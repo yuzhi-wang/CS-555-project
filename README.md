@@ -1,4 +1,4 @@
-# CS-555-Agile Development project
+# CS-555-Agile Development Project
 
 **Team: Easy Scurm**
 

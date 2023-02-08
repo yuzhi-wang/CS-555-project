@@ -2,5 +2,5 @@
 
 **Team: Easy Scurm**
 
-**Team Members: Rongda Kang, Zhiyu Wang(Scrum Master),Luoyi Fu, Mingze Sun**
+**Team Members: Rongda Kang, Yuzhi Wang(Scrum Master),Luoyi Fu, Mingze Sun**
 

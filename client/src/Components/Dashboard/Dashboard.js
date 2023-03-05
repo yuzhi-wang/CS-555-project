@@ -17,7 +17,7 @@ import arrow from "../../Assets/right-arrow.png"
 
 */
 
-const Homepage = () => {
+const Dashboard = () => {
 	const auth = getAuth();
     const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const Homepage = () => {
 	return (
 		<>
 			
-            <h1>HomePage</h1>
+            <h1>Dashboard</h1>
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
             
 
@@ -44,4 +44,4 @@ const Homepage = () => {
 	);
 };
 
-export default Homepage;
+export default Dashboard;

@@ -21,8 +21,9 @@ import Search from "../Components/Search/Search";
 import Layout from "../Components/layout/layout";
 import Errors from "../Components/Errors/Errors";
 import Homepage from "../Components/Homepage/Homepage";
-
-
+import Login from "../Components/Login/Login";
+import Dashboard from "../Components/Dashboard/Dashboard";
+import PrivateRoute from "../PrivateRoute";
 
 const Routesr = () => {
   return (
@@ -31,8 +32,9 @@ const Routesr = () => {
         <Switch>
           {/* Auth Routes */}
           <Routing exact path="/" element={<Homepage />} />
-          {/*
+          
           <Routing exact path="/login" element={<Login />} />
+          {/*
           <Routing exact path="/signup" element={<Signup />} />
           <Routing path="/forgot-password" element={<ForgotPassword />} />
 
@@ -42,7 +44,7 @@ const Routesr = () => {
 
           {/* Private: Only logged in user can access */}
           {/*Wrap the route with PrivateRoute component to allow access to authorised user only like done below*/}
-        {/*
+        
           <Routing path="/dashboard" element={<PrivateRoute />}>
           <Routing exact path="/dashboard" element={<Dashboard />} /> 
           </Routing>

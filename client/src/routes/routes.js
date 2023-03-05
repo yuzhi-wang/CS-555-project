@@ -24,6 +24,7 @@ import Homepage from "../Components/Homepage/Homepage";
 import Login from "../Components/Login/Login";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import PrivateRoute from "../PrivateRoute";
+import Signup from "../Components/Signup";
 
 const Routesr = () => {
   return (
@@ -34,8 +35,9 @@ const Routesr = () => {
           <Routing exact path="/" element={<Homepage />} />
           
           <Routing exact path="/login" element={<Login />} />
-          {/*
+          
           <Routing exact path="/signup" element={<Signup />} />
+          {/*
           <Routing path="/forgot-password" element={<ForgotPassword />} />
 
           {/*Listing Routes need to replace Sign up with Listing page*/}

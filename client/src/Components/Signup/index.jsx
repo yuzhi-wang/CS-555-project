@@ -47,6 +47,7 @@ const Signup = () => {
       const formDataCopy = { ...formData };
       delete formDataCopy.password;
       formDataCopy.timestamp = serverTimestamp();
+	  formDataCopy.role = "customer";
 
       await setDoc(doc(db, "users", user.uid), formDataCopy);
       navigate("/dashboard");

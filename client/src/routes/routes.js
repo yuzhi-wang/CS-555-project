@@ -22,8 +22,15 @@ import Layout from "../Components/layout/layout";
 import Errors from "../Components/Errors/Errors";
 import Homepage from "../Components/Homepage/Homepage";
 import Login from "../Components/Login/Login";
-import Dashboard from "../Components/Dashboard/Dashboard";
-import PrivateRoute from "../PrivateRoute";
+import CustomerDashboard from "../Components/Dashboard/CustomerDashboard/CustomerDashboard";
+import ManagerDashboard from "../Components/Dashboard/ManagerDashboard/ManagerDashboard";
+import GroundteamDashboard from "../Components/Dashboard/GroundteamDashboard/GroundteamDashboard";
+import SalesDashboard from "../Components/Dashboard/SalesDashboard/SalesDashboard";
+import PrivateRoute from "../Services/PrivateRoutes/PrivateRoute";
+import PrivateRouteCustomer from "../Services/PrivateRoutes/PrivateRouteCustomer";
+import PrivateRouteGroundteam from "../Services/PrivateRoutes/PrivateRouteGroundteam";
+import PrivateRouteManager from "../Services/PrivateRoutes/PrivateRouteManager";
+import PrivateRouteSales from "../Services/PrivateRoutes/PrivateRouteSales";
 import Signup from "../Components/Signup";
 
 const Routesr = () => {
@@ -47,10 +54,18 @@ const Routesr = () => {
           {/* Private: Only logged in user can access */}
           {/*Wrap the route with PrivateRoute component to allow access to authorised user only like done below*/}
         
-          <Routing path="/dashboard" element={<PrivateRoute />}>
-          <Routing exact path="/dashboard" element={<Dashboard />} /> 
+          <Routing path="/customerdashboard" element={<PrivateRouteCustomer/>}>
+          <Routing exact path="/customerdashboard" element={<CustomerDashboard  />} /> 
           </Routing>
-        
+          <Routing path="/managerdashboard" element={<PrivateRouteManager/>}>
+          <Routing exact path="/managerdashboard" element={<ManagerDashboard  />} /> 
+          </Routing>
+          <Routing path="/groundteamdashboard" element={<PrivateRouteGroundteam/>}>
+          <Routing exact path="/groundteamdashboard" element={<GroundteamDashboard  />} /> 
+          </Routing>
+          <Routing path="/salesdashboard" element={<PrivateRouteSales/>}>
+          <Routing exact path="/salesdashboard" element={<SalesDashboard  />} /> 
+          </Routing>
           
           {/* Public: All can use */}
           

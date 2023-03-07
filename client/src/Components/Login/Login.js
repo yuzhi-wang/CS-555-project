@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../OAuth/OAuth';
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { doc, getDoc  } from "firebase/firestore"; 
+import { db } from "../../firebase";
 
 const Login = () => {
+	
 	const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,9 +32,18 @@ const Login = () => {
 			email,
 			password
 		  );
+			
 		  if (userCredential.user) {
-			navigate("/dashboard");
+			const docRef = doc(db, "users", userCredential.user.uid);
+        	const docSnap = await getDoc(docRef);
+        	if (docSnap.exists()) {
+          	let { role } = docSnap.data()
+			if(role === "customer") navigate("/customerdashboard")
+       		if(role === "manager") navigate("/managerdashboard")
+       		if(role === "groundteam") navigate("/groundteamdashboard")
+       		if(role === "sales") navigate("/salesdashboard")
 		  }
+		}
 		} catch (error) {
 		  alert("Bad user credentials");
 		}

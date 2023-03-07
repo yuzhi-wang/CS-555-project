@@ -17,24 +17,34 @@ import arrow from "../../Assets/right-arrow.png"
 
 */
 
-const Homepage = () => {
+const CustomerDashboard = () => {
 	const auth = getAuth();
     const navigate = useNavigate();
+    console.log(auth.currentUser.uid)
 
-
-	
+	function onLogout() {
+        auth.signOut().then(()=>{
+        alert("User Signed out")
+        navigate("/");
+        }).catch(()=>{
+        alert("Error with signning out")
+        })
+        
+      }
 
 
 	return (
 		<>
 			
-            <h1>HomePage</h1>
-            <h2>Public page visible to all</h2>
-			<button type="button" className="btn btn-danger btn-m" onClick={()=>{navigate("/login")}}>LOGIN</button>
-           
+            <h1>Customer Dashboard</h1>
+			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
+            <br/>
+            <br/>
+            <br/>
+            <h2> Messages to sales</h2>
 
 		</>
 	);
 };
 
-export default Homepage;
+export default CustomerDashboard;

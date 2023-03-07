@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './styles.module.css';
 import { useState } from 'react';
-//import { Link, useNavigate } from 'react-router-dom';
-//import OAuth from '../OAuth/OAuth';
+import { Link, useNavigate } from 'react-router-dom';
+import OAuth from '../OAuth/OAuth';
 import { db } from "../../firebase"
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import {
@@ -47,9 +47,10 @@ const Signup = () => {
       const formDataCopy = { ...formData };
       delete formDataCopy.password;
       formDataCopy.timestamp = serverTimestamp();
+	  formDataCopy.role = "customer";
 
       await setDoc(doc(db, "users", user.uid), formDataCopy);
-      navigate("/");
+      navigate("/dashboard");
 	  alert("Sign up was successful");
        
     } catch (error) {

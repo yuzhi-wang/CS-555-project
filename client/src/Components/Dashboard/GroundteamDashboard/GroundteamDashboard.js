@@ -17,7 +17,7 @@ import arrow from "../../Assets/right-arrow.png"
 
 */
 
-const Dashboard = () => {
+const GroundteamDashboard = () => {
 	const auth = getAuth();
     const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const Dashboard = () => {
 	return (
 		<>
 			
-            <h1>Dashboard</h1>
+            <h1>Ground team Dashboard</h1>
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
             
 
@@ -44,4 +44,4 @@ const Dashboard = () => {
 	);
 };
 
-export default Dashboard;
+export default GroundteamDashboard;

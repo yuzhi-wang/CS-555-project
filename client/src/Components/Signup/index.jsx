@@ -50,7 +50,7 @@ const Signup = () => {
 	  formDataCopy.role = "customer";
 
       await setDoc(doc(db, "users", user.uid), formDataCopy);
-      navigate("/dashboard");
+      navigate("/customerdashboard");
 	  alert("Sign up was successful");
        
     } catch (error) {

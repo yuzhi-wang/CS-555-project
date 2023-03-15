@@ -1,7 +1,7 @@
 import React, { useState , useEffect} from 'react';
 
 function DisplayMessage({messages}) {
-    console.log(messages)
+
 
     return (
       <div>     

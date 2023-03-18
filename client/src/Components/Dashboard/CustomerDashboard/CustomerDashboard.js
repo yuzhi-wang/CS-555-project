@@ -2,6 +2,7 @@ import React from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import CustomerMessaging from '../../Messaging/CustomerMessaging';
+import CustomerProject from '../../Projects/CustomerProject';
 /*
 import BackgroundCSL from './Carousel';
 import { getDocs } from 'firebase/firestore';
@@ -43,6 +44,9 @@ const CustomerDashboard = () => {
             <br/>
             <h2> Messages to sales</h2>
             <CustomerMessaging/>
+            
+            <CustomerProject/>
+
 
 		</>
 	);

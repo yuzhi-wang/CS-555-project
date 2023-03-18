@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import DisplayMessage from './DisplayMessage';
-import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove ,serverTimestamp, setDoc} from "firebase/firestore"; 
+import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove ,serverTimestamp, setDoc,collection, addDoc} from "firebase/firestore"; 
 import { db } from "../../firebase";
 
 function CustomerMessaging() {
@@ -9,6 +9,9 @@ function CustomerMessaging() {
     
   const [messages, setMessages] = useState([]);
   const [customermessages, setCustomerMessages] = useState("");
+
+
+ 
 
   function handleNewMessageChange(event) {
     
@@ -35,7 +38,7 @@ function CustomerMessaging() {
           });
       } else {
         const data = {
-          name: "display name",
+          name: auth.currentUser.displayName,
           salesteamassigned: "Get random ID from sales database",
           Messages: [{
             Text: customermessages,
@@ -54,7 +57,10 @@ function CustomerMessaging() {
       // fetch data from firebase
     }
    
-  } 
+  }
+  
+  
+
   useEffect(() => {
     async function fetchMessages() {
       console.log("customer use effect")
@@ -78,6 +84,7 @@ function CustomerMessaging() {
         <input type="text" value={customermessages} onChange={handleNewMessageChange} />
         <button onClick={handleSendMessage}>Send</button>
       </div>
+      
     </div>
   );
 }

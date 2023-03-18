@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import SalesMessaging from '../../Messaging/SalesMessaging';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../../../firebase';
+import SalesProject from '../../Projects/SalesProject'
 /*
 import BackgroundCSL from './Carousel';
 import { getDocs } from 'firebase/firestore';
@@ -68,6 +68,7 @@ const SalesDashboard = () => {
           ))}
         </ul>
       </div>
+      <SalesProject/>
             
 
 		</>

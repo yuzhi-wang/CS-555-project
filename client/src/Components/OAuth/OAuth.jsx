@@ -22,6 +22,7 @@ export default function OAuth() {
           name: user.displayName,
           email: user.email,
           role:"customer",
+          projectID: "",
           timestamp: serverTimestamp(),
         });
       }

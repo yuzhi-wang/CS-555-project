@@ -32,6 +32,7 @@ import PrivateRouteGroundteam from "../Services/PrivateRoutes/PrivateRouteGround
 import PrivateRouteManager from "../Services/PrivateRoutes/PrivateRouteManager";
 import PrivateRouteSales from "../Services/PrivateRoutes/PrivateRouteSales";
 import Signup from "../Components/Signup";
+import SalesMessaging from "../Components/Messaging/SalesMessaging";
 
 const Routesr = () => {
   return (
@@ -65,6 +66,9 @@ const Routesr = () => {
           </Routing>
           <Routing path="/salesdashboard" element={<PrivateRouteSales/>}>
           <Routing exact path="/salesdashboard" element={<SalesDashboard  />} /> 
+          </Routing>
+          <Routing path="/salesmessaging/:id" element={<PrivateRouteSales/>}>
+          <Routing exact path="/salesmessaging/:id" element={<SalesMessaging />} /> 
           </Routing>
           
           {/* Public: All can use */}

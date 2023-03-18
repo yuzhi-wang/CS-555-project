@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import DisplayMessage from './DisplayMessage';
-import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove ,serverTimestamp} from "firebase/firestore"; 
+import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove ,serverTimestamp, setDoc} from "firebase/firestore"; 
 import { db } from "../../firebase";
 
 function CustomerMessaging() {
@@ -22,16 +22,31 @@ function CustomerMessaging() {
     if (customermessages.trim() !== '') {
       // send data to firebase
       const messageRef = doc(db, "CustomerSalesMessaging", auth.currentUser.uid);
-
+      console.log(messageRef)
+      const docSnap = await getDoc(messageRef);
+      if (docSnap.exists()) {
+        await updateDoc(messageRef, {
+          Messages: arrayUnion({
+            Text: customermessages,
+            role: "customer",
+            timestamp: new Date(),
+            uid: auth.currentUser.uid,
+          })
+          });
+      } else {
+        const data = {
+          name: "display name",
+          salesteamassigned: "Get random ID from sales database",
+          Messages: [{
+            Text: customermessages,
+            role: "customer",
+            timestamp: new Date(),
+            uid: auth.currentUser.uid,
+          }]
+        }
+        await setDoc(doc(db, "CustomerSalesMessaging", auth.currentUser.uid), data);
+    }
       
-      await updateDoc(messageRef, {
-      Messages: arrayUnion({
-        Text: customermessages,
-        role: "customer",
-        timestamp: new Date(),
-        uid: auth.currentUser.uid,
-      })
-      });
       
 
 

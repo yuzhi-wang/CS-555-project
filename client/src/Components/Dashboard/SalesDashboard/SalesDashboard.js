@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import SalesMessaging from '../../Messaging/SalesMessaging';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../../../firebase';
 /*
 import BackgroundCSL from './Carousel';
 import { getDocs } from 'firebase/firestore';
@@ -20,6 +22,8 @@ import arrow from "../../Assets/right-arrow.png"
 const SalesDashboard = () => {
 	const auth = getAuth();
     const navigate = useNavigate();
+    const [customer, setCustomers] = useState([]);
+    
 
 
 	function onLogout() {
@@ -32,6 +36,21 @@ const SalesDashboard = () => {
         
       }
 
+      useEffect(() => {
+        async function fetchMessages() {
+            
+            console.log("Sales Dashboard use effect fired")
+            const querySnapshot = await getDocs(collection(db, "CustomerSalesMessaging"));
+            let customermessages = []
+            querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              customermessages.push({id:doc.id, data: doc.data()})
+            });
+            setCustomers(customermessages)
+        }
+        fetchMessages();
+      }, [auth.currentUser.uid]);
+
 
 	return (
 		<>
@@ -42,7 +61,14 @@ const SalesDashboard = () => {
             <br/>
             <br/>
             <h2> Messages from customers</h2>
-            <SalesMessaging/>
+            <div>     
+        <ul>
+          {customer.map((cust, index) => (
+            <li key={index}><a onClick={()=>{navigate(`/salesmessaging/${cust.id}`)}}>{cust.data.name}</a></li>
+          ))}
+        </ul>
+      </div>
+            
 
 		</>
 	);

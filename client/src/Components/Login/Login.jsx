@@ -6,7 +6,7 @@ import OAuth from "../OAuth/OAuth";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-
+import Toggle from "./Login.toggle";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -91,18 +91,18 @@ const Login = () => {
     <div class="box">
       <div class="inner_box">
         <div class="forms_wrap">
-          <form action="index.html" autocomplete="off" class="sign_in_form">
+        
+          <form autocomplete="off" class="sign_in_form">
             <div class="logo">
               <img src="./img/logo.png" alt="easyclass" />
               <h4>easyclass</h4>
             </div>
 
             <div class="heading">
+              
               <h2>Welcome Back</h2>
               <h6>Not registred yet?</h6>
-              <a href="#" class="toggle">
-                Sign up
-              </a>
+              <Toggle></Toggle> <Toggle></Toggle>
             </div>
 
             <div class="actual_form">
@@ -128,11 +128,11 @@ const Login = () => {
                 <label>Password</label>
               </div>
 
-              <input type="submit" value="Sign In" class="sign_btn" />
+              <button type="submit" value="Sign In" class="sign_btn" />
 
               <p class="text">
                 Forgotten your password or you login datails?
-                <a href="#">Get help</a> signing in
+                {/* <a href="#">Get help</a> signing in */}
               </p>
             </div>
           </form>

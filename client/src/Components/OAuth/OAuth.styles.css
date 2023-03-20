@@ -1,0 +1,13 @@
+.GoogleButton {
+
+    width: 100%;
+    background-color: #FFFFF3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    
+  }
+  

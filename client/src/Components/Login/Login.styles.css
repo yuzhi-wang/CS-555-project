@@ -54,7 +54,7 @@
 	padding: 15px;
 	margin: 5px 0;
 	font-size: 14px;
-	background-color: #f34646;
+	background-color: #7400B8;
 	color: white;
 	border-radius: 5px;
 	text-align: center;
@@ -119,7 +119,8 @@ main {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #6b93ff;
+  background-color: #7400B8;
+  background-image: linear-gradient(to right, #7400B8 , #80FFDB);
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -131,7 +132,7 @@ main {
   width: 100%;
   max-width: 1020px;
   height: 640px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   border-radius: 3.3rem;
   box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
 }
@@ -146,7 +147,7 @@ main {
 }
 
 .forms_wrap {
-  position: absolute;
+  position: relative;
   height: 100%;
   width: 45%;
   top: 0;
@@ -187,7 +188,7 @@ form.sign_up_form {
 
 .logo h4 {
   font-size: 1.1rem;
-  margin-top: -9px;
+  margin-top: 0px;
   letter-spacing: -0.5px;
   color: #151111;
 }
@@ -261,18 +262,19 @@ label {
   display: inline-block;
   width: 100%;
   height: 43px;
-  background-color: #151111;
+  background-color: #7400B8 
+  ;
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 0.8rem;
   font-size: 0.8rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.2rem;
   transition: 0.3s;
 }
 
 .sign_btn:hover {
-  background-color: #8371fd;
+  background-color: #48BFE3  ;
 }
 
 .text {
@@ -313,7 +315,7 @@ main.sign_up_mode .carousel {
   width: 55%;
   left: 45%;
   top: 0;
-  background-color: #ffe0d2;
+  background-color: #72EFDD  ;
   border-radius: 2rem;
   display: grid;
   grid-template-rows: auto 1fr;
@@ -405,12 +407,14 @@ main.sign_up_mode .carousel {
 
 @media (max-width: 850px) {
   .box {
+    
     height: auto;
     max-width: 550px;
     overflow: hidden;
   }
 
   .inner_box {
+    color: #FFFFF3;;
     position: static;
     transform: none;
     width: revert;
@@ -438,11 +442,11 @@ main.sign_up_mode .carousel {
     transform: translateX(100%);
   }
 
-  mainsign_up_mode form.sign_in_form {
+  main.sign_up_mode form.sign_in_form {
     transform: translateX(-100%);
   }
 
-  mainsign_up_mode form.sign_up_form {
+  main.sign_up_mode form.sign_up_form {
     transform: translateX(0%);
   }
 
@@ -492,4 +496,5 @@ main.sign_up_mode .carousel {
   form {
     padding: 1rem 2rem 1.5rem;
   }
+
 }

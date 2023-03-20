@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-
+import './Login.toggle.styles.css'
 function Toggle(){
 
     const [btnState,setBtnSatet]= useState (false)
@@ -7,7 +7,7 @@ function Toggle(){
     function handleClick(){
         //
         setBtnSatet(btnState => !btnState)
-        console.log(btnState)
+       
     }
     useEffect(() => {
         let element = document.getElementById('main');
@@ -20,7 +20,8 @@ function Toggle(){
         }
       }, [btnState]);
     return(
-        <button className=''onClick={handleClick}>Click Me</button>
+        
+        <button className='clickme' onClick={handleClick}>Click Me</button>
     )
 }
 

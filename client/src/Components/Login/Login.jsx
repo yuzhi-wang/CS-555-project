@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import Toggle from "./Login.toggle";
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -21,27 +22,7 @@ const Login = () => {
       [e.target.id]: e.target.value,
     }));
   };
-//   const inputs = document.querySelectorAll(".input_field");
-//   const toggle_btn = document.querySelectorAll(".toggle");
-//   const main = document.querySelector("main");
-//   const bullets = document.querySelectorAll(".bullets span");
-//   const images = document.querySelectorAll(".image");
-
-//   inputs.forEach((inp) => {
-//     inp.addEventListener("focus", () => {
-//       inp.classList.add("active");
-//     });
-//     inp.addEventListener("blur", () => {
-//       if (inp.value != "") return;
-//       inp.classList.remove("active");
-//     });
-//   });
-
-//   toggle_btn.forEach((btn) => {
-//     btn.addEventListener("click", () => {
-//       main.classList.toggle("sign_up_mode");
-//     });
-//   });
+  
   async function onSubmit(e) {
     e.preventDefault();
     try {
@@ -72,11 +53,11 @@ const Login = () => {
     <div className="box">
       <div className="inner_box">
         <div className="forms_wrap">
-        
-          <form  className="sign_in_form">
+            
+          <form onSubmit={onSubmit} className="sign_in_form">
             <div className="logo">
-              <img src="./img/logo.png" alt="easyclass" />
-              <h4>easyclass</h4>
+            <img src="https://i.ibb.co/sjwF7Nf/Solmate-logos-black.png" alt="Solmate-logos-black" border="0"/>
+              <h4>solmate</h4>
             </div>
 
             <div className="heading">
@@ -89,28 +70,29 @@ const Login = () => {
             <div className="actual_form">
               <div className="input_wrap">
                 <input
+                  onChange={onChange}
                   type="text"
                   minLength="4"
                   className="input_field"
-                  
-                  required
+                  placeholder="Email"
+    
                 />
-                <label>Name</label>
+                
               </div>
 
               <div className="input_wrap">
                 <input
+                onChange={onChange}
                   type="password"
                   minLength="4"
                   className="input_field"
+                  placeholder="Password"
                   
-                  required
                 />
-                <label>Password</label>
+                
               </div>
-
-              <button type="submit" value="Sign In" className="sign_btn" />
-
+              <button className="sign_btn"> Login</button> <OAuth></OAuth> 
+              
               <p className="text">
                 Forgotten your password or you login datails?
                 {/* <a href="#">Get help</a> signing in */}
@@ -120,8 +102,8 @@ const Login = () => {
 
           <form  className="sign_up_form">
             <div className="logo">
-              <img src="./img/logo.png" alt="easyclass" />
-              <h4>easyclass</h4>
+            <img src="https://i.ibb.co/sjwF7Nf/Solmate-logos-black.png" alt="Solmate-logos-black" border="0"/>
+              <h4>solmate</h4>
             </div>
 
             <div className="heading">
@@ -133,23 +115,12 @@ const Login = () => {
             <div className="actual_form">
               <div className="input_wrap">
                 <input
-                  type="text"
-                  minLength="4"
-                  className="input_field"
-                  
-                  required
-                />
-                <label>Name</label>
-              </div>
-
-              <div className="input_wrap">
-                <input
                   type="email"
                   className="input_field"
-                  
+                  placeholder="Email"
                   required
                 />
-                <label>Email</label>
+                
               </div>
 
               <div className="input_wrap">
@@ -157,14 +128,26 @@ const Login = () => {
                   type="password"
                   minLength="4"
                   className="input_field"
-                  
+                  placeholder="Password"
                   required
                 />
-                <label>Password</label>
+                
+                
+              </div>
+              <div className="input_wrap">
+                <input
+                  type="password"
+                  minLength="4"
+                  className="input_field"
+                  placeholder="Retype-Password"
+                  required
+                />
+                
+                
               </div>
 
               <input type="submit" value="Sign Up" className="sign_btn" />
-
+              <OAuth></OAuth>
               <p className="text">
                 By signing up, I agree to the
                 <a href="#">Terms of Services</a> and
@@ -176,19 +159,13 @@ const Login = () => {
 
         <div className="carousel">
           <div className="images_wrapper">
-            <img
-              src="client\public\image1.png"
-              className="image img-1 show"
-              alt=""
-            />
-            <img src="client\public\image1.png" className="image img-2" alt="" />
-            <img src="client\public\image1.png" className="image img-3" alt="" />
+
           </div>
 
           <div className="text_slider">
             <div className="text_wrap">
               <div className="text_group">
-                <h2>Create your own courses</h2>
+                <h2>Manage your Solar Installation</h2>
                 <h2>Customize as you like</h2>
                 <h2>Invite students to your className</h2>
               </div>

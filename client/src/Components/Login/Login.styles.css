@@ -438,11 +438,11 @@ main.sign_up_mode .carousel {
     transform: translateX(100%);
   }
 
-  main.sign_up_mode form.sign_in_form {
+  mainsign_up_mode form.sign_in_form {
     transform: translateX(-100%);
   }
 
-  main.sign_up_mode form.sign_up_form {
+  mainsign_up_mode form.sign_up_form {
     transform: translateX(0%);
   }
 

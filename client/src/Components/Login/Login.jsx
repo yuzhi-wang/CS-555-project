@@ -42,25 +42,6 @@ const Login = () => {
 //       main.classList.toggle("sign_up_mode");
 //     });
 //   });
-
-//   function moveSlider() {
-//     let index = this.dataset.value;
-
-//     let currentImage = document.querySelector(`.img-${index}`);
-//     images.forEach((img) => img.classList.remove("show"));
-//     currentImage.classList.add("show");
-
-//     const textSlider = document.querySelector(".text_group");
-//     textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
-
-//     bullets.forEach((bull) => bull.classList.remove("active"));
-//     this.classList.add("active");
-//   }
-
-//   bullets.forEach((bullet) => {
-//     bullet.addEventListener("click", moveSlider);
-//   });
-
   async function onSubmit(e) {
     e.preventDefault();
     try {
@@ -87,7 +68,7 @@ const Login = () => {
     }
   }
   return (
-    <main>
+    <main id = "main">
     <div className="box">
       <div className="inner_box">
         <div className="forms_wrap">
@@ -102,7 +83,7 @@ const Login = () => {
               
               <h2>Welcome Back</h2>
               <h6>Not registred yet?</h6>
-              <Toggle></Toggle> <Toggle></Toggle>
+              <Toggle></Toggle> 
             </div>
 
             <div className="actual_form">
@@ -137,7 +118,7 @@ const Login = () => {
             </div>
           </form>
 
-          <form action="index.html"  className="sign_up_form">
+          <form  className="sign_up_form">
             <div className="logo">
               <img src="./img/logo.png" alt="easyclass" />
               <h4>easyclass</h4>
@@ -146,9 +127,7 @@ const Login = () => {
             <div className="heading">
               <h2>Get Started</h2>
               <h6>Already have an account?</h6>
-              <a href="#" className="toggle">
-                Sign in
-              </a>
+              <Toggle></Toggle>
             </div>
 
             <div className="actual_form">

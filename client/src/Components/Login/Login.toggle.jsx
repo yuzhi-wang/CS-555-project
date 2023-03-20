@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 function Toggle(){
 
@@ -7,9 +7,20 @@ function Toggle(){
     function handleClick(){
         //
         setBtnSatet(btnState => !btnState)
+        console.log(btnState)
     }
+    useEffect(() => {
+        let element = document.getElementById('main');
+        if (element) {
+          if (btnState) {
+            element.classList.add('sign_up_mode');
+          } else {
+            element.classList.remove('sign_up_mode');
+          }
+        }
+      }, [btnState]);
     return(
-        <button className=''onClick={handleClick}>Toggle</button>
+        <button className=''onClick={handleClick}>Click Me</button>
     )
 }
 

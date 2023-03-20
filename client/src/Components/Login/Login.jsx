@@ -88,105 +88,105 @@ const Login = () => {
   }
   return (
     <main>
-    <div class="box">
-      <div class="inner_box">
-        <div class="forms_wrap">
+    <div className="box">
+      <div className="inner_box">
+        <div className="forms_wrap">
         
-          <form autocomplete="off" class="sign_in_form">
-            <div class="logo">
+          <form  className="sign_in_form">
+            <div className="logo">
               <img src="./img/logo.png" alt="easyclass" />
               <h4>easyclass</h4>
             </div>
 
-            <div class="heading">
+            <div className="heading">
               
               <h2>Welcome Back</h2>
               <h6>Not registred yet?</h6>
               <Toggle></Toggle> <Toggle></Toggle>
             </div>
 
-            <div class="actual_form">
-              <div class="input_wrap">
+            <div className="actual_form">
+              <div className="input_wrap">
                 <input
                   type="text"
-                  minlength="4"
-                  class="input_field"
-                  autocomplete="off"
+                  minLength="4"
+                  className="input_field"
+                  
                   required
                 />
                 <label>Name</label>
               </div>
 
-              <div class="input_wrap">
+              <div className="input_wrap">
                 <input
                   type="password"
-                  minlength="4"
-                  class="input_field"
-                  autocomplete="off"
+                  minLength="4"
+                  className="input_field"
+                  
                   required
                 />
                 <label>Password</label>
               </div>
 
-              <button type="submit" value="Sign In" class="sign_btn" />
+              <button type="submit" value="Sign In" className="sign_btn" />
 
-              <p class="text">
+              <p className="text">
                 Forgotten your password or you login datails?
                 {/* <a href="#">Get help</a> signing in */}
               </p>
             </div>
           </form>
 
-          <form action="index.html" autocomplete="off" class="sign_up_form">
-            <div class="logo">
+          <form action="index.html"  className="sign_up_form">
+            <div className="logo">
               <img src="./img/logo.png" alt="easyclass" />
               <h4>easyclass</h4>
             </div>
 
-            <div class="heading">
+            <div className="heading">
               <h2>Get Started</h2>
               <h6>Already have an account?</h6>
-              <a href="#" class="toggle">
+              <a href="#" className="toggle">
                 Sign in
               </a>
             </div>
 
-            <div class="actual_form">
-              <div class="input_wrap">
+            <div className="actual_form">
+              <div className="input_wrap">
                 <input
                   type="text"
-                  minlength="4"
-                  class="input_field"
-                  autocomplete="off"
+                  minLength="4"
+                  className="input_field"
+                  
                   required
                 />
                 <label>Name</label>
               </div>
 
-              <div class="input_wrap">
+              <div className="input_wrap">
                 <input
                   type="email"
-                  class="input_field"
-                  autocomplete="off"
+                  className="input_field"
+                  
                   required
                 />
                 <label>Email</label>
               </div>
 
-              <div class="input_wrap">
+              <div className="input_wrap">
                 <input
                   type="password"
-                  minlength="4"
-                  class="input_field"
-                  autocomplete="off"
+                  minLength="4"
+                  className="input_field"
+                  
                   required
                 />
                 <label>Password</label>
               </div>
 
-              <input type="submit" value="Sign Up" class="sign_btn" />
+              <input type="submit" value="Sign Up" className="sign_btn" />
 
-              <p class="text">
+              <p className="text">
                 By signing up, I agree to the
                 <a href="#">Terms of Services</a> and
                 <a href="#">Privacy Policy</a>
@@ -195,28 +195,28 @@ const Login = () => {
           </form>
         </div>
 
-        <div class="carousel">
-          <div class="images_wrapper">
+        <div className="carousel">
+          <div className="images_wrapper">
             <img
               src="client\public\image1.png"
-              class="image img-1 show"
+              className="image img-1 show"
               alt=""
             />
-            <img src="client\public\image1.png" class="image img-2" alt="" />
-            <img src="client\public\image1.png" class="image img-3" alt="" />
+            <img src="client\public\image1.png" className="image img-2" alt="" />
+            <img src="client\public\image1.png" className="image img-3" alt="" />
           </div>
 
-          <div class="text_slider">
-            <div class="text_wrap">
-              <div class="text_group">
+          <div className="text_slider">
+            <div className="text_wrap">
+              <div className="text_group">
                 <h2>Create your own courses</h2>
                 <h2>Customize as you like</h2>
-                <h2>Invite students to your class</h2>
+                <h2>Invite students to your className</h2>
               </div>
             </div>
 
-            <div class="bullets">
-              <span class="active" data-value="1"></span>
+            <div className="bullets">
+              <span className="active" data-value="1"></span>
               <span data-value="2"></span>
               <span data-value="3"></span>
             </div>

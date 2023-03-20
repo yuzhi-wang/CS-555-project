@@ -76,7 +76,7 @@ alert(`Declined Project ${projectID} `);
 
           {projectData.length === 0 ? "No Projects Purchased" : projectData.map((project, index) => (
             <div key={index}>
-            <div  onClick={()=>{navigate(`/project/${project.id}`)}}>
+            <div  onClick={()=>{navigate(`/saleprojectdashboard/${project.id}`)}}>
                 <li >ProjectID: {project.id}</li>
                 <li>Customer:{project.data.customerName} </li>
                 <li>Purchased By: {project.data.customer}</li>
@@ -84,10 +84,10 @@ alert(`Declined Project ${projectID} `);
                 <li>Project Accepted: {project.data.ManagerAccepted ? "True" : "False"}</li>
                 <li>Status: {project.data.Status} </li>
                 </div>
-            {projectAccepted ? <h3>Project Confirmed</h3> : <h3>Accept this Project ?</h3>}
+            {project.data.SaleAuthorised ? <h3>Project Confirmed</h3> : <h3>Accept this Project ?</h3>}
             <>
             <div>
-              <button onClick={()=>acceptProject(project.id)} disabled={projectAccepted}>Accept</button>
+              <button onClick={()=>acceptProject(project.id)} disabled={project.data.SaleAuthorised}>Accept</button>
               <button onClick={()=>declineProject(project.id)} disabled={project.data.Status === "Declined by Sales"}>Decline</button>
             </div>
             </>

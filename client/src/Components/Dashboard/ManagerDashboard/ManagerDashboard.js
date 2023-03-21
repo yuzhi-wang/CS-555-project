@@ -1,7 +1,8 @@
 import React from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-
+import ManagerProject from '../../Projects/ManagerProject';
+import ManagerNewProject from '../../Projects/ManagerNewProject';
 /*
 import BackgroundCSL from './Carousel';
 import { getDocs } from 'firebase/firestore';
@@ -39,6 +40,16 @@ const ManagerDashboard = () => {
             <h1>Manager Dashboard</h1>
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
             
+            <div>
+                <h2>New Projects</h2>
+                <p>Display all new projects approved by sales</p>
+                <ManagerNewProject/>
+            </div>
+            <div>
+                <h2>On Going Projects</h2>
+                <p>Display all On Going projects basically projects accepted by manager</p>
+                <ManagerProject/>
+            </div>
 
 		</>
 	);

@@ -25,18 +25,14 @@ function SalesManagerMessaging({data}) {
           await updateDoc(messageRef, {
             Messages: arrayUnion({
                 Text: salesmessage,
-                role: "sales",
                 timestamp: new Date(),
                 uid: auth.currentUser.uid,
             })
             });
         } else {
           const data = {
-            name: auth.currentUser.displayName,
-            salesteamassigned: "Get random ID from sales database",
             Messages: [{
                 Text: salesmessage,
-                role: "sales",
                 timestamp: new Date(),
                 uid: auth.currentUser.uid,
             }]
@@ -68,7 +64,7 @@ function SalesManagerMessaging({data}) {
 
   return (
     <div>
-      <h2>Assigned Manager Messages:</h2>
+      <h2>Sales - Manager Messages:</h2>
       <DisplayMessage messages={messages}/>
       <div>
         <input type="text" value={salesmessage} onChange={handleNewMessageChange} />

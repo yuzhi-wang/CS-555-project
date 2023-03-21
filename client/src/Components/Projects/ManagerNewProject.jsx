@@ -73,7 +73,7 @@ alert(`Declined Project ${projectID} `);
 
           {projectData.length === 0 ? "No Projects On Going" : projectData.map((project, index) => (
             <div key={index}>
-            <div  onClick={()=>{navigate(`/saleprojectdashboard/${project.id}`)}}>
+            <div  onClick={()=>{navigate(`/managerprojectdashboard/${project.id}`)}}>
                 <li >ProjectID: {project.id}</li>
                 <li>Customer:{project.data.customerName} </li>
                 <li>Purchased By: {project.data.customer}</li>

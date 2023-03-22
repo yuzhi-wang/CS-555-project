@@ -1,40 +1,157 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-
-import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove, setDoc,collection, addDoc,query, where,getDocs} from "firebase/firestore"; 
+import { v4 as uuidv4 } from "uuid";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { doc, getDoc,serverTimestamp ,arrayUnion, updateDoc, arrayRemove, setDoc,collection, addDoc,query, where,getDocs} from "firebase/firestore"; 
 import { db } from "../../firebase";
 
 function CustomerProject() {
     const auth = getAuth();
     const navigate = useNavigate();
   const [projectData, setProjectData] = useState([]);
+  const [startTime, setStartTime]= useState("")
+  const [endTime, setEndTime]= useState("")
   const [purchase, setPurchase] = useState(false)
-
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    description: "",
+    email:"",
+    mobile:"",
+    projectsize: "",
+    images: {},
   
-  async function purchaseProject() {
-    const docRef = await addDoc(collection(db, "project"), {
-      purchased: true,
+
+  });
+  const {
+    name,
+    mobile,
+    email,
+    address,
+    description,
+    projectsize,
+    images,
+  } = formData;
+
+  function onChange(e) {
+    let boolean = null;
+    if (e.target.value === "true") {
+      boolean = true;
+    }
+    if (e.target.value === "false") {
+      boolean = false;
+    }
+    // Files
+    if (e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        images: e.target.files,
+      }));
+    }
+    // Text/Boolean/Number
+    if (!e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.id]: boolean ?? e.target.value,
+      }));
+    }
+  }
+  
+  async function purchaseProject(e) {
+    
+//---------------------------------------
+    e.preventDefault();
+    if (images.length > 6) {
+      alert("maximum 6 images are allowed");
+      return;
+    }
+
+    if (address === undefined) {
+        alert("please enter a correct address");
+        return;
+    }
+   
+
+    async function storeImage(image) {
+      return new Promise((resolve, reject) => {
+        const storage = getStorage();
+        const filename = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
+        const storageRef = ref(storage, filename);
+        const uploadTask = uploadBytesResumable(storageRef, image);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                break;
+            }
+          },
+          (error) => {
+            // Handle unsuccessful uploads
+            reject(error);
+          },
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              resolve(downloadURL);
+            });
+          }
+        );
+      });
+    }
+
+    const imgUrls = await Promise.all(
+      [...images].map((image) => storeImage(image))
+    ).catch((error) => {
+      alert("Images not uploaded");
+      return;
+    });
+
+    const formDataCopy = {
+      ...formData,
+      imgUrls,
+      startTime: startTime,
+      endTime: endTime,
+      timestamp: serverTimestamp(),
       customer: auth.currentUser.uid,
+      purchased: true,
       ManagerAccepted: false,
       SaleAuthorised: false,
       customerName: auth.currentUser.displayName,
       saleAssigned: "PTgELGWcZxXa6XFZDxANalMOjLz2"
+    };
+    delete formDataCopy.images;
+    const docRef = await addDoc(collection(db, "project"), formDataCopy);
+     //update user collection
+  
+     const washingtonRef = doc(db, "users", auth.currentUser.uid);
 
-    });
-    //update user collection
-    console.log(docRef.id)
-    const washingtonRef = doc(db, "users", auth.currentUser.uid);
 
-        // Set the "capital" field of the city 'DC'
-    await updateDoc(washingtonRef, {
-        projectID: docRef.id
-    });
-
+     await updateDoc(washingtonRef, {
+         projectID: docRef.id
+     });
+    
+    
     setPurchase(true)
     alert("Thank You, You just made the world a better place !!");
-  
   }
+
 
 
   useEffect(() => {
@@ -66,10 +183,111 @@ function CustomerProject() {
 
   return (
     <div>
+      {purchase ? <p>Project Purchased contact sales for more information or queries</p>: <>
       <h2>Equipt your home with Solar Panels</h2>
       <div>
-        <button onClick={purchaseProject} disabled={purchase}>{purchase ? "Solar Panels Purchased":"Purchase Solar Panels"}</button>
+
+      <form onSubmit={purchaseProject}>
+        <p >Contact Person Name</p>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={onChange}
+          placeholder="Name"
+          maxLength="32"
+          minLength="10"
+          required
+            />
+
+         <p >Contact Person Email</p>
+          <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={onChange}
+          placeholder="Email"
+          maxLength="32"
+          minLength="10"
+          required
+            />
+          <p >Contact Person Phone Number</p>
+          <input
+          type="tel"
+          id="mobile"
+          value={mobile}
+          onChange={onChange}
+          placeholder="Mobile number"
+          maxLength="10"
+          minLength="10"
+          required
+            />
+
+        <p >Location Hours of operation</p>   
+        <p>Start Time</p>
+        <input type="time" id="appt" name="start" value={startTime} onChange={(event) => {
+    setStartTime(event.target.value);
+  }}
+       min="06:00" max="21:00" required/>
+        <p>End Time</p>
+        <input type="time" id="appt" name="end" value={endTime} onChange={(event) => {
+    setEndTime(event.target.value);
+  }}
+       min="06:00" max="21:00" required/>
+      <small>Please select anytime between 6:00 am - 9:00 PM</small>
+
+ 
+        <p>Address</p>
+        <textarea
+          type="text"
+          id="address"
+          value={address}
+          onChange={onChange}
+          placeholder="Address"
+          required
+            />
+
+        <p >Location Additional Description</p>
+        <textarea
+          type="text"
+          id="description"
+          value={description}
+          onChange={onChange}
+          placeholder="Description"
+          required
+           />
+        <div >
+          <div className="">
+            <p >Proposed project size, in solar panel sqft size</p>
+            <div >
+              <input
+                type="text"
+                id="ProjectSize"
+                value={projectsize}
+                onChange={onChange}
+                min="50"
+                max="400000000"
+              
+                 />
+            </div>
+          </div>
+        </div>
+        <div>
+          <p>Images (max 6)</p>
+          <input
+            type="file"
+            id="images"
+            onChange={onChange}
+            accept=".jpg,.png,.jpeg"
+            multiple
+            required
+           />
+        </div>
+        <br/>
+        <button type="submit" disabled={purchase}>{purchase ? "Solar Panels Purchased":"Purchase Solar Panels"}</button>
+      </form>
       </div>
+      </>}
       <div>
         <h2>Projects</h2>
         <div>     

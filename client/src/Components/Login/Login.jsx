@@ -28,7 +28,7 @@ const Login = () => {
       [e.target.id]: e.target.value,
     }));
   };
-
+  // sign up
   async function onSubmit(e) {
     e.preventDefault();
     try {
@@ -54,7 +54,7 @@ const Login = () => {
       alert("Bad user credentials");
     }
   }
-  //signup
+  //sign-up
   const handleSubmit = async (e) => {
     e.preventDefault();
 

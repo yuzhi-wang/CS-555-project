@@ -70,9 +70,11 @@ const Login = () => {
             <div className="actual_form">
               <div className="input_wrap">
                 <input
+                  id="email"
+                  type="email"
                   onChange={onChange}
-                  type="text"
                   minLength="4"
+                  value={email}
                   className="input_field"
                   placeholder="Email"
     
@@ -83,11 +85,11 @@ const Login = () => {
               <div className="input_wrap">
                 <input
                 onChange={onChange}
-                  type="password"
-                  minLength="4"
+                  id="password"
+							    type="password"
+                  minLength="8"
                   className="input_field"
                   placeholder="Password"
-                  
                 />
                 
               </div>

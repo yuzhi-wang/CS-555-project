@@ -4,8 +4,8 @@ function Toggle(){
 
     const [btnState,setBtnSatet]= useState (false)
 
-    function handleClick(){
-        //
+    function handleClick(event){
+        event.preventDefault()
         setBtnSatet(btnState => !btnState)
        
     }
@@ -21,7 +21,7 @@ function Toggle(){
       }, [btnState]);
     return(
         
-        <button className='clickme' onClick={handleClick}>Click Me</button>
+        <button type='button' className='clickme' onClick={handleClick}>Click Me</button>
     )
 }
 

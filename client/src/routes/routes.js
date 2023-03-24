@@ -31,7 +31,6 @@ import PrivateRouteCustomer from "../Services/PrivateRoutes/PrivateRouteCustomer
 import PrivateRouteGroundteam from "../Services/PrivateRoutes/PrivateRouteGroundteam";
 import PrivateRouteManager from "../Services/PrivateRoutes/PrivateRouteManager";
 import PrivateRouteSales from "../Services/PrivateRoutes/PrivateRouteSales";
-import Signup from "../Components/Signup";
 import SalesMessaging from "../Components/Messaging/SalesMessaging";
 import SalesProjectDashboard from "../Components/ProjectDashboard/SalesProjectDashboard";
 import ManagerProjectDashboard from "../Components/ProjectDashboard/ManagerProjectDashboard";
@@ -45,8 +44,6 @@ const Routesr = () => {
           <Routing exact path="/" element={<Homepage />} />
           
           <Routing exact path="/login" element={<Login />} />
-          
-          <Routing exact path="/signup" element={<Signup />} />
           {/*
           <Routing path="/forgot-password" element={<ForgotPassword />} />
 

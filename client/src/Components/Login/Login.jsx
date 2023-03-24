@@ -127,7 +127,7 @@ const Login = () => {
                 </div>
                 <button className="sign_btn"> Login</button> <OAuth></OAuth>
                 <p className="text">
-                  Forgotten your password or you login datails?
+                  Forgotten your password or help?<Toggle></Toggle>
                   {/* <a href="#">Get help</a> signing in */}
                 </p>
               </div>
@@ -180,7 +180,7 @@ const Login = () => {
                     placeholder="Password"
                     onChange={onChange}
                     value={password}
-                    minLength="4"
+                    minLength="8"
                     className="input_field"
                     required
                   />

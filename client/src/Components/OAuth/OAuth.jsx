@@ -2,7 +2,9 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import googleimage from "../../Assets/google.png"
+import "./OAuth.styles.css";
+import { FcGoogle } from "react-icons/fc";
+
 export default function OAuth() {
   const navigate = useNavigate();
   async function onGoogleClick() {
@@ -11,9 +13,7 @@ export default function OAuth() {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-
       // check for the user
-
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
 
@@ -33,13 +33,8 @@ export default function OAuth() {
     }
   }
   return (
-    <button
-className="btn btn-lg btn-block btn-primary" 
-      type="button"
-      onClick={onGoogleClick}
-    >
-      <img src= {googleimage } className="img-circle" width="25" height="25"/> 
-        Continue with Google
+    <button className="GoogleButton" type="button" onClick={onGoogleClick}>
+      <FcGoogle size={20}/>
     </button>
   );
 }

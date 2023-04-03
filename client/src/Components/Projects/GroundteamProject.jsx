@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../firebase';
-import { query, collection, where, getDocs } from 'firebase/firestore';
+import { query, collection, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 
 const GroundteamProject = () => {
     const auth = getAuth();
@@ -33,7 +33,7 @@ const GroundteamProject = () => {
                 const q = query(collection(db, "ticket"), where("groundteamid", "==", auth.currentUser.uid));
                 const querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
-                    arr.push(doc.data());
+                    arr.push({id:doc.id, data: doc.data()});
                 });
             setTdetail(arr);
             }
@@ -43,53 +43,111 @@ const GroundteamProject = () => {
     
     
     const renderTickets = () => {
-        console.log()
         let detail = tdetail;
         if (selectstatus === 'In Progress'){
             if (tickettype === 'All'){
-                detail = detail.filter(d => d.status === 'In Progress')
+                detail = detail.filter(d => d.data.status === 'In Progress')
             }
             if (tickettype === 'Installation'){
-                detail = detail.filter(d => d.type === 'Installation')
+                detail = detail.filter(d => d.data.type === 'Installation')
             }else if (tickettype === 'Maintenance'){
-                detail = detail.filter(d => d.type === 'Maintenance')
+                detail = detail.filter(d => d.data.type === 'Maintenance')
             }
         }else if (selectstatus === 'Completed'){
             if (tickettype === 'All'){
-                detail = detail.filter(d => d.status === 'Completed')
+                detail = detail.filter(d => d.data.status === 'Completed')
             }
             if (tickettype === 'Installation'){
-                detail = detail.filter(d => d.type === 'Installation')
+                detail = detail.filter(d => d.data.type === 'Installation')
             }else if (tickettype === 'Maintenance'){
-                detail = detail.filter(d => d.type === 'Maintenance')
+                detail = detail.filter(d => d.data.type === 'Maintenance')
             }
         }
         if (detail.length === 0){
             return <p>No tickets</p>
         }
-        return detail.map(t => (
-            Ticket(t)
-          ))
+        return detail.map(ticket => (
+            // Ticket(ticket) 
+            <div key={ticket.id} className='ticketseperator'>
+                <div className='tickets'>
+                    <div className='left'>
+                        <h4>{ticket.id}</h4>
+                        <div>
+                            <div>
+                            <li>Project Id:{ticket.data.projectid}</li>
+                            <li>Ticket Type:{ticket.data.type}</li>
+                            <li>Schedule Date:{ticket.data.schedule}</li>
+                            <li>Description:{ticket.data.description}</li>
+                            <li>Status:{ticket.data.status}</li>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    {(ticket.data.status === 'In Progress') && completeButton(ticket.id)}
+                    </div>
+                </div>
+            </div>
+          ));
+    }
+
+    const completeButton = (ticketId) => {
+        return <button key={ticketId} onClick={() => handleCompletion(ticketId)}>Complete</button>
+    }
+
+    const [trigger, setTrigger] = useState(false);
+    const [currentTicket, setCurrentTicket] = useState('');
+
+    const handleCompletion = (ticketId) => {
+        setTrigger(true);
+        setCurrentTicket(ticketId);
+    }
+
+    const cancel = () => {
+        setTrigger(false);
+        setCurrentTicket("");
+    }
+
+    const complete = async() =>{
+        const docRef = doc(db, "ticket", currentTicket);
+        await updateDoc(docRef, {
+            status: "Completed"
+        })
+        .then(() => {
+            alert(`Ticket ${currentTicket} Completed`)
+            setTrigger(false);
+            setCurrentTicket("");
+        })
+    }
+
+    const checkClick = () =>{
+        return (
+            <>
+                <p>Complete this project?</p>
+                <button onClick={complete}>Yes</button>
+                <button onClick={cancel}>Cancel</button>
+            </>
+        )
     }
 
     const Ticket= (ticket) => {
         return(
-            <div key={ticket.ticketid} className='ticketseperator'>
+            <div key={ticket.id} className='ticketseperator'>
                 <div className='tickets'>
                     <div className='left'>
-                        <h4>{ticket.ticketid}</h4>
+                        <h4>{ticket.id}</h4>
                         <div>
                             <div>
-                            <li>Ticket Type:{ticket.type}</li>
-                            <li>Schedule Date:{ticket.schedule}</li>
-                            <li>Description:{ticket.description}</li>
-                            <li>Status:{ticket.status}</li>
+                            <li>Project Id:{ticket.data.projectid}</li>
+                            <li>Ticket Type:{ticket.data.type}</li>
+                            <li>Schedule Date:{ticket.data.schedule}</li>
+                            <li>Description:{ticket.data.description}</li>
+                            <li>Status:{ticket.data.status}</li>
                             </div>
                         </div>
                     </div>
-                    {/* <div> */}
-                    {/* {ticket.status === 'In Progress' && completeButton(ticket.ticketid)} */}
-                    {/* </div> */}
+                    <div>
+                    {(ticket.data.status === 'In Progress') && completeButton(ticket.id)}
+                    </div>
                 </div>
             </div>
           )
@@ -99,8 +157,9 @@ const GroundteamProject = () => {
     return (
         <>
         <div>GroundteamProject</div>
-            {filter()}
-            {renderTickets()}
+        {filter()}
+        {renderTickets()}
+        {(trigger) && checkClick()}
         </>
     )
 }

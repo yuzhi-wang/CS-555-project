@@ -13,6 +13,7 @@ function ManagerNewProject() {
 
   async function acceptProject() {
     setTrigger(true);
+    setGoundteamId(groundteamList[0].id);
   }
 
   const [groundteamList, setGoundteamList] = useState([]);
@@ -46,7 +47,7 @@ function ManagerNewProject() {
             {groundteamSelector()}
           </select>
           <input type="submit"></input>
-          <button onClick={closeWindow()}>Cancel</button>
+          <button onClick={closeWindow}>Cancel</button>
         </form>
       </>
     )

@@ -64,13 +64,91 @@ alert(`Declined Project ${projectID} `);
     fetchProject();
   }, [auth.currentUser.uid]);
 
+  const [trigger, setTrigger] = useState(false);
+  const [currentProject, setCurrentProject] = useState("");
 
+  const handelReassign = (projectId) => {
+    setTrigger(true);
+    setCurrentProject(projectId);
+  }
+
+  const [groundteamList, setGoundteamList] = useState([]);
+  const [groundteamid, setGoundteamId] = useState('');
+
+  useEffect(() => {
+    const fetchGroundTeam = async () => {
+      let arr = [];
+      const docRef = collection(db, "users");
+      const q = query(docRef, where("role", "==", "groundteam"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        arr.push({id:doc.id, data: doc.data()});
+      });
+      setGoundteamList(arr);
+      setGoundteamId(arr[0].id);
+    };
+    fetchGroundTeam();
+    },[]);
+
+  const groundteamSelector = () => {
+    return groundteamList.map(g => (<option key={g.id} value={g.id}>{g.data.name}</option>))
+  }
+
+  const reassignGroundteam = (projectId) => {
+    return(
+      <>
+        <form onSubmit={(e) => handelAccept(e)}>
+          <label htmlFor="project">Project Id:</label><br></br>
+          <input type="text" readOnly={true} placeholder={currentProject} value={currentProject} ></input><br></br>
+          <label htmlFor="groundteam">Reassign to a Ground Team:</label><br></br>
+          <select value={groundteamid} onChange={(e) => setGoundteamId(e.target.value)} >
+            {groundteamSelector()}
+          </select>
+          <input type="submit"></input>
+          <button onClick={closeWindow}>Cancel</button>
+        </form>
+      </>
+    )
+  }
+
+  const closeWindow = () => {
+    setTrigger(false);
+    setGoundteamId("");
+  }
+
+  const handelAccept = async (e) => {
+    e.preventDefault();
+    try{
+      // update ticket collection
+      const q = query(collection(db, "ticket"), where("projectid", "==", currentProject));
+      const querySnapshot = await getDocs(q);
+      var docId = "";
+      var oldGroundteam = "";
+      querySnapshot.forEach((doc) => {
+        docId = doc.id;
+        oldGroundteam = doc.data().groundteamid;
+      });
+      if (oldGroundteam === groundteamid){
+        alert('No update');
+        return;
+      }
+      const ticketRef = doc(db, "ticket", docId);
+      await updateDoc(ticketRef, {
+          groundteamid: groundteamid
+      });
+
+      alert(`Project ${currentProject} Reassigned`)
+      setTrigger(false);
+      setCurrentProject("");
+    }catch(e){
+      alert(e);
+    };
+  }
 
   return (
     <div>
         <div>     
         <ul>
-
           {projectData.length === 0 ? "No Projects On Going" : projectData.map((project, index) => (
             <div key={index}>
             <div  onClick={()=>{navigate(`/managerprojectdashboard/${project.id}`)}}>
@@ -86,15 +164,17 @@ alert(`Declined Project ${projectID} `);
             <div>
               <button onClick={()=>acceptProject(project.id)} disabled={project.data.ManagerAccepted}>Accept</button>
               <button onClick={()=>declineProject(project.id)} disabled={project.data.Status === "Declined by Manager"}>Decline</button>
+              <button onClick={()=>handelReassign(project.id)}>Reassign Groundteam</button>
+             
             </div>
             </>
-             
             <br/>
             </div>
-            
+             
           ))}
         </ul>
       </div>
+      {(trigger) && reassignGroundteam()}
       </div>
   );
 }

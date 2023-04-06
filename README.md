@@ -3,7 +3,7 @@
 - <img src="https://i.ibb.co/85g7Cgm/Solmate-logos-black.png" alt="Solmate-logos-black" border="0" width="200" height="200">
 - **This a Project primaryly focus on CRM we prepared for CS-555-Agile Development Project** using React, Firebase.
 - **Team: Easy Scurm**
-- **Team Members: Rongda Kang, Yuzhi Wang(Scrum Master),Luoyi Fu, Mingze Sun**.
+- **Team Members: Rongda Kang,Kevin Dsa, Yuzhi Wang(Scrum Master),Luoyi Fu, Mingze Sun**.
 
 ## :ledger: Index
 

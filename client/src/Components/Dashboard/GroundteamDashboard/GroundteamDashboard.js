@@ -2,7 +2,7 @@ import React from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import GroundteamProject from '../../Projects/GroundteamProject';
-
+import GroundteamInfo from '../../TeamInfo/GroundteamInfo';
 /*
 import BackgroundCSL from './Carousel';
 import { getDocs } from 'firebase/firestore';
@@ -21,7 +21,7 @@ import arrow from "../../Assets/right-arrow.png"
 const GroundteamDashboard = () => {
 	const auth = getAuth();
     const navigate = useNavigate();
-
+    
 
 	function onLogout() {
         auth.signOut().then(()=>{
@@ -39,6 +39,7 @@ const GroundteamDashboard = () => {
 			
             <h1>Ground team Dashboard</h1>
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
+            <GroundteamInfo/>
             <GroundteamProject/>
 
 		</>

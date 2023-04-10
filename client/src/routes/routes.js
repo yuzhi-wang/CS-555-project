@@ -25,6 +25,8 @@ import Login from "../Components/Login/Login";
 import CustomerDashboard from "../Components/Dashboard/CustomerDashboard/CustomerDashboard";
 import ManagerDashboard from "../Components/Dashboard/ManagerDashboard/ManagerDashboard";
 import GroundteamDashboard from "../Components/Dashboard/GroundteamDashboard/GroundteamDashboard";
+import GroundteamInfoEdit from "../Components/TeamInfo/GroundteamInfoEdit";
+import GroundteamInfoCreate from "../Components/TeamInfo/GroundteamInfoCreate";
 import SalesDashboard from "../Components/Dashboard/SalesDashboard/SalesDashboard";
 import PrivateRoute from "../Services/PrivateRoutes/PrivateRoute";
 import PrivateRouteCustomer from "../Services/PrivateRoutes/PrivateRouteCustomer";
@@ -65,6 +67,8 @@ const Routesr = () => {
           </Routing>
           <Routing path="/groundteamdashboard" element={<PrivateRouteGroundteam/>}>
           <Routing exact path="/groundteamdashboard" element={<GroundteamDashboard  />} /> 
+          <Routing exact path="/groundteamdashboard/infoedit" element={<GroundteamInfoEdit  />} /> 
+          <Routing exact path="/groundteamdashboard/infocreate" element={<GroundteamInfoCreate  />} /> 
           </Routing>
           <Routing path="/salesdashboard" element={<PrivateRouteSales/>}>
           <Routing exact path="/salesdashboard" element={<SalesDashboard  />} /> 

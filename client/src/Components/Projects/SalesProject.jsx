@@ -71,6 +71,7 @@ alert(`Declined Project ${projectID} `);
   return (
     <div>
         <h2>Projects</h2>
+        <br/>
         <div>     
         <ul>
 
@@ -84,6 +85,7 @@ alert(`Declined Project ${projectID} `);
                 <li>Project Accepted: {project.data.ManagerAccepted ? "True" : "False"}</li>
                 <li>Status: {project.data.Status} </li>
                 </div>
+            {/*
             {project.data.SaleAuthorised ? <h3>Project Confirmed</h3> : <h3>Accept this Project ?</h3>}
             <>
             <div>
@@ -91,8 +93,10 @@ alert(`Declined Project ${projectID} `);
               <button onClick={()=>declineProject(project.id)} disabled={project.data.Status === "Declined by Sales"}>Decline</button>
             </div>
             </>
+          */}
              
-            <br/>
+             <br/>
+             <br/>
             </div>
             
           ))}

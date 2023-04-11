@@ -134,7 +134,7 @@ function CustomerProject() {
       ManagerAccepted: false,
       SaleAuthorised: false,
       customerName: auth.currentUser.displayName,
-      saleAssigned: "PTgELGWcZxXa6XFZDxANalMOjLz2",
+      saleAssigned: "Z8CbFK7ASdUIr7tHzfYW1KZ21T53",
       Status: "Awaiting approval by Sales"
     };
     delete formDataCopy.images;
@@ -184,7 +184,7 @@ function CustomerProject() {
 
   return (
     <div>
-      {purchase ? <p>Project Purchased contact sales for more information or queries</p>: <>
+      {purchase ? null : <>
       <h2>Equipt your home with Solar Panels</h2>
       <div>
 
@@ -285,7 +285,7 @@ function CustomerProject() {
            />
         </div>
         <br/>
-        <button type="submit" disabled={purchase}>{purchase ? "Solar Panels Purchased":"Purchase Solar Panels"}</button>
+        <button type="submit" disabled={purchase}>Submit Details Form</button>
       </form>
       </div>
       </>}
@@ -294,7 +294,7 @@ function CustomerProject() {
         <div>     
         <ul>
 
-          {projectData.length === 0 ? "No Projects Purchased" : projectData.map((project, index) => (
+          {projectData.length === 0 ? "No Projects Initiated Fill the details form and get in touch with the Sales Team" : projectData.map((project, index) => (
             <div key={index} onClick={()=>{navigate(`/customerprojectdashboard/${project.id}`)}}>
                 <li >ProjectID: {project.id}</li>
                 <li>Customer:{project.data.customerName} </li>

@@ -36,6 +36,7 @@ import PrivateRouteSales from "../Services/PrivateRoutes/PrivateRouteSales";
 import SalesMessaging from "../Components/Messaging/SalesMessaging";
 import SalesProjectDashboard from "../Components/ProjectDashboard/SalesProjectDashboard";
 import ManagerProjectDashboard from "../Components/ProjectDashboard/ManagerProjectDashboard";
+import CustomerProjectDashboard from "../Components/ProjectDashboard/CustomerProjectDashboard";
 
 const Routesr = () => {
   return (
@@ -58,6 +59,9 @@ const Routesr = () => {
         
           <Routing path="/customerdashboard" element={<PrivateRouteCustomer/>}>
           <Routing exact path="/customerdashboard" element={<CustomerDashboard  />} /> 
+          </Routing>
+          <Routing path="/customerprojectdashboard/:id" element={<PrivateRouteCustomer/>}>
+          <Routing exact path="/customerprojectdashboard/:id" element={<CustomerProjectDashboard />} /> 
           </Routing>
           <Routing path="/managerdashboard" element={<PrivateRouteManager/>}>
           <Routing exact path="/managerdashboard" element={<ManagerDashboard  />} /> 

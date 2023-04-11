@@ -19,7 +19,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { email, password } = formData;
+  const { name ,email, password } = formData;
   const navigate = useNavigate();
 
   const onChange = (e) => {
@@ -66,9 +66,9 @@ const Login = () => {
         password
       );
 
-      // updateProfile(auth.currentUser, {
-      //   displayName: name,
-      // });
+      updateProfile(auth.currentUser, {
+        displayName: name,
+       });
       const user = userCredential.user;
       const formDataCopy = { ...formData };
       delete formDataCopy.password;
@@ -156,7 +156,7 @@ const Login = () => {
                     type="text"
                     placeholder="Full Name"
                     onChange={onChange}
-                    // value={name}
+                    value={name}
                     className="input_field"
                     required
                   />

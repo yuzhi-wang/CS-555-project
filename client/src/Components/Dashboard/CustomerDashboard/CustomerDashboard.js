@@ -42,9 +42,10 @@ const CustomerDashboard = () => {
             <br/>
             <br/>
             <br/>
-            <h2> Messages to sales</h2>
+        
             <CustomerMessaging/>
-            
+            <br/>
+            <br/>
             <CustomerProject/>
 
 

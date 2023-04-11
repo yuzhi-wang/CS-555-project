@@ -134,7 +134,8 @@ function CustomerProject() {
       ManagerAccepted: false,
       SaleAuthorised: false,
       customerName: auth.currentUser.displayName,
-      saleAssigned: "PTgELGWcZxXa6XFZDxANalMOjLz2"
+      saleAssigned: "PTgELGWcZxXa6XFZDxANalMOjLz2",
+      Status: "Awaiting approval by Sales"
     };
     delete formDataCopy.images;
     const docRef = await addDoc(collection(db, "project"), formDataCopy);
@@ -278,7 +279,7 @@ function CustomerProject() {
             type="file"
             id="images"
             onChange={onChange}
-            accept=".jpg,.png,.jpeg"
+            accept=".jpg,.png,.jpeg,.webp"
             multiple
             required
            />
@@ -294,7 +295,7 @@ function CustomerProject() {
         <ul>
 
           {projectData.length === 0 ? "No Projects Purchased" : projectData.map((project, index) => (
-            <div key={index} onClick={()=>{navigate(`/project/${project.id}`)}}>
+            <div key={index} onClick={()=>{navigate(`/customerprojectdashboard/${project.id}`)}}>
                 <li >ProjectID: {project.id}</li>
                 <li>Customer:{project.data.customerName} </li>
                 <li>Purchased By: {project.data.customer}</li>

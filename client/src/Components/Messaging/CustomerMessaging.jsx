@@ -23,9 +23,17 @@ function CustomerMessaging() {
   async function handleSendMessage() {
   
     if (customermessages.trim() !== '') {
+      // insert code to get random sales member for now default displayed to all
+
+
+
+
+
+
+
       // send data to firebase
       const messageRef = doc(db, "CustomerSalesMessaging", auth.currentUser.uid);
-      console.log(messageRef)
+      
       const docSnap = await getDoc(messageRef);
       if (docSnap.exists()) {
         await updateDoc(messageRef, {
@@ -78,7 +86,7 @@ function CustomerMessaging() {
 
   return (
     <div>
-      <h2>Messages:</h2>
+      <h2>Messages to Sales:</h2>
       <DisplayMessage messages={messages}/>
       <div>
         <input type="text" value={customermessages} onChange={handleNewMessageChange} />

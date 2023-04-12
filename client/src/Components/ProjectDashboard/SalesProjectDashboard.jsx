@@ -7,6 +7,8 @@ import { db } from "../../firebase";
 import {Popup} from "reactjs-popup"
 import 'reactjs-popup/dist/index.css';
 import SignaturePad from "react-signature-canvas"
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDFGenerator from '../PDFGenerator/PDFGenerator';
 
 function SalesProjectDashboard() {
   const sigCanvas = useRef({})
@@ -50,7 +52,10 @@ const save = () =>{
     imgUrls:[],
     startTime:"",
     endTime:"",
-    SentToManager:false
+    SentToManager:false,
+    salesSignature:"",
+    Quote: "",
+    Proposal : "",
   });
   const [projectAccepted, setprojectAccepted] = useState(false);
   
@@ -143,15 +148,17 @@ navigate(0)
         {project.imgUrls.length !== 0 ? <img style={{width:"500px"}} src={project.imgUrls[0]}></img>:null}  
         <div>
           <ul>
-            <li >ProjectID: {project.projectID}</li>
-            <li>Customer:{project.customerName} </li>
-            <li>Address:{project.address}</li>
-            <li>Start Time:{project.startTime}</li>
-            <li>End Time:{project.endTime}</li>
-            <li>Purchased By: {project.customer}</li>
-            <li>Sale Authorised: {project.SaleAuthorised ? "True" : "False"}</li>
-            <li>Project Accepted: {project.ManagerAccepted ? "True" : "False"}</li>
-            <li>Status: {project.Status} </li>
+          <li >ProjectID: {project.projectID}</li>
+                <li>Customer:{project.customerName} </li>
+                <li>Address:{project.address}</li>
+                <li>Start Time:{project.startTime}</li>
+                <li>End Time:{project.endTime}</li>
+                <li>Purchased By: {project.customer}</li>
+                <li>Sale Authorised: {project.SaleAuthorised ? "True" : "False"}</li>
+                <li>Project Accepted: {project.ManagerAccepted ? "True" : "False"}</li>
+                <li>Status: {project.Status} </li>
+                <li>Quote Agreed Upon: {project.Quote === "" ? "No Quote Agreed Upon": project.Quote} </li>
+                <li>Proposal: {project.Proposal === "" ? "No Proposal Discussed Yet": project.Proposal} </li>
           </ul>
         </div>
         <br/>
@@ -215,7 +222,16 @@ navigate(0)
     </>
     }
     {project.Status === "Awaiting Customer Signature" ? <h2>Awaiting Customer Signature to send project to the manager</h2>:null }
-    {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ? <h2>Button to download Contract</h2>:null }       
+    {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ?  
+    <div>
+        <h2>Button to download Contract</h2> 
+        <div>
+      <PDFDownloadLink document={<PDFGenerator data={project}/>} filename="FORM">
+      {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
+      </PDFDownloadLink>
+      {/* <PDFFile /> */}
+    </div>
+    </div>:null }       
     {project.Status === "Preparing To Start The Project" ? 
     <>
     <h2>Start Project With Manager</h2>

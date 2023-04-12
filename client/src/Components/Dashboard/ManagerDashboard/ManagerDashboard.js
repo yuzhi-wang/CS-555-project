@@ -20,7 +20,7 @@ import arrow from "../../Assets/right-arrow.png"
 
 const ManagerDashboard = () => {
 	const auth = getAuth();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
 	function onLogout() {
@@ -35,9 +35,9 @@ const ManagerDashboard = () => {
 
 
 	return (
-		<>
+		<div >
 			
-            <h1>Manager Dashboard</h1>
+            <h1 data-testid="ManagerDashboard-1">Manager Dashboard</h1>
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
             
             <div>
@@ -51,7 +51,7 @@ const ManagerDashboard = () => {
                 <ManagerProject/>
             </div>
 
-		</>
+		</div>
 	);
 };
 

@@ -21,7 +21,7 @@ import arrow from "../../Assets/right-arrow.png"
 
 const SalesDashboard = () => {
 	const auth = getAuth();
-    const navigate = useNavigate();
+   const navigate = useNavigate();
     const [customer, setCustomers] = useState([]);
     
 
@@ -53,9 +53,9 @@ const SalesDashboard = () => {
 
 
 	return (
-		<>
+		<div >
 			
-            <h1>Sales Dashboard</h1>
+            <h1 data-testid="SalesDashboard-1">Sales Dashboard</h1>
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
             <br/>
             <br/>
@@ -73,7 +73,7 @@ const SalesDashboard = () => {
       <SalesProject/>
             
 
-		</>
+		</div>
 	);
 };
 

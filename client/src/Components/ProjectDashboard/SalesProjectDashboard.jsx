@@ -109,6 +109,7 @@ async function startProject() {
     // Set the "capital" field of the city 'DC'
 await updateDoc(projectRef, {
   SentToManager: true,
+  Status:"Assigned to Manager, Project going to start soon !!"
 });
 
 alert(`Project ${params.id} Successfully Started with Manager`);
@@ -172,7 +173,7 @@ navigate(0)
             />
 
         <p >Proposal</p>
-        <input
+        <textarea
           type="text"
           id="Details"
           value={Details}
@@ -213,13 +214,14 @@ navigate(0)
         ) :null}
     </>
     }
-    {!project.CustomerSignature ? <h2>Awaiting Customer Signature</h2>: <h2>Button to download Contract</h2>}       
-    {project.SentToManager ? null:
+    {project.Status === "Awaiting Customer Signature" ? <h2>Awaiting Customer Signature to send project to the manager</h2>:null }
+    {project.Status === "Awaiting approval by Sales" ? <h2>Button to download Contract</h2>:null }       
+    {project.Status === "Preparing To Start The Project" ? 
     <>
     <h2>Start Project With Manager</h2>
-    <buttom onClick={startProject}>Start Project</buttom>
-    </>}
-
+    <button onClick={startProject}>Start Project</button>
+    </>: null}
+    <br/>
     <br/>
     <SalesManagerMessaging data={{projectData: project,auth: auth}}/>
     </div>

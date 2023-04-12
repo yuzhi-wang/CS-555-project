@@ -9,7 +9,7 @@ import {Popup} from "reactjs-popup"
 import 'reactjs-popup/dist/index.css';
 import SignaturePad from "react-signature-canvas"
 import "./sign.css"
-
+import ProgressBar from "@ramonak/react-progress-bar";
 
 
 
@@ -20,6 +20,8 @@ function CustomerProjectDashboard() {
     const auth = getAuth();
     const navigate = useNavigate();
     const [signature , setSignature] = useState(null)
+    const [percentCompleted, setPercentCompleted] = useState("0")
+
   const [project, setProjectData] = useState({
     ManagerAccepted:"",
     SaleAuthorised:"",
@@ -33,7 +35,9 @@ function CustomerProjectDashboard() {
     imgUrls:[],
     startTime:"",
     endTime:"",
-    salesSignature:""
+    salesSignature:"",
+    Quote: "",
+    Proposal : "",
   });
   const [DoesProjectExists, setDoesProjectExists] = useState(false);
 
@@ -52,7 +56,7 @@ function CustomerProjectDashboard() {
   
         // Set the "capital" field of the city 'DC'
     await updateDoc(projectRef, {
-      Status: "Preparing The Start of Project",
+      Status: "Preparing To Start The Project",
       CustomerSignature: signature,
     });
    
@@ -70,7 +74,11 @@ function CustomerProjectDashboard() {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setProjectData({projectID:docSnap.id,...docSnap.data()});
-        let {customer} = docSnap.data()
+        let {customer,Status} = docSnap.data()
+        if(Status === "Preparing To Start The Project" || Status === "Assigned to Manager, Project going to start soon !!") setPercentCompleted("20")
+        if(Status === "Manager Confirmed, Project will start Soon") setPercentCompleted("50")
+        if(Status === "Awaiting approval by Sales" || Status === "Awaiting Customer Signature") setPercentCompleted("10")
+        
         if(customer)
         setDoesProjectExists(true)
       }
@@ -97,6 +105,8 @@ if(DoesProjectExists){
                 <li>Sale Authorised: {project.SaleAuthorised ? "True" : "False"}</li>
                 <li>Project Accepted: {project.ManagerAccepted ? "True" : "False"}</li>
                 <li>Status: {project.Status} </li>
+                <li>Quote Agreed Upon: {project.Quote === "" ? "No Quote Agreed Upon": project.Quote} </li>
+                <li>Proposal: {project.Proposal === "" ? "No Proposal Discussed Yet": project.Proposal} </li>
             </div>     
         </ul>
       </div>
@@ -104,7 +114,7 @@ if(DoesProjectExists){
       <br/>
 {project.Status !== "Awaiting Customer Signature" ? null:
 <div>
-    <h2>Sign Papers</h2>
+    <h2>Sign Contract To Get Project Started</h2>
     <Popup modal trigger={<button>Open Signature Pad</button>} closeOnDocumentClick={false}>
         {close =>(
             <>
@@ -125,20 +135,25 @@ if(DoesProjectExists){
     margin: "0 auto",
 border:"1px solid black",
 width:"150px"}}/>
+<p>Once Signed, using Sign Pad click "Sign Contract" to Submit it</p>
 <button onClick={handleSubmit}>Sign Contract</button>
 </div>
 ) :null}
 
 </div>}
-
-
-
+<br/>
+<br/>
+<div>
+<ProgressBar animateOnRender={true} completed={`${percentCompleted}%`} labelAlignment="center" height="30px" maxCompleted={100} width="50%" completedClassName={`barCompleted${percentCompleted}`} labelClassName="label"/>
+<br/>
+<h2>Current Status of the Project: {project.Status}</h2>
+</div>
 <br/>
 <br/>
 <br/>
 
-               <CustomerMessaging/>
-      </div>
+ <CustomerMessaging/>
+</div>
   );
 }
 else{

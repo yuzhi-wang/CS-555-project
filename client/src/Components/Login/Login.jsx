@@ -20,7 +20,7 @@ const Login = () => {
     password: "",
   });
   const { name ,email, password } = formData;
-  const navigate = useNavigate();
+ const navigate = useNavigate();
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -83,7 +83,7 @@ const Login = () => {
     }
   };
   return (
-    <main id="main">
+    <main id="main" data-testid="Login-1">
       <div className="box">
         <div className="inner_box">
           <div className="forms_wrap">

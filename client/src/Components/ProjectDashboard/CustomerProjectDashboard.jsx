@@ -33,6 +33,7 @@ function CustomerProjectDashboard() {
     imgUrls:[],
     startTime:"",
     endTime:"",
+    salesSignature:""
   });
   const [DoesProjectExists, setDoesProjectExists] = useState(false);
 
@@ -45,9 +46,19 @@ function CustomerProjectDashboard() {
     
   }
 
-  function handleSubmit(){
+  async function handleSubmit(){
     //  save sugnature to storage and then to project database
-  console.log(signature)
+    const projectRef = doc(db, "project", params.id);
+  
+        // Set the "capital" field of the city 'DC'
+    await updateDoc(projectRef, {
+      Status: "Preparing The Start of Project",
+      CustomerSignature: signature,
+    });
+   
+    alert(`Project ${params.id} Accepted You can now download Contract`);
+    navigate(0)
+  
 }
 
 
@@ -91,7 +102,7 @@ if(DoesProjectExists){
       </div>
       <br/>
       <br/>
-
+{project.Status !== "Awaiting Customer Signature" ? null:
 <div>
     <h2>Sign Papers</h2>
     <Popup modal trigger={<button>Open Signature Pad</button>} closeOnDocumentClick={false}>
@@ -108,18 +119,20 @@ if(DoesProjectExists){
         </Popup>
     <br/>
     <br/>
-    {signature ? (
+{signature ? (
         <div>
         <img src={signature} alt='signature' style={{display:"block",
     margin: "0 auto",
 border:"1px solid black",
 width:"150px"}}/>
-<button onClick={handleSubmit}>Submit</button>
+<button onClick={handleSubmit}>Sign Contract</button>
 </div>
 ) :null}
 
-  
-</div>
+</div>}
+
+
+
 <br/>
 <br/>
 <br/>

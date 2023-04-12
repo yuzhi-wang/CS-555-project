@@ -20,7 +20,7 @@ import arrow from "../../Assets/right-arrow.png"
 
 const CustomerDashboard = () => {
 	const auth = getAuth();
-    const navigate = useNavigate();
+   const navigate = useNavigate();
     console.log(auth.currentUser.uid)
 
 	function onLogout() {
@@ -35,9 +35,9 @@ const CustomerDashboard = () => {
 
 
 	return (
-		<>
+		<div data-testid="CustomerDashboard-1">
 			
-            <h1>Customer Dashboard</h1>
+            <h1 >Customer Dashboard</h1>
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
             <br/>
             <br/>
@@ -49,7 +49,7 @@ const CustomerDashboard = () => {
             <CustomerProject/>
 
 
-		</>
+		</div>
 	);
 };
 

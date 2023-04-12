@@ -50,6 +50,7 @@ const save = () =>{
     imgUrls:[],
     startTime:"",
     endTime:"",
+    SentToManager:false
   });
   const [projectAccepted, setprojectAccepted] = useState(false);
   
@@ -95,6 +96,7 @@ const save = () =>{
       salesSignature: signature,
       Quote: Quote,
       Proposal : Details,
+      SentToManager: false,
     });
    
     alert(`Project ${params.id} Accepted`);
@@ -211,9 +213,8 @@ navigate(0)
         ) :null}
     </>
     }
-    {!project.CustomerSignature ? null: <h2>Button to download Contract</h2>}       
-    {!project.CustomerSignature || !project.SentToManager ? <h2>Awaiting Customer Signature</h2>: 
-
+    {!project.CustomerSignature ? <h2>Awaiting Customer Signature</h2>: <h2>Button to download Contract</h2>}       
+    {project.SentToManager ? null:
     <>
     <h2>Start Project With Manager</h2>
     <buttom onClick={startProject}>Start Project</buttom>

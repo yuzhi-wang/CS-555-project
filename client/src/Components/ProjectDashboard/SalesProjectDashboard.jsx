@@ -215,7 +215,7 @@ navigate(0)
     </>
     }
     {project.Status === "Awaiting Customer Signature" ? <h2>Awaiting Customer Signature to send project to the manager</h2>:null }
-    {project.Status === "Awaiting approval by Sales" ? <h2>Button to download Contract</h2>:null }       
+    {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ? <h2>Button to download Contract</h2>:null }       
     {project.Status === "Preparing To Start The Project" ? 
     <>
     <h2>Start Project With Manager</h2>

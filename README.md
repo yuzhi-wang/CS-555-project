@@ -28,10 +28,7 @@
 - [License](#lock-license)
 
 ##  :beginner: About
-To use the Project, I recommand you using standard NPM
-
-npm start
-
+To use the Project, I recommand you using standard NPM, If you have package manger yarn, just follow the common instructions
 ## :zap: Usage
 Write about how to use this project.
 
@@ -40,24 +37,29 @@ Write about how to use this project.
 - Be very detailed here, For example, if you have tools which run on different operating systems, write installation steps for all of them.
 
 ```
-$ add installations steps if you have to.
+$ npm install
+
 ```
 
 ###  :package: Commands
-- Commands to start the project.
+
+```
+$ npm start
+
+```
 
 ##  :wrench: Development
-If you want other people to contribute to this project, this is the section, make sure you always add this.
+If you want to contribute to this project, please send us a email through rkang@stevens.edu
 
 ### :notebook: Pre-Requisites
 List all the pre-requisites the system needs to develop this project.
-- A tool
-- B tool
+- A An editor
+- B NPM Modules
 
 ###  :nut_and_bolt: Development Environment
-Write about setting up the working environment for your project.
-- How to download the project...
-- How to install dependencies...
+Here are some simple steps
+- How to download the project clone to your local repository
+- How to install dependencies : everything came in in package.json
 
 
 ###  :file_folder: File Structure

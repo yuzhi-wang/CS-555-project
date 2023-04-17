@@ -3,6 +3,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import GroundteamProject from '../../Projects/GroundteamProject';
 import GroundteamInfo from '../../TeamInfo/GroundteamInfo';
+import GroundteamDisapprovalProject from '../../Projects/GroundteamDisapprovalProject';
 /*
 import BackgroundCSL from './Carousel';
 import { getDocs } from 'firebase/firestore';
@@ -41,6 +42,7 @@ const GroundteamDashboard = () => {
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
             <GroundteamInfo/>
             <GroundteamProject/>
+            <GroundteamDisapprovalProject/>
 
 		</div>
 	);

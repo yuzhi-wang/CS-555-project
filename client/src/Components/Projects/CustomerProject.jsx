@@ -142,6 +142,7 @@ function CustomerProject() {
       salesSignature: "",
       Quote: "",
       Proposal : "",
+      managerAssigned: "",
     };
     delete formDataCopy.images;
     const docRef = await addDoc(collection(db, "project"), formDataCopy);

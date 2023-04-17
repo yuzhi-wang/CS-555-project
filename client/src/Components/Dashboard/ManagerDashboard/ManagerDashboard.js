@@ -3,6 +3,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import ManagerProject from '../../Projects/ManagerProject';
 import ManagerNewProject from '../../Projects/ManagerNewProject';
+import ManagerCompletionCheckingProject from '../../Projects/ManagerCompletionCheckingProject';
 /*
 import BackgroundCSL from './Carousel';
 import { getDocs } from 'firebase/firestore';
@@ -49,6 +50,11 @@ const ManagerDashboard = () => {
                 <h2>On Going Projects</h2>
                 <p>Display all On Going projects basically projects accepted by manager</p>
                 <ManagerProject/>
+            </div>
+            <div>
+                <h2>Completion Checking Projects</h2>
+                <p>Display all Completion Checking projects reported by groundteam</p>
+                <ManagerCompletionCheckingProject/>
             </div>
 
 		</div>

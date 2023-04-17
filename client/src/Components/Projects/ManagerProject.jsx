@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 
-import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove, setDoc,collection, addDoc,query, where,getDocs} from "firebase/firestore"; 
+import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove, setDoc,collection, addDoc,query, where,getDocs, deleteDoc} from "firebase/firestore"; 
 import { db } from "../../firebase";
 
 function ManagerProject() {
@@ -29,11 +29,17 @@ function ManagerProject() {
 
 async function declineProject(projectID) {
     const projectRef = doc(db, "project", projectID);
-
+    const querySnapshot = await getDocs(query(collection(db, "ticket"), where("projectid", "==", projectID)));
     // Set the "capital" field of the city 'DC'
-await updateDoc(projectRef, {
+    const ticketRef = doc(db, "ticket", querySnapshot.docs[0].id);
+    
+    deleteDoc(ticketRef)
+        
+
+    await updateDoc(projectRef, {
   ManagerAccepted: false,
-  Status: "Declined by Manager"
+  Status: "Declined by Manager",
+  managerAssigned: ""
 });
 
 alert(`Declined Project ${projectID} `);
@@ -46,7 +52,8 @@ alert(`Declined Project ${projectID} `);
       const projectRef = collection(db, "project");
 
       // Create a query against the collection.
-      const q = query(projectRef, where("managerAssigned", "==", auth.currentUser.uid), where("ManagerAccepted", "==", true));
+      const q = query(projectRef, where("managerAssigned", "==", auth.currentUser.uid), where("ManagerAccepted", "==", true), 
+      where("Status", "==", "Manager Confirmed, Project will start Soon"));
       const querySnapshot = await getDocs(q);
       let customerProject = []
 
@@ -134,7 +141,10 @@ alert(`Declined Project ${projectID} `);
       }
       const ticketRef = doc(db, "ticket", docId);
       await updateDoc(ticketRef, {
-          groundteamid: groundteamid
+          groundteamid: groundteamid,
+          img:"",
+          completion_description:"",
+          manager_diaspproval:""
       });
 
       alert(`Project ${currentProject} Reassigned`)

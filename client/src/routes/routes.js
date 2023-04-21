@@ -20,7 +20,7 @@ import Search from "../Components/Search/Search";
 */
 import Layout from "../Components/layout/layout";
 import Errors from "../Components/Errors/Errors";
-import Homepage from "../Components/Homepage/Homepage";
+import Homepage from "../Components/Homepage/Main/Homepage";
 import Login from "../Components/Login/Login";
 import CustomerDashboard from "../Components/Dashboard/CustomerDashboard/CustomerDashboard";
 import ManagerDashboard from "../Components/Dashboard/ManagerDashboard/ManagerDashboard";

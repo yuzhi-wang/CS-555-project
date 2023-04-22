@@ -86,7 +86,7 @@ const GroundteamDisapprovalProject = () => {
    
     return (
         <>
-        <div>Disapproved Project</div>
+        <div>Disapproved Completion</div>
         
         {renderTickets()}
         

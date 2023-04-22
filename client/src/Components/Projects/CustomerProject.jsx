@@ -16,6 +16,7 @@ function CustomerProject() {
     const auth = getAuth();
     const navigate = useNavigate();
   const [projectData, setProjectData] = useState([]);
+  const [date, setDate] = useState('');
   const [startTime, setStartTime]= useState("")
   const [endTime, setEndTime]= useState("")
   const [purchase, setPurchase] = useState(false)
@@ -127,6 +128,7 @@ function CustomerProject() {
     const formDataCopy = {
       ...formData,
       imgUrls,
+      date: date,
       startTime: startTime,
       endTime: endTime,
       timestamp: serverTimestamp(),
@@ -232,6 +234,10 @@ function CustomerProject() {
             />
 
         <p >Location Hours of operation</p>   
+        <p>Date</p>
+        <input type="date" id="date" name="date" value={date} onChange={(event) => {
+    setDate(event.target.value);
+  }} required />
         <p>Start Time</p>
         <input type="time" id="appt" name="start" value={startTime} onChange={(event) => {
     setStartTime(event.target.value);

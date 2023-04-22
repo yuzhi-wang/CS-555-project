@@ -42,13 +42,11 @@ const ManagerDashboard = () => {
 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
             
             <div>
-                <h2>New Projects</h2>
-                <p>Display all new projects approved by sales</p>
+                <h2>Projects</h2>
                 <ManagerNewProject/>
             </div>
             <div>
                 <h2>On Going Projects</h2>
-                <p>Display all On Going projects basically projects accepted by manager</p>
                 <ManagerProject/>
             </div>
             <div>

@@ -85,16 +85,6 @@ function ManagerNewProject() {
     };
   }
 
-  async function declineProject(projectID) {
-    const projectRef = doc(db, "project", projectID);
-    await updateDoc(projectRef, {
-      ManagerAccepted: false,
-      managerAssigned: "",
-      Status: "Declined by Manager"
-    });
-    alert(`Declined Project ${projectID} `);
-  }
-
 
   useEffect(() => {
     async function fetchProject() {
@@ -125,7 +115,7 @@ function ManagerNewProject() {
         <div>     
         <ul>
 
-          {projectData.length === 0 ? "No Projects On Going" : projectData.map((project, index) => (
+          {projectData.length === 0 ? "No New Projects To Start" : projectData.map((project, index) => (
             <div key={index}>
             <div  onClick={()=>{navigate(`/managerprojectdashboard/${project.id}`)}}>
                 <li >ProjectID: {project.id}</li>
@@ -135,10 +125,10 @@ function ManagerNewProject() {
                 <li>Project Accepted: {project.data.ManagerAccepted ? "True" : "False"}</li>
                 <li>Status: {project.data.Status} </li>
                 </div>
-            <h3>Accept this Project ?</h3>
+            <h3>Start this Project ?</h3>
             <>
             <div>
-              <button onClick={()=>acceptProject(project.id)} disabled={project.data.ManagerAccepted}>Accept</button>
+              <button onClick={()=>acceptProject(project.id)} disabled={project.data.ManagerAccepted}>Start Project</button>
             </div>
             </>
             { (trigger) && AssignGroundTeam(project.id)}

@@ -66,9 +66,120 @@ function CustomerProjectDashboard() {
   
 }
 
+  const [maintenanceTrigger, setMaintenanceTrigger] = useState(false);
+  const ButtonForMaintenance = () => {
+    if (percentCompleted === "100"){
+    return (
+    <>
+      <h2>Customer Service</h2>
+      {renderMaintenanceTicket()}
+      <button onClick={() => {setMaintenanceTrigger(true)}}>Request for Maintenance</button>
+      {NewMaintenance(project)}
+
+    </>
+    )
+    }
+  }
+
+  const [description,setDescription] = useState("");
+  const [date, setDate] = useState('');
+  const [startTime, setStartTime]= useState("");
+  const [endTime, setEndTime]= useState("");
+
+  const NewMaintenance = (project) => {
+    if (maintenanceTrigger){
+    return (
+      <>
+        <form onSubmit={(event) => submitTicket(event, project)}>
+          <textarea type='text' id="description" name="description" placeholder='Problem Description' value={description} onChange={(event) => {
+      setDescription(event.target.value)}}></textarea>
+          <p >Location Hours of operation</p>   
+          <p>Date</p>
+          <input type="date" id="date" name="date" value={date} onChange={(event) => {
+      setDate(event.target.value);}} required />
+          <p>Start Time</p>
+          <input type="time" id="appt" name="start" value={startTime} onChange={(event) => {
+      setStartTime(event.target.value);}} min="06:00" max="21:00" required/>
+          <p>End Time</p>
+          <input type="time" id="appt" name="end" value={endTime} onChange={(event) => {
+      setEndTime(event.target.value);}} min="06:00" max="21:00" required/>
+          <small>Please select anytime between 6:00 am - 9:00 PM</small>
+          <button type='submit'>Request for Maintenance</button>
+        </form>
+      </>
+    )
+  }
+}
+  
+  let projectId = params.id;
+  const [groundteam, setGroundteam] = useState("");
+  useEffect(() => {
+    const fetchGroundteam = async () => {
+      const ticketRef = collection(db, "ticket");
+      const q = query(ticketRef, where("projectid", "==", projectId));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setGroundteam(doc.data().groundteamid);
+    })
+  };
+  fetchGroundteam();}
+  ,[]);
+
+  const [MaintenanceTickets, setMaintenanceTickets] = useState([]);
+  useEffect(() => {
+    let MaintenanceTicket = [];
+    const fetchMaintenanceTicket = async () => {
+      const ticketRef = collection(db, "ticket");
+      const q = query(ticketRef, where("projectid", "==", projectId), where("type", "==", "Maintenance"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        MaintenanceTicket.push(doc);
+    })
+    setMaintenanceTickets(MaintenanceTicket);
+  }
+  fetchMaintenanceTicket();}
+  ,[]);
+
+  const renderMaintenanceTicket = () =>{
+    if (MaintenanceTickets.length > 0){
+      return MaintenanceTickets.map(ticket => 
+        <div key={ticket.id}>
+          <ul>
+            <li>Ticket Id:{ticket.id}</li>
+            <li>Description:{ticket.data().description}</li>
+            <li>Schedule:{ticket.data().date}</li>
+            <li>Status:{ticket.data().status}</li>
+          </ul>
+        </div>
+      )
+    }
+  }
+
+  const submitTicket = async(event, project) => {
+    event.preventDefault();
+    try{
+    let maintenanceticket = await addDoc(collection(db,"ticket"), {
+      description: description,
+      groundteamid: groundteam,
+      projectid: params.id,
+      startTime: startTime,
+      endTime: endTime,
+      date: date,
+      status: "In Progress",
+      type:"Maintenance",
+      address: project.address,
+      customer: project.customerName,
+      managerid: project.managerAssigned
+    });
+    setMaintenanceTrigger(false);
+  }catch(e){
+    alert(e);
+  }
+  } 
 
   useEffect(() => {
     async function fetchProject() {
+     
       console.log("Customer Project use effect")
       
       const docRef = doc(db, "project", params.id);
@@ -77,8 +188,9 @@ function CustomerProjectDashboard() {
         setProjectData({projectID:docSnap.id,...docSnap.data()});
         let {customer,Status} = docSnap.data()
         if(Status === "Preparing To Start The Project" || Status === "Assigned to Manager, Project going to start soon !!") setPercentCompleted("20")
-        if(Status === "Manager Confirmed, Project will start Soon") setPercentCompleted("50")
+        if(Status === "Manager Confirmed, Project will start Soon" || Status === "Project Started, assigned to ground team") setPercentCompleted("50")
         if(Status === "Awaiting approval by Sales" || Status === "Awaiting Customer Signature") setPercentCompleted("10")
+        if (Status === "Completion approved by Manager") setPercentCompleted("100")
         
         if(customer)
         setDoesProjectExists(true)
@@ -97,7 +209,7 @@ if(DoesProjectExists){
             {project.imgUrls.length !== 0 ? <img style={{width:"500px"}} src={project.imgUrls[0]}></img>:null}     
         <ul>
             <div>
-                <li >ProjectID: {project.projectID}</li>
+                <li>ProjectID: {project.projectID}</li>
                 <li>Customer:{project.customerName} </li>
                 <li>Address:{project.address}</li>
                 <li>Start Time:{project.startTime}</li>
@@ -164,9 +276,19 @@ width:"150px"}}/>
 <br/>
 
  <CustomerMessaging/>
+ <br/>
+ 
+  {ButtonForMaintenance()}
+
 </div>
+
+
   );
+
+
 }
+
+
 else{
     return(
         <div>

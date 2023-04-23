@@ -108,7 +108,7 @@ function ManagerCompletionCheckingProject() {
         await updateDoc(infoRef1, {
            
             
-            Status: "Completion approved by Manager."
+            Status: "Completion approved by Manager"
 
           });
       alert(`Project ${projectId} completion approved.`);

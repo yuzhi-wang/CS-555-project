@@ -165,6 +165,7 @@ alert(`Declined Project ${projectID} `);
           <li >ProjectID: {project.id}</li>
                 <li>Customer:{project.data.customerName} </li>
                 <li>Address:{project.data.address}</li>
+                <li>Date:{project.data.date}</li>
                 <li>Start Time:{project.data.startTime}</li>
                 <li>End Time:{project.data.endTime}</li>
                 <li>Ground Team Assigned: {project.data.groundteamid}</li>

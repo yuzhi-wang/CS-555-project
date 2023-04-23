@@ -17,7 +17,7 @@ const GroundteamProject = () => {
     const filter = () => {
         return (
             <div>
-                <label>filter:</label>
+                {/* <label>filter:</label> */}
                 <select value={tickettype} onChange={(e) => setTickettype(e.target.value)}>
                     <option value="All">All</option>
                     <option value="Installation">Installation</option>

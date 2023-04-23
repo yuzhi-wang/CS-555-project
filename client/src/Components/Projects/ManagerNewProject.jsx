@@ -28,6 +28,7 @@ function ManagerNewProject() {
         groundteamid: groundteamid,
         projectid:projectId,
         schedule:"pending",
+        date: data.date,
         startTime: data.startTime,
         endTime: data.endTime,
         status: "In Progress",
@@ -100,6 +101,7 @@ function ManagerNewProject() {
                 <li>Customer:{project.data.customerName} </li>
                 <li>Address:{project.data.address}</li>
                 <li>Project Size:{project.data.projectsize}</li>
+                <li>Date:{project.data.date}</li>
                 <li>Start Time:{project.data.startTime}</li>
                 <li>End Time:{project.data.endTime}</li>
                 <li>Sale Authorised: {project.data.SaleAuthorised ? "True" : "False"}</li>
@@ -118,7 +120,7 @@ function ManagerNewProject() {
               <select id='groundteam' value={groundteamid} onChange={(e) => setGoundteamId(e.target.value)} >
               {groundteamSelector()}
               </select>
-              <input type="submit">Submit team and start project</input>
+              <input type="submit"/>
               </form>
             </>:null}
             </div>

@@ -55,7 +55,9 @@ function ManagerProjectDashboard() {
           type:"Installation",
           address: data.address,
           customer: data.customerName,
-          managerid: auth.currentUser.uid
+          managerid: auth.currentUser.uid,
+          img:[],
+          imgPre: data.imgUrls,
         });
         
         // update project collection

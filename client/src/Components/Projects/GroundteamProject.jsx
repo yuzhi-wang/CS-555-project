@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth } from 'firebase/auth';
 import { db } from '../../firebase';
 import { query, collection, where, getDocs, doc, updateDoc, setDoc } from 'firebase/firestore';
@@ -11,6 +12,7 @@ import {
   } from "firebase/storage";
 const GroundteamProject = () => {
     const auth = getAuth();
+    const navigate = useNavigate();
     const [tickettype, setTickettype] = useState("All");
     const [selectstatus, setSelectstatus] = useState("In Progress");
     const [info, setInfo] = useState({images:{},});
@@ -178,7 +180,7 @@ const GroundteamProject = () => {
             // Ticket(ticket) 
             <div key={ticket.id} className='ticketseperator'>
                 <div className='tickets'>
-                    <div className='left'>
+                    <div className='left' onClick={()=>{navigate(`/groundteamprojectdashboard/${ticket.id}`)}}>
                         <h4>{ticket.id}</h4>
                         <div>
                             <ul>
@@ -280,7 +282,7 @@ const GroundteamProject = () => {
         return(
             <div key={ticket.id} className='ticketseperator'>
                 <div className='tickets'>
-                    <div className='left'>
+                    <div className='left' onClick={()=>{navigate(`/groundteamprojectdashboard/${ticket.id}`)}}>
                         <h4>{ticket.id}</h4>
                         <div>
                             <div>

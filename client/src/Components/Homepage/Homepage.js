@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-// import { Feature } from './Feature/Feature'
+import { ArrowPathIcon, CloudArrowUpIcon, LockClosedIcon } from '@heroicons/react/20/solid'
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -37,6 +37,53 @@ const navigation1 = {
   ],
 }
 
+const features = [
+  {
+    name: 'Streamlined Installation Process:',
+    description:
+      'Our app connects you with a network of certified solar panel installers, making it easy to find and schedule the right professionals for your project',
+    href: '#',
+    icon: ArrowPathIcon,
+  },
+  {
+    name: 'Ground Team Collaboration',
+    description:
+      'The apps ground team dashboard enables seamless communication between installers, managers, and customers, ensuring a smooth installation experience from start to finish',
+    href: '#',
+    icon: CloudArrowUpIcon,
+  },
+  {
+    name: 'Comprehensive Sales Dashboard',
+    description:
+      ' Solmate customer sales platform provides real-time data, analytics, and lead tracking to help your sales team efficiently manage and close deals',
+    href: '#',
+    icon: LockClosedIcon,
+  },
+  {
+    name: 'Manager Dashboard',
+    description:
+      'Our app connects you with a network of certified solar panel installers, making it easy to find and schedule the right professionals for your project',
+    href: '#',
+    icon: ArrowPathIcon,
+  },
+  {
+    name: 'Customized Solar Solutions',
+    description:
+      'Solmate analyzes your energy needs, location, and preferences to recommend the perfect solar panel setup tailored to your requirements',
+    href: '#',
+    icon: ArrowPathIcon,
+  },
+
+  {
+    name: 'Incentive and Rebate Tracking',
+    description:
+      'Solmate helps you discover and take advantage of available solar incentives, rebates, and tax credits to make your solar installation even more affordable',
+    href: '#',
+    icon: ArrowPathIcon,
+  },
+]
+
+
 export default function Homepage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -46,11 +93,12 @@ export default function Homepage() {
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Solmate</span>
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://i.ibb.co/7Wt1ftS/Solmate-logos-black.png"
                 alt=""
+                
               />
             </a>
           </div>
@@ -142,11 +190,10 @@ export default function Homepage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                Data to enrich your online business
+              Solmate: Harness the Sun, Power Your Future
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-300">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-                fugiat veniam occaecat fugiat aliqua.
+             Connecting You to a Brighter Future with Seamless Solar Panel Installation, Expert Support, and Intelligent Management for a Sustainable Tomorrow"
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
@@ -183,6 +230,45 @@ export default function Homepage() {
           
         </div>
       </div>
+
+      <div className="bg-gray-900 py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl lg:text-center">
+          <h2 className="text-base font-semibold leading-7 text-indigo-400">Deploy faster</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Everything you need to deploy your Sollar Panels
+          </p>
+          <p className="mt-6 text-lg leading-8 text-gray-300">
+            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
+            pulvinar et feugiat blandit at. In mi viverra elit nunc.
+          </p>
+        </div>
+        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+            {features.map((feature) => (
+              <div key={feature.name} className="flex flex-col">
+                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
+                  <feature.icon className="h-5 w-5 flex-none text-indigo-400" aria-hidden="true" />
+                  {feature.name}
+                </dt>
+                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-300">
+                  <p className="flex-auto">{feature.description}</p>
+                  <p className="mt-6">
+                    <a href={feature.href} className="text-sm font-semibold leading-6 text-indigo-400">
+                      Learn more <span aria-hidden="true">→</span>
+                    </a>
+                  </p>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+      
+      
+
+
       <footer className="bg-gray-900" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer

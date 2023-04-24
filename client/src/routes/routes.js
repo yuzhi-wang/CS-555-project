@@ -37,6 +37,7 @@ import SalesMessaging from "../Components/Messaging/SalesMessaging";
 import SalesProjectDashboard from "../Components/ProjectDashboard/SalesProjectDashboard";
 import ManagerProjectDashboard from "../Components/ProjectDashboard/ManagerProjectDashboard";
 import CustomerProjectDashboard from "../Components/ProjectDashboard/CustomerProjectDashboard";
+import GroundTeamProjectDashboard from "../Components/ProjectDashboard/GroundTeamProjectDashboard";
 
 const Routesr = () => {
   return (
@@ -73,6 +74,9 @@ const Routesr = () => {
           <Routing exact path="/groundteamdashboard" element={<GroundteamDashboard  />} /> 
           <Routing exact path="/groundteamdashboard/infoedit" element={<GroundteamInfoEdit  />} /> 
           <Routing exact path="/groundteamdashboard/infocreate" element={<GroundteamInfoCreate  />} /> 
+          </Routing>
+          <Routing path="/groundteamprojectdashboard/:id" element={<PrivateRouteGroundteam/>}>
+          <Routing exact path="/groundteamprojectdashboard/:id" element={<GroundTeamProjectDashboard />} /> 
           </Routing>
           <Routing path="/salesdashboard" element={<PrivateRouteSales/>}>
           <Routing exact path="/salesdashboard" element={<SalesDashboard  />} /> 

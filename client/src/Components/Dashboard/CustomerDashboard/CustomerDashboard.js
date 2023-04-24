@@ -2,7 +2,7 @@ import React from "react";
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import CustomerMessaging from "../../Messaging/CustomerMessaging";
-import CustomerProject from "../../Projects/CustomerProject";   
+import CustomerProject from "../../Projects/CustomerProject";
 /*
 import BackgroundCSL from './Carousel';
 import { getDocs } from 'firebase/firestore';
@@ -103,7 +103,7 @@ export default function Example() {
       .signOut()
       .then(() => {
         alert("User Signed out");
-        navigate("/");
+        navigate("");
       })
       .catch(() => {
         alert("Error with signning out");
@@ -420,7 +420,6 @@ export default function Example() {
                               className={classNames(
                                 active ? "bg-gray-50" : "",
                                 "block px-3 py-1 text-sm leading-6 text-gray-900"
-                            
                               )}
                               onClick={onLogout}
                             >
@@ -437,19 +436,27 @@ export default function Example() {
           </div>
 
           <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">{
-                 		<div data-testid="CustomerDashboard-1">
-             <h1 >Customer Dashboard</h1>
- 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
-             <br/>
-             <br/>
-             <br/>
-             <CustomerMessaging/>
-             <br/>
-           <br/>
-             <CustomerProject/>
-		</div>
-            }</div>
+            <div className="px-4 sm:px-6 lg:px-8">
+              {
+                <div data-testid="CustomerDashboard-1">
+                  <h1>Customer Dashboard</h1>
+                  <button
+                    type="button"
+                    className="btn btn-danger btn-m"
+                    onClick={onLogout}
+                  >
+                    Log Out
+                  </button>
+                  <br />
+                  <br />
+                  <br />
+                  <CustomerMessaging />
+                  <br />
+                  <br />
+                  <CustomerProject />
+                </div>
+              }
+            </div>
           </main>
         </div>
       </div>

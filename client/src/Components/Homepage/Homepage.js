@@ -2,6 +2,11 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ArrowPathIcon, CloudArrowUpIcon, LockClosedIcon } from '@heroicons/react/20/solid'
+import React from 'react';
+import { getAuth, updateProfile } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+
+
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -85,10 +90,14 @@ const features = [
 // color them bg-teal-200 bg-purple-700 bg-violet-900
 
 export default function Homepage() {
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  
+  const auth = getAuth();
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-teal-200">
+    <div className="bg-teal-300">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
@@ -120,8 +129,8 @@ export default function Homepage() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" className="text-sm font-semibold leading-6 text-white">
-              Log in <span aria-hidden="true">&rarr;</span>
+            <a href="" className="text-sm font-semibold leading-6 text-white"  onClick={()=>{navigate("/login")}}>
+              Log in <span aria-hidden="true" >&rarr;</span>
             </a>
           </div>
         </nav>
@@ -231,7 +240,7 @@ export default function Homepage() {
         </div>
       </div>
 
-      <div className="bg-teal-100 py-24 sm:py-32">
+      <div className="bg-teal-300 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-Black">Deploy faster</h2>
@@ -269,7 +278,7 @@ export default function Homepage() {
       
 
 
-      <footer className="bg-purple-700" aria-labelledby="footer-heading">
+      <footer className="bg-black" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
@@ -277,7 +286,7 @@ export default function Homepage() {
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
             <img
               className="h-7"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+              src="https://i.ibb.co/cJVzzn5/Solmate-logos-white.png"
               alt="Company name"
             />
             <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">

@@ -82,13 +82,13 @@ const features = [
     icon: ArrowPathIcon,
   },
 ]
-
+// color them bg-teal-200 bg-purple-700 bg-violet-900
 
 export default function Homepage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="bg-gray-900">
+    <div className="bg-teal-200">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
@@ -127,13 +127,13 @@ export default function Homepage() {
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
           <div className="fixed inset-0 z-50" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only">Solmate</span>
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                  src="https://i.ibb.co/7Wt1ftS/Solmate-logos-black.png"
                   alt=""
                 />
               </a>
@@ -192,13 +192,13 @@ export default function Homepage() {
               <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               Solmate: Harness the Sun, Power Your Future
               </h1>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
+              <p className="mt-6 text-lg leading-8 text-white">
              Connecting You to a Brighter Future with Seamless Solar Panel Installation, Expert Support, and Intelligent Management for a Sustainable Tomorrow"
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
                   href="#"
-                  className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+                  className="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
                 >
                   Get started
                 </a>
@@ -231,14 +231,14 @@ export default function Homepage() {
         </div>
       </div>
 
-      <div className="bg-gray-900 py-24 sm:py-32">
+      <div className="bg-teal-100 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-400">Deploy faster</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-base font-semibold leading-7 text-Black">Deploy faster</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-Black sm:text-4xl">
             Everything you need to deploy your Sollar Panels
           </p>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
+          <p className="mt-6 text-lg leading-8 text-black">
             Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
             pulvinar et feugiat blandit at. In mi viverra elit nunc.
           </p>
@@ -247,14 +247,14 @@ export default function Homepage() {
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
             {features.map((feature) => (
               <div key={feature.name} className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
-                  <feature.icon className="h-5 w-5 flex-none text-indigo-400" aria-hidden="true" />
+                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-violet-1000">
+                  <feature.icon className="h-5 w-5 flex-none text-violet-950" aria-hidden="true" />
                   {feature.name}
                 </dt>
-                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-300">
+                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-violet-1000">
                   <p className="flex-auto">{feature.description}</p>
                   <p className="mt-6">
-                    <a href={feature.href} className="text-sm font-semibold leading-6 text-indigo-400">
+                    <a href={feature.href} className="text-sm font-semibold leading-6 text-violet-700">
                       Learn more <span aria-hidden="true">→</span>
                     </a>
                   </p>
@@ -269,7 +269,7 @@ export default function Homepage() {
       
 
 
-      <footer className="bg-gray-900" aria-labelledby="footer-heading">
+      <footer className="bg-purple-700" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>

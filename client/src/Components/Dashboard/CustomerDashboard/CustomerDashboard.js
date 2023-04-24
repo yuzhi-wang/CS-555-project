@@ -84,8 +84,9 @@ const teams = [
   { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
 ];
 const userNavigation = [
-  { name: "Your profile", href: "#" },
+//   { name: "Your profile", href: "#" },
   { name: "Sign out", href: "#" },
+
 ];
 
 function classNames(...classes) {
@@ -435,24 +436,13 @@ export default function Example() {
             </div>
           </div>
 
-          <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">
+          <main className="">
+            <div className="">
               {
                 <div data-testid="CustomerDashboard-1">
-                  <h1>Customer Dashboard</h1>
-                  <button
-                    type="button"
-                    className="btn btn-danger btn-m"
-                    onClick={onLogout}
-                  >
-                    Log Out
-                  </button>
-                  <br />
-                  <br />
-                  <br />
+
                   <CustomerMessaging />
-                  <br />
-                  <br />
+
                   <CustomerProject />
                 </div>
               }

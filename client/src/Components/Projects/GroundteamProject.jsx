@@ -17,7 +17,7 @@ const GroundteamProject = () => {
     const filter = () => {
         return (
             <div>
-                <label>filter:</label>
+                {/* <label>filter:</label> */}
                 <select value={tickettype} onChange={(e) => setTickettype(e.target.value)}>
                     <option value="All">All</option>
                     <option value="Installation">Installation</option>
@@ -181,13 +181,15 @@ const GroundteamProject = () => {
                     <div className='left'>
                         <h4>{ticket.id}</h4>
                         <div>
-                            <div>
+                            <ul>
                             <li>Project Id:{ticket.data.projectid}</li>
                             <li>Ticket Type:{ticket.data.type}</li>
-                            <li>Schedule Date:{ticket.data.schedule}</li>
+                            <li>Schedule Date:{ticket.data.date}</li>
+                            <li>Earliest Availability:{ticket.data.startTime}</li>
+                            <li>Latest Availability:{ticket.data.endTime}</li>
                             <li>Description:{ticket.data.description}</li>
                             <li>Status:{ticket.data.status}</li>
-                            </div>
+                            </ul>
                         </div>
                         
                     </div>

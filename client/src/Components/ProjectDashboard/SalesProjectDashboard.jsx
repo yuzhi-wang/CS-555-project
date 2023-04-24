@@ -8,7 +8,8 @@ import {Popup} from "reactjs-popup"
 import 'reactjs-popup/dist/index.css';
 import SignaturePad from "react-signature-canvas"
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import PDFGenerator from '../PDFGenerator/PDFGenerator';
+import ContractGenerator from '../PDFGenerator/ContractGenerator';
+import InvoiceGenerator from '../PDFGenerator/InvoiceGenerator';
 
 function SalesProjectDashboard() {
   const sigCanvas = useRef({})
@@ -56,14 +57,10 @@ const save = () =>{
     salesSignature:"",
     Quote: "",
     Proposal : "",
+    invoice:false,
   });
   const [projectAccepted, setprojectAccepted] = useState(false);
-  
-  
-  
-  
-  
-  
+  const [invoice, setInvoice] = useState(false);
   
   function onChange(e) {
     let boolean = null;
@@ -131,6 +128,7 @@ navigate(0)
       if (docSnap.exists()) {
         let {SaleAuthorised}=docSnap.data()
         setProjectData({projectID:docSnap.id,...docSnap.data()});
+        setInvoice(docSnap.data().invoice);
         if(SaleAuthorised) setprojectAccepted(true)
       }
       else console.log("No Data")
@@ -138,7 +136,15 @@ navigate(0)
     fetchProject();
   }, []);
 
-
+  const sendInvoice = async(project) => {
+    const projectRef = doc(db, "project", params.id);
+    try{
+      await updateDoc(projectRef, { invoice: true})
+      setInvoice(true);
+    }catch(e){
+      alert(e)
+    }
+  }
 
   return (
     <div>
@@ -224,13 +230,18 @@ navigate(0)
     {project.Status === "Awaiting Customer Signature" ? <h2>Awaiting Customer Signature to send project to the manager</h2>:null }
     {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ?  
     <div>
-        <h2>Button to download Contract</h2> 
-        <div>
-      <PDFDownloadLink document={<PDFGenerator data={project}/>} filename="FORM">
-      {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
-      </PDFDownloadLink>
-      {/* <PDFFile /> */}
-    </div>
+      <h2>Button to download Documents </h2>
+      <div>
+        <h3>Contract</h3>
+        <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
+        {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
+        </PDFDownloadLink>
+        <h3>Invoice</h3>
+        <button disabled={invoice} onClick = {async()=> {await sendInvoice()}}>Send Invoice</button>
+        <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
+        {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!invoice}>Download</button> )}
+        </PDFDownloadLink>
+      </div>
     </div>:null }       
     {project.Status === "Preparing To Start The Project" ? 
     <>

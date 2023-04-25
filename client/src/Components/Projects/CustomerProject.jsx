@@ -193,7 +193,7 @@ function CustomerProject() {
 
 
   return (
-    <form>
+    <form className='bg-white'>
       <div className="space-y-12 sm:space-y-16">
         <div>
           <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>

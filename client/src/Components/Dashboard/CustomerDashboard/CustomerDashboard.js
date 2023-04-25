@@ -33,23 +33,6 @@ import arrow from "../../Assets/right-arrow.png"
 
 //       }
 
-// 	return (
-// 		<div data-testid="CustomerDashboard-1">
-
-//             <h1 >Customer Dashboard</h1>
-// 			<button type="button" className="btn btn-danger btn-m" onClick={onLogout}>Log Out</button>
-//             <br/>
-//             <br/>
-//             <br/>
-
-//             <CustomerMessaging/>
-//             <br/>
-//             <br/>
-//             <CustomerProject/>
-
-// 		</div>
-// 	);
-// };
 
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
@@ -85,7 +68,7 @@ const teams = [
 ];
 const userNavigation = [
 //   { name: "Your profile", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Sign out", href: "/" },
 
 ];
 
@@ -437,16 +420,17 @@ export default function Example() {
           </div>
 
           <main className="">
-            <div className="">
-              {
-                <div data-testid="CustomerDashboard-1">
+
+              
+                {/* <div data-testid="CustomerDashboard-1"> */}
 
                   <CustomerMessaging />
-
+                  {/* </div>       <div> */}
                   <CustomerProject />
-                </div>
-              }
-            </div>
+
+                {/* </div> */}
+              
+
           </main>
         </div>
       </div>

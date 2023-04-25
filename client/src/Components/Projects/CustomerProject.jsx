@@ -193,9 +193,9 @@ function CustomerProject() {
 
 
   return (
-    <form className='bg-white'>
-      <div className="space-y-12 sm:space-y-16">
-        <div>
+    <form className='bg-white max-w-none '>
+      <div className="space-y-12 sm:space-y-16 " >
+        <div className=''>
           <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600">
             This information will be displayed publicly so be careful what you share.

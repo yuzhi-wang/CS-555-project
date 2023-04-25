@@ -83,7 +83,7 @@ const Login = () => {
     }
   };
   return (
-    <main id="main" data-testid="Login-1">
+    <main id="main" data-testid="Login-1" className="-full min-h-screen overflow-hidden bg-gradient-to-r from-purple-700 via-indigo-400 to-green-300 p-8 flex items-center justify-center">
       <div className="box">
         <div className="inner_box">
           <div className="forms_wrap">

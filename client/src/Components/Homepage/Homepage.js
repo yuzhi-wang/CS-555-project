@@ -170,9 +170,10 @@ export default function Homepage() {
                 </div>
                 <div className="py-6">
                   <a
+                    
                     href="#"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                  >
+                    onClick={()=>{navigate("/login")}}>
                     Log in
                   </a>
                 </div>
@@ -208,7 +209,7 @@ export default function Homepage() {
                 <a
                   href="#"
                   className="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
-                >
+                  onClick={()=>{navigate("/login")}}>
                   Get started
                 </a>
                 <a href="#" className="text-sm font-semibold leading-6 text-white">
@@ -248,8 +249,7 @@ export default function Homepage() {
             Everything you need to deploy your Sollar Panels
           </p>
           <p className="mt-6 text-lg leading-8 text-black">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
+          Solmate is your all-in-one solar companion, offering tailored solar solutions, seamless installation, and expert support. Harness the power of our comprehensive dashboards for efficient project management and sales tracking. Unlock a brighter, sustainable future with Solmate's real-time performance monitoring and incentive tracking features.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">

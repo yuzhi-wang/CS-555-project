@@ -115,18 +115,6 @@ input {
   font-family: "Poppins", sans-serif;
 }
 
-main {
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-  background-color: #7400B8;
-  background-image: linear-gradient(to right, #7400B8 , #80FFDB);
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .box {
   position: relative;
   width: 100%;
@@ -169,6 +157,7 @@ form {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
   transition: opacity 0.02s 0.4s;
+  
 }
 
 form.sign_up_form {

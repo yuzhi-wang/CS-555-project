@@ -68,12 +68,27 @@ function ManagerGroundMessaging({data}) {
 
 
   return (
-    <div>
-      <h2>Manager Ground Team Messages:</h2>
-      <DisplayMessage messages={messages}/>
-      <div>
-        <input type="text" value={managermessage} onChange={handleNewMessageChange} />
-        <button onClick={handleSendMessage}>Send</button>
+    <div className="flex flex-col items-center  justify-center w-full min-h-screen bg-white  text-gray-800 p-10">
+      <div class="flex flex-col flex-grow w-full max-w bg-white shadow-xl rounded-lg overflow-hidden">
+        <div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
+          <DisplayMessage messages={messages} />
+        </div>
+
+        <div class="bg-gray-300 p-4 flex">
+          <input
+            class="flex items-center h-10 w-full rounded px-3 text-sm"
+            type="text"
+            placeholder="Type your message…"
+            value={managermessage}
+            onChange={handleNewMessageChange}
+          />
+          <button
+            class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            onClick={handleSendMessage}
+          >
+            Send
+          </button>
+        </div>
       </div>
     </div>
   );

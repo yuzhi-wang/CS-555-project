@@ -187,7 +187,8 @@ async function handelReassign(e, projectId, data) {
       </Disclosure>
 
       <header className="bg-white shadow-sm">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex items-center mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        <button className="bg-indigo-700 text-white rounded-md px-3 py-1 text-sm font-medium mr-3" onClick={()=>{navigate(`/managerdashboard`)}}>Back</button>
           <h1 className="text-lg font-semibold leading-6 text-gray-900">
             Project Dashboard
           </h1>

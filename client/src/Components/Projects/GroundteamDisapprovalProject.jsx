@@ -70,13 +70,13 @@ const GroundteamDisapprovalProject = () => {
                     {/* <div className="flex gap-x-4"> */}
                     <div className="min-w-0 flex-auto">
                         <p className="text-m font-bold leading-6 ">Ticket Id: {ticket.id}</p>
-                        <p className="mt-1 truncate text-s leading-5 text-gray-900">Project Id: {ticket.data.projectid}</p>
-                        <p className="mt-1 truncate text-s leading-5 text-gray-900">Ticket Type: {ticket.data.type}</p>
-                        <p className="mt-1 truncate text-s leading-5 text-gray-900">Schedule Date: {ticket.data.date}</p>
-                        <p className="mt-1 truncate text-s leading-5 text-gray-900">Earliest Availability: {ticket.data.startTime}</p>
-                        <p className="mt-1 truncate text-s leading-5 text-gray-900">Latest Availability: {ticket.data.endTime}</p>
-                        <p className="mt-1 truncate text-s leading-5 text-gray-900">Description: {ticket.data.description}</p>
-                        <p className="mt-1 truncate text-s leading-5 text-gray-900">Status: {ticket.data.status}</p>
+                        <p className="mt-1 text-s leading-5 text-gray-900">Project Id: {ticket.data.projectid}</p>
+                        <p className="mt-1 text-s leading-5 text-gray-900">Ticket Type: {ticket.data.type}</p>
+                        <p className="mt-1 text-s leading-5 text-gray-900">Schedule Date: {ticket.data.date}</p>
+                        <p className="mt-1 text-s leading-5 text-gray-900">Earliest Availability: {ticket.data.startTime}</p>
+                        <p className="mt-1 text-s leading-5 text-gray-900">Latest Availability: {ticket.data.endTime}</p>
+                        <p className="mt-1 text-s leading-5 text-gray-900">Description: {ticket.data.description}</p>
+                        <p className="mt-1 text-s leading-5 text-gray-900">Status: {ticket.data.status}</p>
                     </div>
                     {/* </div> */}
                 </li>

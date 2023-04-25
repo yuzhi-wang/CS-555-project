@@ -38,17 +38,17 @@ import {
 } from "@heroicons/react/20/solid";
 
 const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
+  { name: "Message", href: "#", icon: HomeIcon, current: true },
   { name: "Team", href: "#", icon: UsersIcon, current: false },
   { name: "Projects", href: "#", icon: FolderIcon, current: false },
-  { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
-  { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
+  { name: "Project Form", href: "/#section1", icon: CalendarIcon, current: false },
 ];
 const teams = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
+  { id: 1, name: "Amazon", href: "#", initial: "A", current: false },
+  { id: 2, name: "RentPip", href: "#", initial: "R", current: false },
+  { id: 3, name: "SolarKing", href: "#", initial: "S", current: false },
+  { id: 4, name: "BestScurm", href: "#", initial: "B", current: false },
+  { id: 5, name: "Stevens", href: "#", initial: "S", current: false },
 ];
 const userNavigation = [
 //   { name: "Your profile", href: "#" },
@@ -147,7 +147,7 @@ export default function Example() {
                     <div className="flex h-16 shrink-0 items-center">
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                        src="https://i.ibb.co/cJVzzn5/Solmate-logos-white.png"
                         alt="Your Company"
                       />
                     </div>
@@ -178,7 +178,7 @@ export default function Example() {
                         </li>
                         <li>
                           <div className="text-xs font-semibold leading-6 text-gray-400">
-                            Your teams
+                            Contractors
                           </div>
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {teams.map((team) => (
@@ -229,7 +229,7 @@ export default function Example() {
             <div className="flex h-16 shrink-0 items-center">
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://i.ibb.co/cJVzzn5/Solmate-logos-white.png"
                 alt="Your Company"
               />
             </div>
@@ -260,7 +260,7 @@ export default function Example() {
                 </li>
                 <li>
                   <div className="text-xs font-semibold leading-6 text-gray-400">
-                    Your teams
+                    Contractors
                   </div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {teams.map((team) => (
@@ -410,10 +410,10 @@ export default function Example() {
 
 
                 {/* <div data-testid="CustomerDashboard-1"> */}
-
+                <CustomerProject /> 
                   <CustomerMessaging />
                   <div/>
-                  <CustomerProject /> 
+
 
                 {/* </div> */}
               

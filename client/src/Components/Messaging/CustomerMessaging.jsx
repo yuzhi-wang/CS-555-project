@@ -94,9 +94,6 @@ function CustomerMessaging() {
             <h2 class="text-white">Messages</h2>
           </div>
 
-          <div class="flex">
-            <button >Increase count</button>
-          </div>
         </div>
         <div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
           <DisplayMessage messages={messages} />

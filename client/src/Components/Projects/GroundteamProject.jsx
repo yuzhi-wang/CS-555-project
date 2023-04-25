@@ -325,7 +325,7 @@ const GroundteamProject = () => {
                         <p className="mt-1 truncate text-s leading-5 text-gray-900">Status: {ticket.data.status}</p>
                     </div>
                     {/* </div> */}
-                    <div>
+                    <div className='flex justify-center flex-col'>
                         {(ticket.data.status === 'In Progress') && completeButton(ticket.id, ticket.data.projectid)}
                     </div>
                 </li>
@@ -396,10 +396,12 @@ const GroundteamProject = () => {
                         required
                         />
                 <br/>
-                <button className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={handleSubmit}>Submit</button>
-                
+                <div className='flex justify-between'>
+                  <button className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={handleSubmit}>Submit</button>
+                  <button className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={cancel}>Cancel</button>
+                </div>
                 </form>
-                <button className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={cancel}>Cancel</button>
+                
              </div>
                 
              </div>

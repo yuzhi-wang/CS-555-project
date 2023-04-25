@@ -423,8 +423,8 @@ export default function Example() {
 
               
                 {/* <div data-testid="CustomerDashboard-1"> */}
-{/* 
-                  <CustomerMessaging /> */}
+
+                  <CustomerMessaging />
                   {/* </div>       <div> */}
                   <CustomerProject />
 

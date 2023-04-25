@@ -71,6 +71,8 @@ function SalesManagerMessaging({data}) {
         <button onClick={handleSendMessage}>Send</button>
       </div>
     </div>
+
+    
   );
 }
 

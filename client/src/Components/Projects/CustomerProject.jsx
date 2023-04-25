@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAuth, updateProfile } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, HashRouter } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
@@ -192,7 +192,9 @@ function CustomerProject() {
   }, [auth.currentUser.uid]);
 
   return (
-    <form className="bg-white max-w-none ml-5 ">
+   <div>
+    {purchase ? null : <>
+    <form className="bg-white max-w-none ml-5 " onSubmit={purchaseProject}>
       <div className="space-y-12 sm:space-y-16 ">
         <div>
           <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -669,6 +671,29 @@ function CustomerProject() {
         </button>
       </div>
     </form>
+    </>
+    }
+
+</div>
+/* <div>
+        <h2>Projects</h2>
+        <div>     
+        <ul>
+
+          {projectData.length === 0 ? "No Projects Initiated Fill the details form and get in touch with the Sales Team" : projectData.map((project, index) => (
+            <div key={index} onClick={()=>{navigate(`/customerprojectdashboard/${project.id}`)}}>
+                <li >ProjectID: {project.id}</li>
+                <li>Customer:{project.data.customerName} </li>
+                <li>Purchased By: {project.data.customer}</li>
+                <li>Sale Authorised: {project.data.SaleAuthorised ? "True" : "False"}</li>
+                <li>Project Accepted: {project.data.ManagerAccepted ? "True" : "False"}</li>
+                <li>Status: {project.data.Status} </li>
+            </div>
+          ))}
+        </ul>
+      </div>
+      </div>
+    </div> */ 
   );
 }
 

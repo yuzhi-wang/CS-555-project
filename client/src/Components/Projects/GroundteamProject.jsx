@@ -326,6 +326,7 @@ const GroundteamProject = () => {
                     </div>
                     {/* </div> */}
                     <div className='flex justify-center flex-col'>
+                      <button onClick={()=>{navigate(`/groundteamprojectdashboard/${ticket.id}`)}} className="bg-blue-100 mb-3 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Detail</button>
                         {(ticket.data.status === 'In Progress') && completeButton(ticket.id, ticket.data.projectid)}
                     </div>
                 </li>

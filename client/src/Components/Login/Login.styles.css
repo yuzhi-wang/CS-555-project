@@ -226,7 +226,7 @@ form.sign_up_form {
   color: #151111;
   transition: 0.4s;
 }
-
+/* 
 label {
   position: absolute;
   left: 0;
@@ -236,7 +236,7 @@ label {
   color: #bbb;
   pointer-events: none;
   transition: 0.4s;
-}
+} */
 
 .input_field.active {
   border-bottom-color: #151111;

@@ -1,6 +1,6 @@
 import React from "react";
 import { getAuth, updateProfile } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Routes,useNavigate } from 'react-router-dom';
 import CustomerMessaging from "../../Messaging/CustomerMessaging";
 import CustomerProject from "../../Projects/CustomerProject";
 /*
@@ -406,12 +406,14 @@ export default function Example() {
 
           <main className="">
 
-              
+
+
+
                 {/* <div data-testid="CustomerDashboard-1"> */}
 
                   <CustomerMessaging />
-                  {/* </div>       <div> */}
-                  <CustomerProject />
+                  <div/>
+                  <CustomerProject /> 
 
                 {/* </div> */}
               

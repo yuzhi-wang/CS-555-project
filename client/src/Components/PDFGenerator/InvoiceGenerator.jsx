@@ -41,6 +41,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: "space-between",
   },
+  containerSign:{
+    flexDirection: 'row',
+  },
+  sigcontainer:{
+
+  },
   container:{
     flexDirection: 'row',
     justifyContent: "space-between",
@@ -89,6 +95,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "grey",
   },
+  lineheight:{
+    lineHeight: 10
+  },
 });
 
 const InvoiceGenerator = ({data}) => {
@@ -123,7 +132,18 @@ const InvoiceGenerator = ({data}) => {
           <Text style={styles.total}>Total</Text>
           <Text style={styles.total}>{totalPrice}</Text>
         </View>
-        
+        <Text style={styles.lineheight}>{"      "}</Text>
+        <View style={styles.containerSign}> 
+        <View style={styles.sigcontainer}> 
+          <Text style={styles.signature}>Sale Manager:</Text>
+          <Image style={styles.image} src={data.salesSignature} />
+        </View>
+
+        <View style={styles.sigcontainer}> 
+          <Text style={styles.signature}>Resource Manager:</Text>
+          <Image style={styles.image} src={data.managersignatureaftercomplete} />
+        </View>
+        </View>
         <Text
           style={styles.pageNumber}
           render={({ pageNumber, totalPages }) =>

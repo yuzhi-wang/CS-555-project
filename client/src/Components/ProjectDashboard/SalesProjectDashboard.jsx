@@ -102,6 +102,7 @@ const save = () =>{
     });
    
     alert(`Project ${params.id} Accepted`);
+    setSignature(null)
     navigate(0)
   }
 
@@ -139,8 +140,15 @@ navigate(0)
   const sendInvoice = async(project) => {
     const projectRef = doc(db, "project", params.id);
     try{
-      await updateDoc(projectRef, { invoice: true})
+      await updateDoc(projectRef, { 
+        invoice: true,
+        Status:"Project Completed",
+        salesignaftercomplete: signature
+      })
       setInvoice(true);
+      setSignature(null)
+      alert(`Congratulations Project ${params.id} Completed !!!`);
+      navigate(0)
     }catch(e){
       alert(e)
     }
@@ -198,7 +206,7 @@ navigate(0)
             />
          
         <div>
-          {signature ? <button type='submit'>Sign Contract</button>: null}
+          {signature ? <><p>Once Signed, using Sign Pad click "Sign Contract" to Submit it</p><button type='submit'>Sign Contract</button></>: null}
           {/*<button onClick={()=>declineProject(project.projectID)} disabled={project.Status === "Declined by Sales"}>Decline</button>*/}
         </div>
       </form>
@@ -230,16 +238,10 @@ navigate(0)
     {project.Status === "Awaiting Customer Signature" ? <h2>Awaiting Customer Signature to send project to the manager</h2>:null }
     {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ?  
     <div>
-      <h2>Button to download Documents </h2>
+      <h2>Button to download Contract </h2>
       <div>
-        <h3>Contract</h3>
         <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
         {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
-        </PDFDownloadLink>
-        <h3>Invoice</h3>
-        <button disabled={invoice} onClick = {async()=> {await sendInvoice()}}>Send Invoice</button>
-        <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
-        {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!invoice}>Download</button> )}
         </PDFDownloadLink>
       </div>
     </div>:null }       
@@ -248,6 +250,54 @@ navigate(0)
     <h2>Start Project With Manager</h2>
     <button onClick={startProject}>Start Project</button>
     </>: null}
+    
+    
+    
+    <br/>
+
+
+
+
+    {project.Status === "Completion approved by Manager"  ? 
+    <>
+    <div>
+    <h2>Sign To Mark Project Complete</h2>
+    <Popup modal trigger={<button>Open Signature Pad</button>} closeOnDocumentClick={false}>
+        {close =>(
+            <>
+                <SignaturePad ref={sigCanvas} canvasProps={{
+                    className:"signatureCanvas"
+                }} />
+                <button onClick={save}>Save</button>
+                <button onClick={clear}>Clear</button>
+                <button onClick={close}>Close</button>
+            </>
+        )}
+        </Popup>
+    <br/>
+    <br/>
+{signature ? (
+        <div>
+        <img src={signature} alt='signature' style={{display:"block",
+    margin: "0 auto",
+border:"1px solid black",
+width:"150px"}}/>
+<p>Once Signed, using Sign Pad click "Send Invoice" to send it</p>
+<button onClick={() => sendInvoice()}>Send Invoice</button>
+</div>
+) :null}
+</div>
+</>
+    : null}
+<br/>
+
+{project.Status === "Project Completed" ? 
+<>
+<h3>Download Invoice Here</h3>
+        <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
+        {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!invoice}>Download Invoice</button> )}
+        </PDFDownloadLink>
+</>:null}
     <br/>
     <br/>
     <SalesManagerMessaging data={{projectData: project,auth: auth}}/>

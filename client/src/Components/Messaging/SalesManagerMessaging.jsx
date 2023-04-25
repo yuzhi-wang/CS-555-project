@@ -3,14 +3,14 @@ import { getAuth, updateProfile } from "firebase/auth";
 import DisplayMessage from './DisplayMessage';
 import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove ,serverTimestamp, setDoc} from "firebase/firestore"; 
 import { db } from "../../firebase";
-import {useParams } from 'react-router-dom';
+import {useParams, useNavigate } from 'react-router-dom';
 
 function SalesManagerMessaging({data}) {
    let projectData = data.projectData
    let auth = data.auth
   const [messages, setMessages] = useState([]);
   const [salesmessage, setSalesMessage] = useState("");
-
+  const navigate = useNavigate();
   function handleNewMessageChange(event) {
     setSalesMessage(event.target.value);
   }
@@ -42,6 +42,7 @@ function SalesManagerMessaging({data}) {
 
 
       setSalesMessage('');
+      navigate(0)
       // fetch data from firebase
     }
   } 

@@ -29,7 +29,7 @@ const GroundteamInfo = () => {
         if (detail.length === 0){
             let s = <div>
             <p>No Information</p>
-            <button type="button" className="btn btn-danger btn-m" onClick={CreatePage}>Create Information</button>
+            
             </div>
             return s; 
             
@@ -47,7 +47,7 @@ const GroundteamInfo = () => {
                             <p><strong>Company Information:</strong></p><p> {info.data.CompanyInfo}</p>
                             <p><strong>Team Members:</strong></p><p>{info.data.Members}</p>
                             <p><strong>Contact Number: </strong>{info.data.ContactNumber}</p>
-                            <button type="button" className="btn btn-danger btn-m" onClick={EditPage}>Edit</button>
+                            
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,10 @@ import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove, setDoc,collection, add
 import { db } from "../../firebase";
 import ManagerGroundMessaging from '../Messaging/ManagerGroundMessaging';
 import ManagerProjectControls from '../Utility/ManagerProjectControls';
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Logo from "../../Assets/Logo_white.png";
 
 
 function ManagerProjectDashboard() {
@@ -33,6 +37,10 @@ function ManagerProjectDashboard() {
       Quote: "",
       Proposal : "",
     });
+
+    function classNames(...classes) {
+      return classes.filter(Boolean).join(" ");
+    }
 
     const groundteamSelector = () => {
       return groundteamList.map(g => (<option key={g.id} value={g.id}>{g.data.name}</option>))
@@ -130,76 +138,130 @@ async function handelReassign(e, projectId, data) {
 
 
   return (
-    <div>
-        <h2>Project Dashboard</h2>
-        <div>     
-        <div>
-            {project.imgUrls.length !== 0 ? <img style={{width:"500px"}} src={project.imgUrls[0]}></img>:null}     
-        <ul>
-            <div>
-                <li >ProjectID: {project.projectID}</li>
-                <li>Customer:{project.customerName} </li>
-                <li>Address:{project.address}</li>
-                <li>Start Time:{project.startTime}</li>
-                <li>End Time:{project.endTime}</li>
-                <li>Purchased By: {project.customer}</li>
-                <li>Sale Authorised: {project.SaleAuthorised ? "True" : "False"}</li>
-                <li>Project Accepted: {project.ManagerAccepted ? "True" : "False"}</li>
-                <li>Status: {project.Status} </li>
-                <li>Quote Agreed Upon: {project.Quote === "" ? "No Quote Agreed Upon": project.Quote} </li>
-                <li>Proposal: {project.Proposal === "" ? "No Proposal Discussed Yet": project.Proposal} </li>
-            </div>     
-        </ul>
-      </div>
-      </div>
-      
-      {project.ManagerAccepted ? <>
-            <div>
-              <button>Pause Project</button>
 
-              <button onClick={()=>setToggle(!toggle)}>Re-Assign Ground Team</button>
-            <br/>
-            {toggle ? <>
-              <form onSubmit={(e) => handelReassign(e, project.projectID, project)}>
-              <select id='groundteam' value={groundteamid} onChange={(e) => setGoundteamId(e.target.value)} >
-              {groundteamSelector()}
-              
-              </select>
-              <input type="submit"/>
-              </form>
-            </>:null}
-             
+    <div className="min-h-full">
+      <Disclosure as="nav" className="bg-indigo-600">
+        {({ open }) => (
+          <>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex h-16 items-center justify-between">
+                <div className="ml-10 flex items-baseline space-x-4">
+                  <div
+                    className={classNames(
+                      //   item.current ?
+                      "bg-indigo-700 text-white",
+                      // : "text-white hover:bg-indigo-500 hover:bg-opacity-75",
+                      "rounded-md px-3 py-2 text-sm font-medium"
+                    )}
+                    //   aria-current={item.current ? "page" : undefined}
+                  >
+                    Project Dashboard
+                  </div>
+                </div>
+              </div>
             </div>
 
+            <Disclosure.Panel className="md:hidden">
+              <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                {/* {navigation.map((item) => ( */}
+                <Disclosure.Button
+                  // key={item.name}
+                  as="div"
+                  // href={item.href}
+                  className={classNames(
+                    //   item.current ?
+                    "bg-indigo-700 text-white",
+                    // : "text-white hover:bg-indigo-500 hover:bg-opacity-75",
+                    "block rounded-md px-3 py-2 text-base font-medium"
+                  )}
+                  // aria-current={item.current ? "page" : undefined}
+                >
+                  Project Dashboard
+                  {/* {item.name} */}
+                </Disclosure.Button>
+                {/* ))} */}
+              </div>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
 
+      <header className="bg-white shadow-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+          <h1 className="text-lg font-semibold leading-6 text-gray-900">
+            Project Dashboard
+          </h1>
+        </div>
+      </header>
+      <main>
+        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+          <div>
+            <div className='bg-slate-50/50 rounded-md p-5'>  
+                <ul className="divide-y divide-gray-100">
+                  <div className='flex justify-center'>
+                {project.imgUrls.length !== 0 ? <img className="mb-3" style={{width:"500px"}} src={project.imgUrls[0]}></img>:null}
+                </div>
+                <div className='mb-3 flex justify-center'>
+                  <li className="gap-x-6 py-5 ">
+                    <div className="text-grey min-w-0 flex-auto">
+                      <p className="text-m font-bold leading-6 ">ProjectID: {project.projectID}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Customer: {project.customerName} </p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Address: {project.address}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Start Time: {project.startTime}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">End Time: {project.endTime}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Purchased By: {project.customer}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Sale Authorised: {project.SaleAuthorised ? "True" : "False"}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Project Accepted: {project.ManagerAccepted ? "True" : "False"}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Status: {project.Status}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Quote Agreed Upon: {project.Quote === "" ? "No Quote Agreed Upon": project.Quote}</p>
+                      <p className="mt-1 truncate text-s leading-5 text-gray-900">Proposal: {project.Proposal === "" ? "No Proposal Discussed Yet": project.Proposal}</p>
+                    </div>
+                    <div className='flex justify-center flex-col'>
+                    {project.ManagerAccepted ? 
+                <>
+                  <div>
+                    {/* <button>Pause Project</button> */}
+                    <button className="bg-blue-100 mt-3 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={()=>setToggle(!toggle)}>Re-Assign Ground Team</button>
+                    <br/>
+                    {toggle ? <>
+                    <form onSubmit={(e) => handelReassign(e, project.projectID, project)}>
+                      <select id='groundteam' value={groundteamid} onChange={(e) => setGoundteamId(e.target.value)} >
+                        {groundteamSelector()}
+                      </select>
+                      <input type="submit"/>
+                    </form>
+                    </>:null}
+                  </div>
+                </> : <>
+                  <button className="bg-blue-100 mt-3 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={()=>setToggle(!toggle)} disabled={project.ManagerAccepted}>Start Project</button>
+                  {toggle ? <>
+                    <form className="box-" onSubmit={(e) => handelAccept(e, project.projectID, project)}>
+                      <label className="text-m font-bold text-black" htmlFor="groundteam">Assign to a Ground Team:</label><br></br>
+                      <select id='groundteam' value={groundteamid} onChange={(e) => setGoundteamId(e.target.value)} >
+                        {groundteamSelector()}
+                      </select>
+                      <button type="submit" className="bg-blue-100 mt-3 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Submit</button>
+                    </form>
+                  </>:null}
+                </>}
+                    </div>
+                  </li>
+                  
+                    </div>
+                  
+                  
+                  
+                
+                </ul>
+                <ManagerGroundMessaging data={{projectData: project,auth: auth}}/>
+                <br/>
+                <SalesManagerMessaging data={{projectData: project,auth: auth}}/>
+                </div >
 
-            </> : <>
-
-
-
-            <h3>Start this Project ?</h3>
-            <br/>
-            <button onClick={()=>setToggle(!toggle)} disabled={project.ManagerAccepted}>Start Project</button>
-            <br/>
-            {toggle ? <>
-              <form onSubmit={(e) => handelAccept(e, project.projectID, project)}>
-              <label htmlFor="groundteam">Assign to a Ground Team:</label><br></br>
-              <select id='groundteam' value={groundteamid} onChange={(e) => setGoundteamId(e.target.value)} >
-              {groundteamSelector()}
-              </select>
-              <input type="submit"/>
-              </form>
-            </>:null}
-            </>}
-            
-    
-      <br/>
-      <br/>
-      <ManagerGroundMessaging data={{projectData: project,auth: auth}}/>
-      <br/>
-      <br/>
-      <SalesManagerMessaging data={{projectData: project,auth: auth}}/>
-      </div>
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }
 

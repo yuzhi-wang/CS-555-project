@@ -70,40 +70,44 @@ alert(`Declined Project ${projectID} `);
 
   return (
     <div>
-        <h2>Projects</h2>
-        <br/>
-        <div>     
+      <div>     
         <ul>
-
           {projectData.length === 0 ? "No Projects Purchased" : projectData.map((project, index) => (
-            <div key={index}>
-            <div  onClick={()=>{navigate(`/saleprojectdashboard/${project.id}`)}}>
-                <li >ProjectID: {project.id}</li>
-                <li>Customer:{project.data.customerName} </li>
-                <li>Purchased By: {project.data.customer}</li>
-                <li>Sale Authorised: {project.data.SaleAuthorised ? "True" : "False"}</li>
-                <li>Project Accepted: {project.data.ManagerAccepted ? "True" : "False"}</li>
-                <li>Status: {project.data.Status} </li>
-                </div>
-            {/*
-            {project.data.SaleAuthorised ? <h3>Project Confirmed</h3> : <h3>Accept this Project ?</h3>}
-            <>
-            <div>
-              <button onClick={()=>acceptProject(project.id)} disabled={project.data.SaleAuthorised}>Accept</button>
-              <button onClick={()=>declineProject(project.id)} disabled={project.data.Status === "Declined by Sales"}>Decline</button>
+            <div key={index}> 
+            <br></br>
+            <div className='bg-slate-50/50 rounded-md p-5'>  
+              <ul className="divide-y divide-gray-100">
+                <li className="flex justify-between gap-x-6 py-5 ">
+                  <div className="min-w-0 flex-auto">
+                    <p className="text-m font-bold leading-6 ">ProjectID: {project.id}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Customer: {project.data.customerName} </p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Purchased By: {project.data.customer}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Sale Authorised: {project.data.SaleAuthorised ? "True" : "False"}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Project Accepted: {project.data.ManagerAccepted ? "True" : "False"}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Status: {project.data.Status}</p>
+                  </div>
+                  <div>
+                    <button className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={()=>{navigate(`/saleprojectdashboard/${project.id}`)}}>Project Detail</button>
+                  </div>
+                </li>
+              </ul>
             </div>
-            </>
-          */}
-             
-             <br/>
-             <br/>
             </div>
-            
           ))}
-        </ul>
-      </div>
-      </div>
-  );
-}
+            </ul>
+            </div>
+            </div>
+
+          //   {/*
+          //   {project.data.SaleAuthorised ? <h3>Project Confirmed</h3> : <h3>Accept this Project ?</h3>}
+          //   <>
+          //   <div>
+          //     <button onClick={()=>acceptProject(project.id)} disabled={project.data.SaleAuthorised}>Accept</button>
+          //     <button onClick={()=>declineProject(project.id)} disabled={project.data.Status === "Declined by Sales"}>Decline</button>
+          //   </div>
+          //   </>
+          // */}
+        
+)}
 
 export default SalesProject;

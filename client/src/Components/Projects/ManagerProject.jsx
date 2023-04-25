@@ -110,7 +110,7 @@ alert(`Declined Project ${projectID} `);
             {groundteamSelector()}
           </select>
           <input type="submit"></input>
-          <button onClick={closeWindow}>Cancel</button>
+          <button className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={closeWindow}>Cancel</button>
         </form>
       </>
     )
@@ -158,23 +158,31 @@ alert(`Declined Project ${projectID} `);
         <div>     
         <ul>
           {projectData.length === 0 ? "No Projects On Going" : projectData.map((project, index) => (
-            <div key={index}>
-            <div  onClick={()=>{navigate(`/managerprojectdashboard/${project.id}`)}}>
-            {project.data.imgUrls.length !== 0 ? <img style={{width:"350px"}} src={project.data.imgUrls[0]}></img>:null}  
-          <ul>
-          <li >ProjectID: {project.id}</li>
-                <li>Customer:{project.data.customerName} </li>
-                <li>Address:{project.data.address}</li>
-                <li>Date:{project.data.date}</li>
-                <li>Start Time:{project.data.startTime}</li>
-                <li>End Time:{project.data.endTime}</li>
-                <li>Ground Team Assigned: {project.data.groundteamid}</li>
-                <li>Installation ticket ID: {project.data.installationTicketID}</li>
-                <li>Status: {project.data.Status} </li>
-          </ul>
-          </div>
-          <br/>
+            <div key={index}> 
+            <br/>
+            <div className='bg-slate-50/50 rounded-md p-5'>  
+              <ul className="divide-y divide-gray-100">
+                <li className="flex justify-between gap-x-6 py-5 ">
+                  {project.data.imgUrls.length !== 0 ? <img style={{width:"350px"}} src={project.data.imgUrls[0]}></img>:null}
+                  <div className="min-w-0 flex-auto">
+                    <p className="text-m font-bold leading-6 ">ProjectID: {project.id}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Customer: {project.data.customerName} </p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Address: {project.data.address}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Date: {project.data.date}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Start Time: {project.data.startTime}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">End Time: {project.data.endTime}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Ground Team Assigned: {project.data.groundteamid}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Installation ticket ID: {project.data.installationTicketID}</p>
+                    <p className="mt-1 text-s leading-5 text-gray-900">Status: {project.data.Status} </p>
+                  </div>
+                  <div>
+                    <button className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={()=>{navigate(`/managerprojectdashboard/${project.id}`)}}>Project Detail</button>
+                  </div>
+                </li>
+              </ul>
             </div>
+            </div>
+
           ))}
         </ul>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Page, View, Text, Image, Document, StyleSheet } from "@react-pdf/renderer";
-import Logo from "../../Assets/Logo.png"
+import Logo_transparent from "../../Assets/Logo_transparent.png"
 
 const styles = StyleSheet.create({
   body: {
@@ -109,7 +109,7 @@ const InvoiceGenerator = ({data}) => {
     <Document>
       <Page style={styles.body}>
         <View style={styles.companycontainer}>
-          <Image style={styles.logo} src={Logo} />
+          <Image style={styles.logo} src={Logo_transparent} />
           <Text style={styles.company}>Solmate Company</Text>
         </View>
         <Text style={styles.header} fixed>Invoice</Text>

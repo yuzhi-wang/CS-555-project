@@ -11,7 +11,9 @@ import SignaturePad from "react-signature-canvas"
 import "./sign.css"
 import ProgressBar from "@ramonak/react-progress-bar";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import PDFGenerator from '../PDFGenerator/PDFGenerator';
+import ContractGenerator from '../PDFGenerator/ContractGenerator';
+import InvoiceGenerator from '../PDFGenerator/InvoiceGenerator';
+
 
 
 function CustomerProjectDashboard() {
@@ -226,14 +228,18 @@ if(DoesProjectExists){
       <br/>
       {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ? 
       <div>
-        <h2>Button to download Contract</h2> 
+        <h2>Button to download Documents </h2> 
         <div>
-      <PDFDownloadLink document={<PDFGenerator data={project}/>} filename="FORM">
-      {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
-      </PDFDownloadLink>
-      {/* <PDFFile /> */}
-    </div>
-    </div>:null }
+          <h3>Contract</h3>
+          <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
+          {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
+          </PDFDownloadLink>
+          <h3>Invoice</h3>
+          <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
+          {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!project.invoice}>Download</button> )}
+          </PDFDownloadLink>
+        </div>
+      </div>:null }
       <br/>
       {project.Status !== "Awaiting Customer Signature" ? null:
     <div>

@@ -86,8 +86,8 @@ const GroundteamCalendar = () => {
 
   return (
     <div>
-    <div>Calendar</div>
-    <div style={{ width: "50%", margin: "0 auto" }}>
+    <div className="text-xl font-bold">Calendar</div>
+    <div style={{ width: "100%", margin: "0 auto" }}>
     
       <Calendar
         localizer={localizer}

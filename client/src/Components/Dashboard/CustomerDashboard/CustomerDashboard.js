@@ -18,22 +18,6 @@ import arrow from "../../Assets/right-arrow.png"
 
 */
 
-// const CustomerDashboard = () => {
-// 	const auth = getAuth();
-//    const navigate = useNavigate();
-//     console.log(auth.currentUser.uid)
-
-// 	function onLogout() {
-//         auth.signOut().then(()=>{
-//         alert("User Signed out")
-//         navigate("/");
-//         }).catch(()=>{
-//         alert("Error with signning out")
-//         })
-
-//       }
-
-
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
@@ -71,6 +55,7 @@ const userNavigation = [
   { name: "Sign out", href: "/" },
 
 ];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

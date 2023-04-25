@@ -7,6 +7,7 @@ import {useParams } from 'react-router-dom';
 
 function ManagerGroundMessaging({data}) {
    let projectData = data.projectData
+  
    let auth = data.auth
   const [messages, setMessages] = useState([]);
   const [managermessage, setManagerMessage] = useState("");

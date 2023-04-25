@@ -144,6 +144,7 @@ function CustomerProject() {
       CustomerSignature:"",
       salesSignature: "",
       Quote: "",
+      invoice:false,
       Proposal : "",
       managerAssigned: "",
     };

@@ -33,8 +33,10 @@ export default function OAuth() {
     }
   }
   return (
-    <button className="GoogleButton" type="button" onClick={onGoogleClick}>
-      <FcGoogle size={20}/>
+    
+    <button className="GoogleButton items-center" type="button" onClick={onGoogleClick}>
+      <FcGoogle size={20} class= 'inline'/>
     </button>
+
   );
 }

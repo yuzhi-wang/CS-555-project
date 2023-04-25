@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-
-import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove, setDoc,collection, addDoc,query, where,getDocs} from "firebase/firestore"; 
+import ProgressBar from "@ramonak/react-progress-bar";
+import { doc, getDoc ,arrayUnion, updateDoc, arrayRemove, setDoc,collection, addDoc,query, where,getDocs, deleteDoc} from "firebase/firestore"; 
 import { db } from "../../firebase";
 
 function ManagerProject() {
@@ -27,13 +27,17 @@ function ManagerProject() {
   
   }
 
-async function declineProject(projectID) {
-    const projectRef = doc(db, "project", projectID);
-
-    // Set the "capital" field of the city 'DC'
-await updateDoc(projectRef, {
+async function declineProject(projectID, data) {
+    
+  const ticketRef = doc(db, "ticket", data.installationTicketID); 
+  deleteDoc(ticketRef)
+   
+    
+  const projectRef = doc(db, "project", projectID);
+  await updateDoc(projectRef, {
   ManagerAccepted: false,
-  Status: "Declined by Manager"
+  Status: "Paused by Manager",
+  managerAssigned: ""
 });
 
 alert(`Declined Project ${projectID} `);
@@ -46,7 +50,8 @@ alert(`Declined Project ${projectID} `);
       const projectRef = collection(db, "project");
 
       // Create a query against the collection.
-      const q = query(projectRef, where("managerAssigned", "==", auth.currentUser.uid), where("ManagerAccepted", "==", true));
+      const q = query(projectRef, where("managerAssigned", "==", auth.currentUser.uid), where("ManagerAccepted", "==", true), 
+      where("Status", "==", "Project Started, assigned to ground team"));
       const querySnapshot = await getDocs(q);
       let customerProject = []
 
@@ -134,7 +139,10 @@ alert(`Declined Project ${projectID} `);
       }
       const ticketRef = doc(db, "ticket", docId);
       await updateDoc(ticketRef, {
-          groundteamid: groundteamid
+          groundteamid: groundteamid,
+          img:"",
+          completion_description:"",
+          manager_diaspproval:""
       });
 
       alert(`Project ${currentProject} Reassigned`)
@@ -152,25 +160,21 @@ alert(`Declined Project ${projectID} `);
           {projectData.length === 0 ? "No Projects On Going" : projectData.map((project, index) => (
             <div key={index}>
             <div  onClick={()=>{navigate(`/managerprojectdashboard/${project.id}`)}}>
-                <li >ProjectID: {project.id}</li>
+            {project.data.imgUrls.length !== 0 ? <img style={{width:"350px"}} src={project.data.imgUrls[0]}></img>:null}  
+          <ul>
+          <li >ProjectID: {project.id}</li>
                 <li>Customer:{project.data.customerName} </li>
-                <li>Purchased By: {project.data.customer}</li>
-                <li>Sale Authorised: {project.data.SaleAuthorised ? "True" : "False"}</li>
-                <li>Project Accepted: {project.data.ManagerAccepted ? "True" : "False"}</li>
+                <li>Address:{project.data.address}</li>
+                <li>Date:{project.data.date}</li>
+                <li>Start Time:{project.data.startTime}</li>
+                <li>End Time:{project.data.endTime}</li>
+                <li>Ground Team Assigned: {project.data.groundteamid}</li>
+                <li>Installation ticket ID: {project.data.installationTicketID}</li>
                 <li>Status: {project.data.Status} </li>
-                </div>
-            {project.data.ManagerAccepted ? <h3>Project Accepted</h3> : <h3>Accept this Project ?</h3>}
-            <>
-            <div>
-              <button onClick={()=>acceptProject(project.id)} disabled={project.data.ManagerAccepted}>Accept</button>
-              <button onClick={()=>declineProject(project.id)} disabled={project.data.Status === "Declined by Manager"}>Decline</button>
-              <button onClick={()=>handelReassign(project.id)}>Reassign Groundteam</button>
-             
+          </ul>
+          </div>
+          <br/>
             </div>
-            </>
-            <br/>
-            </div>
-             
           ))}
         </ul>
       </div>

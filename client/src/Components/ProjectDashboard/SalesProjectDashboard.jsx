@@ -7,6 +7,9 @@ import { db } from "../../firebase";
 import {Popup} from "reactjs-popup"
 import 'reactjs-popup/dist/index.css';
 import SignaturePad from "react-signature-canvas"
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ContractGenerator from '../PDFGenerator/ContractGenerator';
+import InvoiceGenerator from '../PDFGenerator/InvoiceGenerator';
 
 function SalesProjectDashboard() {
   const sigCanvas = useRef({})
@@ -50,15 +53,14 @@ const save = () =>{
     imgUrls:[],
     startTime:"",
     endTime:"",
-    SentToManager:false
+    SentToManager:false,
+    salesSignature:"",
+    Quote: "",
+    Proposal : "",
+    invoice:false,
   });
   const [projectAccepted, setprojectAccepted] = useState(false);
-  
-  
-  
-  
-  
-  
+  const [invoice, setInvoice] = useState(false);
   
   function onChange(e) {
     let boolean = null;
@@ -109,6 +111,7 @@ async function startProject() {
     // Set the "capital" field of the city 'DC'
 await updateDoc(projectRef, {
   SentToManager: true,
+  Status:"Assigned to Manager, Project going to start soon !!"
 });
 
 alert(`Project ${params.id} Successfully Started with Manager`);
@@ -125,6 +128,7 @@ navigate(0)
       if (docSnap.exists()) {
         let {SaleAuthorised}=docSnap.data()
         setProjectData({projectID:docSnap.id,...docSnap.data()});
+        setInvoice(docSnap.data().invoice);
         if(SaleAuthorised) setprojectAccepted(true)
       }
       else console.log("No Data")
@@ -132,7 +136,15 @@ navigate(0)
     fetchProject();
   }, []);
 
-
+  const sendInvoice = async(project) => {
+    const projectRef = doc(db, "project", params.id);
+    try{
+      await updateDoc(projectRef, { invoice: true})
+      setInvoice(true);
+    }catch(e){
+      alert(e)
+    }
+  }
 
   return (
     <div>
@@ -142,15 +154,17 @@ navigate(0)
         {project.imgUrls.length !== 0 ? <img style={{width:"500px"}} src={project.imgUrls[0]}></img>:null}  
         <div>
           <ul>
-            <li >ProjectID: {project.projectID}</li>
-            <li>Customer:{project.customerName} </li>
-            <li>Address:{project.address}</li>
-            <li>Start Time:{project.startTime}</li>
-            <li>End Time:{project.endTime}</li>
-            <li>Purchased By: {project.customer}</li>
-            <li>Sale Authorised: {project.SaleAuthorised ? "True" : "False"}</li>
-            <li>Project Accepted: {project.ManagerAccepted ? "True" : "False"}</li>
-            <li>Status: {project.Status} </li>
+          <li >ProjectID: {project.projectID}</li>
+                <li>Customer:{project.customerName} </li>
+                <li>Address:{project.address}</li>
+                <li>Start Time:{project.startTime}</li>
+                <li>End Time:{project.endTime}</li>
+                <li>Purchased By: {project.customer}</li>
+                <li>Sale Authorised: {project.SaleAuthorised ? "True" : "False"}</li>
+                <li>Project Accepted: {project.ManagerAccepted ? "True" : "False"}</li>
+                <li>Status: {project.Status} </li>
+                <li>Quote Agreed Upon: {project.Quote === "" ? "No Quote Agreed Upon": project.Quote} </li>
+                <li>Proposal: {project.Proposal === "" ? "No Proposal Discussed Yet": project.Proposal} </li>
           </ul>
         </div>
         <br/>
@@ -172,7 +186,7 @@ navigate(0)
             />
 
         <p >Proposal</p>
-        <input
+        <textarea
           type="text"
           id="Details"
           value={Details}
@@ -213,13 +227,28 @@ navigate(0)
         ) :null}
     </>
     }
-    {!project.CustomerSignature ? <h2>Awaiting Customer Signature</h2>: <h2>Button to download Contract</h2>}       
-    {project.SentToManager ? null:
+    {project.Status === "Awaiting Customer Signature" ? <h2>Awaiting Customer Signature to send project to the manager</h2>:null }
+    {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ?  
+    <div>
+      <h2>Button to download Documents </h2>
+      <div>
+        <h3>Contract</h3>
+        <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
+        {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
+        </PDFDownloadLink>
+        <h3>Invoice</h3>
+        <button disabled={invoice} onClick = {async()=> {await sendInvoice()}}>Send Invoice</button>
+        <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
+        {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!invoice}>Download</button> )}
+        </PDFDownloadLink>
+      </div>
+    </div>:null }       
+    {project.Status === "Preparing To Start The Project" ? 
     <>
     <h2>Start Project With Manager</h2>
-    <buttom onClick={startProject}>Start Project</buttom>
-    </>}
-
+    <button onClick={startProject}>Start Project</button>
+    </>: null}
+    <br/>
     <br/>
     <SalesManagerMessaging data={{projectData: project,auth: auth}}/>
     </div>

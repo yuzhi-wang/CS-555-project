@@ -1,5 +1,5 @@
 # SoulMate using React CS-555-Agile Development Project
-# Introduction
+# Introduction [![Netlify Status](https://api.netlify.com/api/v1/badges/1a8c65ac-805c-48d6-9275-b3d9c17065d1/deploy-status)](https://app.netlify.com/sites/soulmatecs555/deploys)
 - <img src="https://i.ibb.co/85g7Cgm/Solmate-logos-black.png" alt="Solmate-logos-black" border="0" width="200" height="200">
 - **This a Project primaryly focus on CRM we prepared for CS-555-Agile Development Project** using React, Firebase.
 - **Team: Easy Scurm**
@@ -28,10 +28,7 @@
 - [License](#lock-license)
 
 ##  :beginner: About
-To use the Project, I recommand you using standard NPM
-
-npm start
-
+To use the Project, I recommand you using standard NPM, If you have package manger yarn, just follow the common instructions
 ## :zap: Usage
 Write about how to use this project.
 
@@ -40,24 +37,29 @@ Write about how to use this project.
 - Be very detailed here, For example, if you have tools which run on different operating systems, write installation steps for all of them.
 
 ```
-$ add installations steps if you have to.
+$ npm install
+
 ```
 
 ###  :package: Commands
-- Commands to start the project.
+
+```
+$ npm start
+
+```
 
 ##  :wrench: Development
-If you want other people to contribute to this project, this is the section, make sure you always add this.
+If you want to contribute to this project, please send us a email through rkang@stevens.edu
 
 ### :notebook: Pre-Requisites
 List all the pre-requisites the system needs to develop this project.
-- A tool
-- B tool
+- A An editor
+- B NPM Modules
 
 ###  :nut_and_bolt: Development Environment
-Write about setting up the working environment for your project.
-- How to download the project...
-- How to install dependencies...
+Here are some simple steps
+- How to download the project clone to your local repository
+- How to install dependencies : everything came in in package.json
 
 
 ###  :file_folder: File Structure

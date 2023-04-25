@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+
 import {
   getStorage,
   ref,
@@ -15,6 +16,7 @@ function CustomerProject() {
     const auth = getAuth();
     const navigate = useNavigate();
   const [projectData, setProjectData] = useState([]);
+  const [date, setDate] = useState('');
   const [startTime, setStartTime]= useState("")
   const [endTime, setEndTime]= useState("")
   const [purchase, setPurchase] = useState(false)
@@ -126,6 +128,7 @@ function CustomerProject() {
     const formDataCopy = {
       ...formData,
       imgUrls,
+      date: date,
       startTime: startTime,
       endTime: endTime,
       timestamp: serverTimestamp(),
@@ -135,7 +138,14 @@ function CustomerProject() {
       SaleAuthorised: false,
       customerName: auth.currentUser.displayName,
       saleAssigned: "Z8CbFK7ASdUIr7tHzfYW1KZ21T53",
-      Status: "Awaiting approval by Sales"
+      Status: "Awaiting approval by Sales",
+      SentToManager:false,
+      CustomerSignature:"",
+      salesSignature: "",
+      Quote: "",
+      invoice:false,
+      Proposal : "",
+      managerAssigned: "",
     };
     delete formDataCopy.images;
     const docRef = await addDoc(collection(db, "project"), formDataCopy);
@@ -185,7 +195,7 @@ function CustomerProject() {
   return (
     <div>
       {purchase ? null : <>
-      <h2>Equipt your home with Solar Panels</h2>
+      <h2>Equipt your home with Solar Panels, Fill Details Form</h2>
       <div>
 
       <form onSubmit={purchaseProject}>
@@ -225,6 +235,10 @@ function CustomerProject() {
             />
 
         <p >Location Hours of operation</p>   
+        <p>Date</p>
+        <input type="date" id="date" name="date" value={date} onChange={(event) => {
+    setDate(event.target.value);
+  }} required />
         <p>Start Time</p>
         <input type="time" id="appt" name="start" value={startTime} onChange={(event) => {
     setStartTime(event.target.value);
@@ -258,20 +272,21 @@ function CustomerProject() {
           required
            />
         <div >
-          <div className="">
+          
             <p >Proposed project size, in solar panel sqft size</p>
             <div >
-              <input
+              <textarea
                 type="text"
-                id="ProjectSize"
+                id="projectsize"
                 value={projectsize}
                 onChange={onChange}
-                min="50"
-                max="400000000"
+                placeholder="Project Size"
+                maxLength="32"
+                minLength="1"
               
                  />
             </div>
-          </div>
+        
         </div>
         <div>
           <p>Images (max 6)</p>

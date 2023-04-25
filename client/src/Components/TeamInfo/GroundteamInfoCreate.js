@@ -9,9 +9,7 @@ function GroundteamInfoCreate() {
     const auth = getAuth();
     const navigate = useNavigate();
 
-  const [info, setInfo] = useState({
-    companyinfo: []
-  });
+  const [info, setInfo] = useState([]);
   const Back = () => {
     window.location.replace('/groundteamdashboard');
 };
@@ -90,7 +88,7 @@ useEffect(() => {
         name="companyinfo" 
         value={info.companyinfo || ""} 
         onChange={handleChange} 
-        maxLength='200' 
+        maxLength='800' 
         required={true}
         rows="3" 
         style={{resize: "vertical"}}>
@@ -101,7 +99,7 @@ useEffect(() => {
         name="members" 
         value={info.members || ""} 
         onChange={handleChange} 
-        maxLength='200' 
+        maxLength='800' 
         required={true}
         rows="3" 
         style={{resize: "vertical"}}>

@@ -1,7 +1,7 @@
 # SoulMate using React CS-555-Agile Development Project
 # Introduction [![Netlify Status](https://api.netlify.com/api/v1/badges/1a8c65ac-805c-48d6-9275-b3d9c17065d1/deploy-status)](https://app.netlify.com/sites/soulmatecs555/deploys)
 - <img src="https://i.ibb.co/85g7Cgm/Solmate-logos-black.png" alt="Solmate-logos-black" border="0" width="200" height="200">
-- **This a Project primaryly focus on CRM we prepared for CS-555-Agile Development Project** using React, Firebase.
+- **This a Project primaryly focus on solar project management system that we prepared for CS-555-Agile Development Project** using React, Firebase.
 - **Team: Easy Scurm**
 - **Team Members: Rongda Kang,Kevin Dsa, Yuzhi Wang(Scrum Master),Luoyi Fu, Mingze Sun**.
 

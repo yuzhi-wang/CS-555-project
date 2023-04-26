@@ -13,7 +13,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ContractGenerator from '../PDFGenerator/ContractGenerator';
 import InvoiceGenerator from '../PDFGenerator/InvoiceGenerator';
-
+import { PaperClipIcon } from '@heroicons/react/20/solid'
 
 
 function CustomerProjectDashboard() {
@@ -25,6 +25,13 @@ function CustomerProjectDashboard() {
     const [signature , setSignature] = useState(null)
     const [percentCompleted, setPercentCompleted] = useState("0")
 
+    const customLabelStyle = {
+      color: 'white',
+      fontSize: '18px',
+      fontWeight: 'bold',
+      fontFamily: 'Arial, sans-serif',
+      background: '',
+    };
   const [project, setProjectData] = useState({
     ManagerAccepted:"",
     SaleAuthorised:"",
@@ -205,40 +212,163 @@ function CustomerProjectDashboard() {
 
 if(DoesProjectExists){
   return (
-    <div>
-        <h2>Customer Project Dashboard</h2>
-        <div>
-            {project.imgUrls.length !== 0 ? <img style={{width:"500px"}} src={project.imgUrls[0]}></img>:null}     
-        <ul>
-            <div>
-                <li>ProjectID: {project.projectID}</li>
-                <li>Customer:{project.customerName} </li>
-                <li>Address:{project.address}</li>
-                <li>Start Time:{project.startTime}</li>
-                <li>End Time:{project.endTime}</li>
-                <li>Purchased By: {project.customer}</li>
-                <li>Sale Authorised: {project.SaleAuthorised ? "True" : "False"}</li>
-                <li>Project Accepted: {project.ManagerAccepted ? "True" : "False"}</li>
-                <li>Status: {project.Status} </li>
-                <li>Quote Agreed Upon: {project.Quote === "" ? "No Quote Agreed Upon": project.Quote} </li>
-                <li>Proposal: {project.Proposal === "" ? "No Proposal Discussed Yet": project.Proposal} </li>
-            </div>     
-        </ul>
-      </div>
-      <br/>
-      {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ? 
-      <div>
-        <h2>Button to download Documents </h2> 
-        <div>
-          <h3>Contract</h3>
-          <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
-          {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
-          </PDFDownloadLink>
-          <h3>Invoice</h3>
-          <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
-          {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!project.invoice}>Download</button> )}
-          </PDFDownloadLink>
+    
+  <div>
+  <header className="bg-white shadow-sm ">
+        <div className="flex items-center mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        <button className="bg-indigo-700 text-white rounded-md px-3 py-1 text-sm font-medium mr-3" onClick={()=>{navigate(`/customerdashboard`)}}>Back To Your Dashboard</button>
+          <h1 className="text-lg font-semibold leading-6 text-gray-900">
+            Customer Project Dashboard
+          </h1>
         </div>
+      </header>
+    <div className="px-4 sm:px-0 ml-6">
+      <h3 className="text-base font-semibold leading-7 text-gray-900">Project Applicant Information</h3>
+      <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p>
+    </div>
+    <div className="mt-6 ml-6 border-t border-gray-100">
+      <dl className="divide-y divide-gray-100">
+      {project.imgUrls.length !== 0 ? <img style={{width:"500px"}} src={project.imgUrls[0]}></img>:null}
+      <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Your Progress: </dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><ProgressBar
+        
+        baseBgColor="gray"
+        height="20px"
+        width="80%"
+        isLabelVisible={true}
+        
+        labelStyle={customLabelStyle}animateOnRender={true} completed={`${percentCompleted}%`}   maxCompleted={100} completedClassName={`barCompleted${percentCompleted}`} labelClassName="label"/></dd>
+        </div>
+      <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Status:</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.Status}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Project ID</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.projectID}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Customer</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.customerName}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Address</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.address}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Start Time:</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.startTime}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">End Time:</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.endTime}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Purchased By:</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.customer}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Sale Authorised:</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.SaleAuthorised ? "True" : "False"}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Project Accepted:</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.ManagerAccepted ? "True" : "False"}</dd>
+        </div>
+
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Quote Agreed Upon: </dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.Quote === "" ? "No Quote Agreed Upon": project.Quote}</dd>
+        </div>
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Proposal: </dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{project.Proposal === "" ? "No Proposal Discussed Yet": project.Proposal}</dd>
+        </div>
+
+
+        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt className="text-sm font-medium leading-6 text-gray-900">Attachments</dt>
+          <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+
+          {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ? 
+       <div  className="divide-y divide-gray-100 rounded-md border border-gray-200">
+       <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                <div className="flex w-0 flex-1 items-center">
+                  <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                  <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                    <span className="truncate font-medium">Contract</span>
+                    
+                  </div>
+                </div>
+                <div className="ml-4 flex-shrink-0">
+                <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
+           </PDFDownloadLink>
+                </div>
+              </li>
+
+         <h2>Button to download Documents </h2> 
+         <div>
+           <h3>Contract</h3>
+          <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
+           </PDFDownloadLink>
+          <h3>Invoice</h3>
+           <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
+           {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!project.invoice}>Download</button> )}
+          </PDFDownloadLink>
+         </div>
+      </div>:null }
+
+            <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
+              <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                <div className="flex w-0 flex-1 items-center">
+                  <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                  <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                    <span className="truncate font-medium">Invoice</span>
+                    
+                  </div>
+                </div>
+                <div className="ml-4 flex-shrink-0">
+                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                    Download
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                <div className="flex w-0 flex-1 items-center">
+                  <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                  <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                    <span className="truncate font-medium">coverletter_back_end_developer.pdf</span>
+                              <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
+           </PDFDownloadLink>
+                  </div>
+                </div>
+                <div className="ml-4 flex-shrink-0">
+                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                    Download
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </dd>
+        </div>
+      </dl>
+      
+
+    </div>
+       <br/>
+      {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ? 
+       <div>
+         <h2>Button to download Documents </h2> 
+         <div>
+           <h3>Contract</h3>
+          <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
+           </PDFDownloadLink>
+          <h3>Invoice</h3>
+           <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
+           {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!project.invoice}>Download</button> )}
+          </PDFDownloadLink>
+         </div>
       </div>:null }
       <br/>
       {project.Status !== "Awaiting Customer Signature" ? null:
@@ -257,7 +387,7 @@ if(DoesProjectExists){
         )}
         </Popup>
     <br/>
-    <br/>
+
 {signature ? (
         <div>
         <img src={signature} alt='signature' style={{display:"block",
@@ -270,23 +400,16 @@ width:"150px"}}/>
 ) :null}
 
 </div>}
-<br/>
-<br/>
-<div>
-<ProgressBar animateOnRender={true} completed={`${percentCompleted}%`} labelAlignment="center" height="30px" maxCompleted={100} width="50%" completedClassName={`barCompleted${percentCompleted}`} labelClassName="label"/>
-<br/>
-<h2>Current Status of the Project: {project.Status}</h2>
-</div>
-<br/>
-<br/>
-<br/>
 
+<br/>
  <CustomerMessaging/>
  <br/>
  
   {ButtonForMaintenance()}
 
-</div>
+       
+  </div>
+    
 
 
   );
@@ -305,3 +428,6 @@ else{
 }
 
 export default CustomerProjectDashboard;
+
+
+

@@ -5,7 +5,7 @@ import { ArrowPathIcon, CloudArrowUpIcon, LockClosedIcon } from '@heroicons/reac
 import React from 'react';
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-
+import Team from '../Homepage/Team/Team'
 
 
 const navigation = [
@@ -275,7 +275,7 @@ export default function Homepage() {
       </div>
     </div>
       
-      
+      <Team />
 
 
       <footer className="bg-black" aria-labelledby="footer-heading">

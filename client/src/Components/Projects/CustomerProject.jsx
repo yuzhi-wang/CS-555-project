@@ -254,7 +254,9 @@ function CustomerProject() {
       <div>
     <form className="bg-white max-w-none ml-5 " onSubmit={purchaseProject}>
       <div className="space-y-12 sm:space-y-16 ">
+      <p className="mt-1 max-w-2xl text-l font-bold leading-6 text-gray-700">Please advise your sales if you have any problem filling this form</p>
         <div>
+        
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Personal Information
           </h2>
@@ -269,7 +271,7 @@ function CustomerProject() {
                 htmlFor="first-name"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Contact First name and Last name
+                Contact First name and Last name *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <input
@@ -289,7 +291,7 @@ function CustomerProject() {
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Email address
+                Email address *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <input
@@ -311,7 +313,7 @@ function CustomerProject() {
                 htmlFor="country"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Country
+                Country *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <select
@@ -332,7 +334,7 @@ function CustomerProject() {
                 htmlFor="street-address"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Cell Phone SMS
+                Cell Phone SMS *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <input
@@ -354,7 +356,7 @@ function CustomerProject() {
                 htmlFor="city"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Address
+                Address *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <input
@@ -374,7 +376,7 @@ function CustomerProject() {
                 htmlFor="region"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Additional Location Description
+                Additional Location Description *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <input
@@ -394,10 +396,12 @@ function CustomerProject() {
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Solar Panel Installation Information
           </h2>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600">
-            Equipt your home with Solar Panels, Please fill
-            in information in detail and your avaliablity for instlallation
+            <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600">
+            Equipt your home with Solar Panels
+          
           </p>
+          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600">Please fill in information in detail and your avaliablity for installation</p>
+          
 
           <div className="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
             <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -426,7 +430,7 @@ function CustomerProject() {
                 htmlFor="postal-code"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Date{" "}
+                Date{" "} *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <input
@@ -448,7 +452,7 @@ function CustomerProject() {
                 htmlFor="postal-code"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Start Time{" "}
+                Start Time{" "} *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <input
@@ -472,7 +476,7 @@ function CustomerProject() {
                 htmlFor="postal-code"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                End Time{" "}
+                End Time{" "} *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <input
@@ -532,7 +536,7 @@ function CustomerProject() {
                 htmlFor="cover-photo"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
               >
-                Cover photo
+                Cover photo *
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <div className="flex max-w-2xl justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
@@ -732,7 +736,7 @@ function CustomerProject() {
     </div>
 </>
 }
-
+<br></br>
 <div className="bg-grey">
         <div class="max-w rounded overflow-hidden shadow-md bg-grey-400">
   <img class="w-full aspect-w-16 aspect-h-9 " src="https://i.ibb.co/DCMwsKy/banner-finance-incentives.jpg" alt="Sunset in the mountains" />

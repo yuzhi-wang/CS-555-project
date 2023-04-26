@@ -253,7 +253,7 @@ navigate(0)
             onChange={onChange}
             placeholder="Enter Amount.."
             maxLength="32"
-            minLength="4"
+            minLength="1"
             required
               />
           <br></br>

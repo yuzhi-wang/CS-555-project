@@ -3,6 +3,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate, HashRouter } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
 import {
   getStorage,
@@ -25,6 +26,62 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../../firebase";
+const statuses = {
+  offline: 'text-gray-500 bg-gray-100/10',
+  online: 'text-green-400 bg-green-400/10',
+  error: 'text-rose-400 bg-rose-400/10',
+}
+const environments = {
+  Preview: 'text-gray-400 bg-gray-400/10 ring-gray-400/20',
+  Production: 'text-indigo-400 bg-indigo-400/10 ring-indigo-400/30',
+}
+const deployments = [
+  {
+    id: 1,
+    href: '#',
+    projectName: 'ios-app',
+    teamName: 'Planetaria',
+    status: 'offline',
+    statusText: 'Initiated 1m 32s ago',
+    description: 'Deploys from GitHub',
+    environment: 'Preview',
+  },
+  {
+    id: 2,
+    href: '#',
+    projectName: 'mobile-api',
+    teamName: 'Planetaria',
+    status: 'online',
+    statusText: 'Deployed 3m ago',
+    description: 'Deploys from GitHub',
+    environment: 'Production',
+  },
+  {
+    id: 3,
+    href: '#',
+    projectName: 'tailwindcss.com',
+    teamName: 'Tailwind Labs',
+    status: 'offline',
+    statusText: 'Deployed 3h ago',
+    description: 'Deploys from GitHub',
+    environment: 'Preview',
+  },
+  {
+    id: 4,
+    href: '#',
+    projectName: 'api.protocol.chat',
+    teamName: 'Protocol',
+    status: 'error',
+    statusText: 'Failed to deploy 6d ago',
+    description: 'Deploys from GitHub',
+    environment: 'Preview',
+  },
+]
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
 
 function CustomerProject() {
   const auth = getAuth();
@@ -676,9 +733,12 @@ function CustomerProject() {
 </>
 }
 
-<div>
-        <h2>Projects</h2>
-        {/* <div>     
+<div className="bg-grey">
+        <div class="max-w rounded overflow-hidden shadow-md bg-grey-400">
+  <img class="w-full aspect-w-16 aspect-h-9 " src="https://i.ibb.co/DCMwsKy/banner-finance-incentives.jpg" alt="Sunset in the mountains" />
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2">Your Project Dashboard</div>
+    <div>     
         <ul>
 
           {projectData.length === 0 ? "No Projects Initiated Fill the details form and get in touch with the Sales Team" : projectData.map((project, index) => (
@@ -688,23 +748,13 @@ function CustomerProject() {
                 <li>Purchased By: {project.data.customer}</li>
                 <li>Sale Authorised: {project.data.SaleAuthorised ? "True" : "False"}</li>
                 <li>Project Accepted: {project.data.ManagerAccepted ? "True" : "False"}</li>
-                <li>Status: {project.data.Status} </li>
+                <li className="text-violet">Status: {project.data.Status} </li>
+                <small>Click To Get More Information</small>
             </div>
           ))}
         </ul>
-      </div> */}
-      <div class="max-w-sm rounded overflow-hidden shadow-lg">
-  <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"/>
-  <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-    <p class="text-gray-700 text-base">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-    </p>
-  </div>
-  <div class="px-6 pt-4 pb-2">
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+      </div>
+    
   </div>
 </div>
       </div>
@@ -713,5 +763,4 @@ function CustomerProject() {
 }
 
 export default CustomerProject;
-
 

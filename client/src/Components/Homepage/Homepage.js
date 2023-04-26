@@ -199,10 +199,10 @@ export default function Homepage() {
         <div className="py-24 sm:py-32 lg:pb-40">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+              <h1 data-cy="title" className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               Solmate: Harness the Sun, Power Your Future
               </h1>
-              <p className="mt-6 text-lg leading-8 text-white">
+              <p  className="mt-6 text-lg leading-8 text-white">
              Connecting You to a Brighter Future with Seamless Solar Panel Installation, Expert Support, and Intelligent Management for a Sustainable Tomorrow"
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">

@@ -39,9 +39,13 @@ function SalesProjectDashboard() {
 const clear = () => sigCanvas.current.clear()
 
 // Save Signature
-const save = () =>{
+const save = async () =>{
   setSignature(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
-  
+  const projectRef = doc(db, "project", params.id);
+    await updateDoc(projectRef, {
+      CustomerSignature: signature
+    });
+    
 }
 
 
@@ -101,7 +105,6 @@ const save = () =>{
     await updateDoc(projectRef, {
       SaleAuthorised: true,
       Status: "Awaiting Customer Signature",
-      salesSignature: signature,
       Quote: Quote,
       Proposal : Details,
       SentToManager: false,
@@ -241,9 +244,10 @@ navigate(0)
                       <p className="mt-1 truncate text-s leading-5 text-gray-900">Proposal: {project.Proposal === "" ? "No Proposal Discussed Yet": project.Proposal}</p>
                     </div>
                     <div >
-                    {project.SaleAuthorised ? null :
-      <div className="flex justify-center mt-10">
-        <h3 className="text-l font-bold">Agreed Upon A Quote ?</h3>
+                    {project.SaleAuthorised ? null :<>
+                    <h3 className="text-m mb-5 mt-10 font-bold">Agreed Upon A Quote ?</h3>
+      <div className="flex justify-center items-center">
+        
         <form  onSubmit={acceptProject}>
           <p >Enter Agreed Upon Quote:</p>
           <input
@@ -269,12 +273,13 @@ navigate(0)
             required
               />
           <br></br>
-          <div>
+          <div >
             {signature ? <><p>Once Signed, using Sign Pad click "Sign Contract" to Submit it</p><button type='submit' className="bg-blue-100 mb-3 w-56 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Sign Contract</button></>: null}
             {/*<button onClick={()=>declineProject(project.projectID)} disabled={project.Status === "Declined by Sales"}>Decline</button>*/}
           </div>
         
-      
+          </form>
+          <div className='ml-10'>
       <Popup modal trigger={<button className="bg-blue-100 w-56 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Open Signature Pad</button>} closeOnDocumentClick={false}>
         {close =>(
             <>
@@ -287,8 +292,9 @@ navigate(0)
             </>
         )}
       </Popup>
-      </form>
+      </div>
       <br/>
+      
    
     {signature ? (
         <div>
@@ -299,6 +305,7 @@ navigate(0)
         </div>
         ) :null}
     </div>
+    </>
     }
     </div>
 

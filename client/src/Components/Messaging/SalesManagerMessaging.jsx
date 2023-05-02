@@ -69,7 +69,7 @@ function SalesManagerMessaging({data}) {
       <div class="flex flex-col flex-grow w-full max-w bg-white shadow-xl rounded-lg overflow-hidden">
         <div class="py-2 px-3 bg-black flex flex-row justify-between items-center">
           <div>
-            <h2 class="text-white">Messages To Sales</h2>
+            <h2 class="text-white">Sales - Manager Communication Hub</h2>
           </div>
 
         </div>

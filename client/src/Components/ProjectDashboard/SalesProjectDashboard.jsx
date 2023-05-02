@@ -41,14 +41,14 @@ const clear = () => sigCanvas.current.clear()
 // Save Signature
 const save = async () =>{
   setSignature(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
+  
+  /*
   const projectRef = doc(db, "project", params.id);
     await updateDoc(projectRef, {
-      CustomerSignature: signature
-    });
-    
+      salesSignature: signature
+    });  
+    */
 }
-
-
 
   const [project, setProjectData] = useState({
     ManagerAccepted:"",
@@ -108,6 +108,7 @@ const save = async () =>{
       Quote: Quote,
       Proposal : Details,
       SentToManager: false,
+      salesSignature: signature
     });
    
     alert(`Project ${params.id} Accepted`);

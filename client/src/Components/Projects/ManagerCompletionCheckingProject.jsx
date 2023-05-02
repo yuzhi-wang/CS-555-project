@@ -16,6 +16,7 @@ function ManagerCompletionCheckingProject() {
   const [idetail1, setIdetail1] = useState([])
   const [idetail2, setIdetail2] = useState([])
   const [idetail3, setIdetail3] = useState([])
+  const [thisProject, setThisProject]= useState("")
   
   useEffect(() => {
       const fetchInfo1 = async () => {
@@ -43,43 +44,15 @@ function ManagerCompletionCheckingProject() {
   const clear = () => sigCanvas.current.clear()
 
   // Save Signature
-  const save = () =>{
+  const save = (ticketId) =>{
     setSignature(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
-    
+    setThisProject(ticketId)
   }
  
   const ApproveButton = (projectId, ticketId) => {
     
     return (
-      <>
-    <div>
-    <Popup modal trigger={<button className="bg-blue-100 w-56 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Signature Pad</button>} closeOnDocumentClick={false}>
-        {close =>(
-            <>
-                <SignaturePad ref={sigCanvas} canvasProps={{
-                    className:"signatureCanvas"
-                }} />
-                <button className="bg-blue-100 mr-5 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={save}>Save</button>
-                <button className="bg-blue-100 mr-5 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={clear}>Clear</button>
-                <button className="bg-blue-100 mr-5 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={close}>Close</button>
-            </>
-        )}
-        </Popup>
-    <br/>
-    <br/>
-{signature ? (
-        <div>
-        <img src={signature} alt='signature' style={{display:"block",
-    margin: "0 auto",
-border:"1px solid black",
-width:"150px"}}/>
-<p>Once Signed, using Sign Pad click "Sign Contract" to Submit it</p>
-<button key={projectId} className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={() => handleApprove(projectId, ticketId)}>Sign Contract</button>
-</div>
-) :null}
-
-</div>
-</>
+      <></>
   )}
 
 
@@ -87,6 +60,8 @@ width:"150px"}}/>
     
     return <button key={ticketId} className="bg-blue-100 w-56 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={() => handleDisapprove(projectId, ticketId)}>Disapprove</button>
   }
+
+
   async function handleApprove(projectId, ticketId) {
     //   setCurrentTicket(ticketId);
     //   setCurrentProject(projectId);
@@ -163,14 +138,42 @@ width:"150px"}}/>
                 />
                 ))}
               <div className="min-w-0 flex-auto">
-                <p className="text-m font-bold leading-6 ">Ticket Id: {info.data1.ticketid}</p>
+                <p className="text-m font-bold leading-6 ">Ticket Id: {info.id1}</p>
                 <p className="mt-1 text-s leading-5 text-gray-900">Ticket Type: {info.data1.type}</p>
                 <p className="mt-1 text-s leading-5 text-gray-900">Groundteam ID: {info.data1.groundteamid}</p>
                 <p className="mt-1 text-s leading-5 text-gray-900">Completion Description: {info.data1.description}</p>
               </div>
               <div>
                 {/* <button className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={()=>{navigate(`/managerprojectdashboard/${project.id}`)}}>Project Detail</button> */}
-                { ApproveButton(info.id1,info.data1.ticketid)}
+                <>
+                <div>
+                <Popup modal trigger={<button className="bg-blue-100 w-56 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Mark Project Complete</button>} closeOnDocumentClick={false}>
+                {close =>(
+                <>
+                <SignaturePad ref={sigCanvas} canvasProps={{
+                    className:"signatureCanvas"
+                }} />
+                <button className="bg-blue-100 mr-5 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={()=>save(info.id1)}>Save</button>
+                <button className="bg-blue-100 mr-5 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={clear}>Clear</button>
+                <button className="bg-blue-100 mr-5 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={close}>Close</button>
+                </>
+                )}
+                </Popup>
+                <br/>
+                <br/>
+                {signature && thisProject === info.id1 ? (
+                <div>
+                <img key={info.id1} src={signature} alt='signature' style={{display:"block",
+                margin: "0 auto",
+                border:"1px solid black",
+                width:"150px"}}/>
+                <p>Once Signed, using Sign Pad click "Sign Invoice" to Submit it</p>
+                <button key={info.id1} className="bg-blue-100 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded" onClick={() => handleApprove(info.data1.projectid, info.id1)}>Sign Invoice</button>
+                </div>
+                ) :null}
+
+                  </div>
+              </>
                 { DisapproveButton(info.id1,info.data1.ticketid)}
               </div>
             </li>

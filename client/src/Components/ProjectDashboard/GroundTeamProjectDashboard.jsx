@@ -33,7 +33,8 @@ function GroundTeamProjectDashboard() {
       date:"",
       startTime:"",
       endTime:"",
-      imgPre:[],  
+      imgPre:[],
+      installationTicketID:""
     });
 
 
@@ -141,8 +142,9 @@ function GroundTeamProjectDashboard() {
                   </li>
                   
                     </div>
-                    <ManagerGroundMessaging data={{projectData:{installationTicketID: projectID},auth: auth}}/>
 
+                    
+                  {!projectID ? null :  <ManagerGroundMessaging data={{projectData:{installationTicketID: projectID},auth: auth}}/>}
                 </ul>
                 </div >
 

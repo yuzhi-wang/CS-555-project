@@ -254,7 +254,7 @@ function CustomerProject() {
       <div>
     <form className="bg-white max-w-none ml-5 " onSubmit={purchaseProject}>
       <div className="space-y-12 sm:space-y-16 ">
-      <p className="mt-1 max-w-2xl text-l font-bold leading-6 text-gray-700">Please advise your sales if you have any problem filling this form</p>
+      <p className="mt-1 max-w-2xl text-l font-bold leading-6 text-gray-700">Please Contact the sales team if you have any problem filling this form</p>
         <div>
         
           <h2 className="text-base font-semibold leading-7 text-gray-900">

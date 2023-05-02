@@ -48,6 +48,8 @@ function CustomerProjectDashboard() {
     salesSignature:"",
     Quote: "",
     Proposal : "",
+    CustomerSignature:"",
+    salesignaftercomplete:"",
   });
   const [DoesProjectExists, setDoesProjectExists] = useState(false);
 
@@ -199,7 +201,7 @@ function CustomerProjectDashboard() {
         if(Status === "Preparing To Start The Project" || Status === "Assigned to Manager, Project going to start soon !!") setPercentCompleted("20")
         if(Status === "Manager Confirmed, Project will start Soon" || Status === "Project Started, assigned to ground team") setPercentCompleted("50")
         if(Status === "Awaiting approval by Sales" || Status === "Awaiting Customer Signature") setPercentCompleted("10")
-        if (Status === "Completion approved by Manager") setPercentCompleted("100")
+        if (Status === "Completion approved by Manager" || Status === "Project Completed") setPercentCompleted("100")
         
         if(customer)
         setDoesProjectExists(true)
@@ -291,101 +293,66 @@ if(DoesProjectExists){
           <dt className="text-sm font-medium leading-6 text-gray-900">Attachments</dt>
           <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
 
-          {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ? 
-       <div  className="divide-y divide-gray-100 rounded-md border border-gray-200">
-       <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+          <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
+              
+            {!project.CustomerSignature || project.CustomerSignature === "" ? null:
+              <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                 <div className="flex w-0 flex-1 items-center">
                   <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
                   <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span className="truncate font-medium">Contract</span>
-                    
+                    <span className="truncate font-medium">Contract.pdf</span>
                   </div>
                 </div>
                 <div className="ml-4 flex-shrink-0">
                 <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
-           </PDFDownloadLink>
+                    {({loading}) => (loading ? <button className="font-medium text-indigo-600 hover:text-indigo-500">Loading Document...</button> : <button className="font-medium text-indigo-600 hover:text-indigo-500">Download</button> )}
+                </PDFDownloadLink>
+                  {/*  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                    Download
+                  </a>  */}
+                  
                 </div>
               </li>
-
-         <h2>Button to download Documents </h2> 
-         <div>
-           <h3>Contract</h3>
-          <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
-           </PDFDownloadLink>
-          <h3>Invoice</h3>
-           <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
-           {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!project.invoice}>Download</button> )}
-          </PDFDownloadLink>
-         </div>
-      </div>:null }
-
-            <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
+            }
+            {!project.salesignaftercomplete || project.salesignaftercomplete === "" ? null:
               <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                 <div className="flex w-0 flex-1 items-center">
                   <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
                   <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span className="truncate font-medium">Invoice</span>
-                    
+                    <span className="truncate font-medium">Invoice.pdf</span>
                   </div>
                 </div>
                 <div className="ml-4 flex-shrink-0">
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                    Download
-                  </a>
+                <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
+                    {({loading}) => (loading ? <button className="font-medium text-indigo-600 hover:text-indigo-500">Loading Document...</button> : <button className="font-medium text-indigo-600 hover:text-indigo-500">Download</button> )}
+                </PDFDownloadLink>
                 </div>
               </li>
-              <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                <div className="flex w-0 flex-1 items-center">
-                  <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                  <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span className="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                              <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
-           </PDFDownloadLink>
-                  </div>
-                </div>
-                <div className="ml-4 flex-shrink-0">
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                    Download
-                  </a>
-                </div>
-              </li>
+            }
             </ul>
           </dd>
         </div>
       </dl>
-      
-
     </div>
-       <br/>
-      {project.Status !== "Awaiting approval by Sales" || project.Status !== "Awaiting Customer Signature" ? 
-       <div>
-         <h2>Button to download Documents </h2> 
-         <div>
-           <h3>Contract</h3>
-          <PDFDownloadLink document={<ContractGenerator data={project}/>} filename="FORM">
-           </PDFDownloadLink>
-          <h3>Invoice</h3>
-           <PDFDownloadLink document={<InvoiceGenerator data={project}/>} filename="FORM">
-           {({loading}) => (loading ? <button disabled={!project.invoice}>Loading Document...</button> : <button disabled={!project.invoice}>Download</button> )}
-          </PDFDownloadLink>
-         </div>
-      </div>:null }
-      <br/>
-      {project.Status !== "Awaiting Customer Signature" ? null:
+    <br/>
+    <br/>
+
+
+    {project.Status !== "Awaiting Customer Signature" ? null:
     <div>
-    <h2>Sign Contract To Get Project Started</h2>
-    <Popup modal trigger={<button>Open Signature Pad</button>} closeOnDocumentClick={false}>
+    <h2 className="text-l font-bold">Sign Contract To Get Project Started</h2>
+    <Popup modal trigger={<button className="bg-blue-100 w-56 mt-3 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Open Signature Pad</button>} closeOnDocumentClick={false}>
         {close =>(
             <>
                 <SignaturePad ref={sigCanvas} canvasProps={{
                     className:"signatureCanvas"
                 }} />
-                <button onClick={save}>Save</button>
-                <button onClick={clear}>Clear</button>
-                <button onClick={close}>Close</button>
+                <button onClick={save} className="bg-blue-100 w-56 mr-5 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Save</button>
+                <button onClick={clear} className="bg-blue-100 w-56 mr-5 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Clear</button>
+                <button onClick={close} className="bg-blue-100 w-56 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Close</button>
             </>
         )}
-        </Popup>
+    </Popup>
     <br/>
 
 {signature ? (
@@ -395,7 +362,7 @@ if(DoesProjectExists){
 border:"1px solid black",
 width:"150px"}}/>
 <p>Once Signed, using Sign Pad click "Sign Contract" to Submit it</p>
-<button onClick={handleSubmit}>Sign Contract</button>
+<button onClick={handleSubmit} className="bg-blue-100 w-56 mt-3 hover:bg-transparent text-grey-700 font-semibold py-2 px-4 border border-grey-700 hover:border-transparent rounded">Sign Contract</button>
 </div>
 ) :null}
 
@@ -404,10 +371,7 @@ width:"150px"}}/>
 <br/>
  <CustomerMessaging/>
  <br/>
- 
-  {ButtonForMaintenance()}
 
-       
   </div>
     
 

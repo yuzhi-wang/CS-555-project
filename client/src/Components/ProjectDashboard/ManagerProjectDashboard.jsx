@@ -254,7 +254,7 @@ async function handelReassign(e, projectId, data) {
                   
                 
                 </ul>
-                <ManagerGroundMessaging data={{projectData: project,auth: auth}}/>
+                {!project.installationTicketID ? null :  <ManagerGroundMessaging data={{projectData: project,auth: auth}}/>}
                 <br/>
                 <SalesManagerMessaging data={{projectData: project,auth: auth}}/>
                 </div >

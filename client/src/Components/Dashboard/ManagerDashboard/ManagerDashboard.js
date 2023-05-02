@@ -9,20 +9,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../../../Assets/Logo_white.png";
 
-/*
-import BackgroundCSL from './Carousel';
-import { getDocs } from 'firebase/firestore';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Link , useNavigate} from 'react-router-dom';
-import ListingItem from '../Listingitem/Listingitem.jsx';
-//import Slider from "../components/Slider";
-import { db } from '../../firebase';
-import queries from '../../query';
-import '../Style/style.css';
-import arrow from "../../Assets/right-arrow.png"
 
-*/
 
 const ManagerDashboard = () => {
   const auth = getAuth();

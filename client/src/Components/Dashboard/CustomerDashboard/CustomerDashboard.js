@@ -10,20 +10,7 @@ import {
 import Logo from "../../../Assets/Logo_black.png";
 import CustomerMessaging from "../../Messaging/CustomerMessaging";
 import CustomerProject from "../../Projects/CustomerProject";
-/*
-import BackgroundCSL from './Carousel';
-import { getDocs } from 'firebase/firestore';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Link , useNavigate} from 'react-router-dom';
-import ListingItem from '../Listingitem/Listingitem.jsx';
-//import Slider from "../components/Slider";
-import { db } from '../../firebase';
-import queries from '../../query';
-import '../Style/style.css';
-import arrow from "../../Assets/right-arrow.png"
 
-*/
 
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";

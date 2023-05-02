@@ -21,7 +21,7 @@ import ManagerProjectDashboard from "../Components/ProjectDashboard/ManagerProje
 import CustomerProjectDashboard from "../Components/ProjectDashboard/CustomerProjectDashboard";
 import GroundTeamProjectDashboard from "../Components/ProjectDashboard/GroundTeamProjectDashboard";
 import HomeNavigation from "../Components/Homepage/Navigation/HomeNavigation";
-import HomeFooter from "../Components/Homepage/Footer/HomeFooter";
+import About from "../Components/Homepage/About/About";
 
 
 
@@ -36,7 +36,7 @@ const Routesr = () => {
           {/* Auth Routes */}
           <Routing exact path="/" element={<HomeNavigation />}>
           <Routing index element = {<Homepage/>} />
-          
+          <Routing exact path="/About" element={<About />} />
           
           </Routing>
           <Routing exact path="/login" element={<Login />} />

@@ -6,13 +6,13 @@ const navigation1 = {
     { name: "Insights", href: "#" },
   ],
   support: [
-    { name: "Pricing", href: "#" },
+    { name: "Home", href: "/" },
     { name: "Documentation", href: "#" },
     { name: "Guides", href: "#" },
     { name: "API Status", href: "#" },
   ],
   company: [
-    { name: "About", href: "#" },
+    { name: "About", href: "/About" },
     { name: "Blog", href: "#" },
     { name: "Jobs", href: "#" },
     { name: "Press", href: "#" },

@@ -7,10 +7,10 @@ import { Outlet } from 'react-router-dom';
 import HomeFooter from '../Footer/HomeFooter';
 
 const navigation = [
-    { name: 'Product', href: '#' },
+    { name: 'Home', href: '/' },
     { name: 'Features', href: '#' },
     { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
+    { name: 'About', href: '/About' },
     
   ]
 

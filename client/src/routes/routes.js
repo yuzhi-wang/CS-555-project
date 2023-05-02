@@ -1,23 +1,5 @@
 import React from "react";
-import { Routes as Switch, Route as Routing } from "react-router-dom";
-/*
-import Dashboard from "../Components/Dashboard/Dashboard";
-import Messenger from "../Components/Messenger";import CreateListing from "../Components/CreateListing/CreateListing";
-import Homepage from "../Components/Homepage/Homepage";
-import Login from "../Components/login/login";
-import Signup from "../Components/Signup";
-import ForgotPassword from "../Components/ForgotPassword/ForgotPassword";
-import Layout from "../Components/layout/layout";
-import Profile from "../Components/Profile/Profile";
-
-import PrivateRoute from "../PrivateRoute";
-import Errors from "../Components/Errors";
-import Listing from "../Components/Listing/Listing";
-import Offers from "../Components/Offers/Offers";
-import Sale from "../Components/Sale/Sale";
-import Rent from "../Components/Rent/Rent";
-import Search from "../Components/Search/Search";
-*/
+import { Routes as Switch, Route as Routing, useLocation } from "react-router-dom";
 import Layout from "../Components/layout/layout";
 import Errors from "../Components/Errors/Errors";
 import Homepage from "../Components/Homepage/Homepage";
@@ -38,16 +20,27 @@ import SalesProjectDashboard from "../Components/ProjectDashboard/SalesProjectDa
 import ManagerProjectDashboard from "../Components/ProjectDashboard/ManagerProjectDashboard";
 import CustomerProjectDashboard from "../Components/ProjectDashboard/CustomerProjectDashboard";
 import GroundTeamProjectDashboard from "../Components/ProjectDashboard/GroundTeamProjectDashboard";
+import HomeNavigation from "../Components/Homepage/Navigation/HomeNavigation";
+import HomeFooter from "../Components/Homepage/Footer/HomeFooter";
+
+
+
+
 
 const Routesr = () => {
+
   return (
     <>
       <Layout>
         <Switch>
           {/* Auth Routes */}
-          <Routing exact path="/" element={<Homepage />} />
+          <Routing exact path="/" element={<HomeNavigation />}>
+          <Routing index element = {<Homepage/>} />
           
+          
+          </Routing>
           <Routing exact path="/login" element={<Login />} />
+          
           {/*
           <Routing path="/forgot-password" element={<ForgotPassword />} />
 
@@ -93,6 +86,7 @@ const Routesr = () => {
           <Routing exact path="*" element={<Errors />} />
         </Switch>
       </Layout> 
+
     </>
   );
 };

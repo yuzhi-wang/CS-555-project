@@ -67,34 +67,52 @@ Add a file structure here with the basic details about files, below is an exampl
 
 ```
 .
-├── assets
-│   ├── css
-│   │   ├── index-ui.css
-│   │   └── rate-ui.css
-│   ├── images
-│   │   ├── icons
-│   │   │   ├── shrink-button.png
-│   │   │   └── umbrella.png
-│   │   ├── logo_144.png
-│   │   └── Untitled-1.psd
-│   └── javascript
-│       ├── index.js
-│       └── rate.js
-├── CNAME
-├── index.html
-├── rate.html
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── components
+│   │   ├── footer
+│   │   │   ├── Footer.css
+│   │   │   └── Footer.js
+│   │   ├── header
+│   │   │   ├── Header.css
+│   │   │   └── Header.js
+│   │   ├── layout
+│   │   │   ├── Layout.css
+│   │   │   └── Layout.js
+│   │   ├── pages
+│   │   │   ├── About.js
+│   │   │   ├── Home.js
+│   │   │   └── NotFound.js
+│   │   ├── AppRouter.js
+│   │   ├── GeneratePDF.js
+│   │   └── UserTable.js
+│   ├── services
+│   │   └── dataService.js
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.css
+│   ├── index.js
+│   ├── logo.svg
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+├── .gitignore
+├── package-lock.json
+├── package.json
 └── README.md
 ```
 
-| No | File Name | Details 
-|----|------------|-------|
-| 1  | index | Entry point
-
 ###  :hammer: Build
-Write the build Instruction here.
+Follow standard React Project Build Intructions
 
 ### :rocket: Deployment
-Write the deployment instruction here.
+Follow Standard Web Application build Instructions
 
 ## :cherry_blossom: Community
 
@@ -103,9 +121,10 @@ If it's open-source, talk about the community here, ask social media links and o
  ###  :fire: Contribution
 
  Your contributions are always welcome and appreciated. Following are the things you can do to contribute to this project.
+ Your name will be listed here:
 
  1. **Report a bug** <br>
- If you think you have encountered a bug, and I should know about it, feel free to report it [here]() and I will take care of it.
+ If you think you have encountered a bug, and I should know about it, feel free to report it to email on this page and I will take care of it.
 
  2. **Request a feature** <br>
  You can also request for a feature [here](), and if it will viable, it will be picked for development.  
@@ -141,11 +160,11 @@ After this, changes will be merged.
 
 
 ### :exclamation: Guideline
-coding guidelines or other things you want people to follow should follow.
+Please follow the coding standard practice and formulate your code clear and readable as well as maintanable
 
 
 ## :question: FAQ
-You can optionally add a FAQ section about the project.
+If you have questions please email RongdaKangkk@gmail.com for additional info and help
 
 ##  :page_facing_up: Resources
 Add important resources here
@@ -154,7 +173,5 @@ Add important resources here
 Pictures of your project.
 
 ## :star2: Credit/Acknowledgment
-Credit the authors here.
+Rongda Kang, Kevin Dsa, Yuzhi Wang, Luoyi Fu, Mingze Xu, Additional Creadit to React, Tailwindcss, 
 
-##  :lock: License
-Add a license here, or a link to it.
